@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.example.shobhit_pc.emergency"
+        applicationId "com.silive.in.emergency"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1

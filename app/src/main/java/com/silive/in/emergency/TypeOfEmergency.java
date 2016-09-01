@@ -1,4 +1,4 @@
-package com.example.shobhit_pc.emergency;
+package com.silive.in.emergency;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

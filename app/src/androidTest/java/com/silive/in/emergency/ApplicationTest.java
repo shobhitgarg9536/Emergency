@@ -1,4 +1,4 @@
-package com.example.shobhit_pc.emergency;
+package com.silive.in.emergency;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
