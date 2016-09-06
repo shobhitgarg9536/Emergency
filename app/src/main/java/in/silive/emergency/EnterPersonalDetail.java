@@ -119,7 +119,8 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
        }
     }
     public void startnewactivity(){
-        Intent intent = new Intent(this, TypeOfEmergency.class);
+        /** MODIFIED THE INTENT TO LOAD SELECTCONTACT ACTIVITY**/
+        Intent intent = new Intent(this, SelectContacts.class);
         startActivity(intent);
     }
 
