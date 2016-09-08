@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            Intent intent = new Intent(this,TypeOfEmergency.class);
+            Intent intent = new Intent(this,FragmentCallingActivity.class);
             startActivity(intent);
         }
     }

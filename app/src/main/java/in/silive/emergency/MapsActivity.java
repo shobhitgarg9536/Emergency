@@ -8,9 +8,16 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,7 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
@@ -44,14 +51,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double mLongitude=0;
     String typeofemergency;
     HashMap<String, String> mMarkerPlaceLink = new HashMap<String, String>();
-    Button normalView;
+
+    SlidingDrawer slidingDrawerMove;
+    TextView phone,website,international,vicinity,address,slidingText;
+    private Toolbar toolbar;
+    Thread thread;
+    int count=5000;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        normalView = (Button) findViewById(R.id.btNormallView);
+
+
+        slidingDrawerMove = (SlidingDrawer) findViewById(R.id.sdmove);
+
+        slidingText =(TextView) findViewById(R.id.handle);
+
+        phone =(TextView) findViewById(R.id.tvphone);
+        website =(TextView) findViewById(R.id.tvwebsite);
+        address =(TextView) findViewById(R.id.tvaddress);
+        international =(TextView) findViewById(R.id.tvinternational);
+        vicinity =(TextView) findViewById(R.id.tvVicinity);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         typeofemergency = getIntent().getStringExtra("type");
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -66,19 +94,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
-        normalView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
-                    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                    normalView.setText("Satellite View");
-                }
-                else{
-                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                    normalView.setText("Normal View");
-                }
-            }
-        });
+
+
+
 
     }
 
@@ -87,14 +105,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        mMap.getUiSettings().setCompassEnabled(true);
+
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        //Creating object to retrive provider
-        Criteria criteria = new Criteria();
 
-        //Getting the provider
-        String provider = locationManager.getBestProvider(criteria, false);
 
         // Getting Current Location From GPS
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -107,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
-        locationManager.requestLocationUpdates(provider, 20000, 0, new android.location.LocationListener() {
+        locationManager.requestLocationUpdates(String.valueOf(location), 20000, 0, new android.location.LocationListener() {
 
             @Override
             public void onLocationChanged(Location location) {
@@ -138,26 +156,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
 
-                Intent intent = new Intent(getBaseContext(), NearestPlaceDetails.class);
 
                 String reference = mMarkerPlaceLink.get(arg0.getId());
-                intent.putExtra("reference", reference);
+                StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
 
-                startActivity(intent);
+                sb.append("reference="+reference);
+                sb.append("&sensor=true");
+                sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
+
+                NearestPlaceDetails pdAysnTask = new NearestPlaceDetails(new MapAsynResponse() {
+                    @Override
+                    public void processFinish(HashMap<String, String> output) {
+
+                        slidingDrawerMove.setVisibility(View.VISIBLE);
+                        slidingText.setText(output.get("name").toString());
+
+                        address.setText(output.get("formatted_address").toString());
+                        phone.setText(output.get("formatted_phone_number").toString());
+                        international.setText(output.get("international_phone_number").toString());
+                        website.setText(output.get("website").toString());
+                        vicinity.setText(output.get("vicinity").toString());
+
+                    }
+                });
+
+                pdAysnTask.execute(sb.toString());
+
+
             }
         });
-        Thread thread = new Thread() {
+        thread = new Thread() {
 
             @Override
             public void run() {
                 StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
                 sb.append("location="+mLatitude+","+mLongitude);
-                sb.append("&radius=5000");
+                sb.append("&radius="+count);
                 sb.append("&types="+typeofemergency);
                 sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
 
@@ -170,17 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void Zoom(View view){
-        if(view.getId() == R.id.btzoomin){
 
-            mMap.animateCamera(CameraUpdateFactory.zoomIn());
-        }
-
-        if(view.getId() == R.id.btzoomout){
-
-            mMap.animateCamera(CameraUpdateFactory.zoomOut());
-        }
-    }
 
 
     public void onLocationChanged(Location location) {
@@ -190,6 +220,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
     }
+
 
     public class PlacesAsynTask extends AsyncTask<String,Integer , List<HashMap<String, String>>> {
         InputStream iStream = null;
@@ -305,6 +336,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Linking Marker id and place reference
                 mMarkerPlaceLink.put(m.getId(), hmPlace.get("reference"));
             }
+            if(result.isEmpty()){
+                count +=5000;
+                if(thread.isAlive()){
+                    thread.interrupt();
+                }
+                thread = new Thread();
+                thread.start();
+            }
             super.onPostExecute(result);
         }
 
@@ -349,5 +388,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             return place;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.map_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.view) {
+            if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+            }
+            else{
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+            }
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

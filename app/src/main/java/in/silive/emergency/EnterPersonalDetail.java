@@ -119,7 +119,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
        }
     }
     public void startnewactivity(){
-        Intent intent = new Intent(this, TypeOfEmergency.class);
+        Intent intent = new Intent(this, FragmentCallingActivity.class);
         startActivity(intent);
     }
 

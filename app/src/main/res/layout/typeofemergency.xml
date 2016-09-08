@@ -12,13 +12,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Pharmacy"
+        android:id="@+id/btpharmacy" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Police"
         android:id="@+id/btpolice" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fire Brigade"
+        android:text="Fire Statition"
         android:id="@+id/btfirebrigade" />
 
     <Button
