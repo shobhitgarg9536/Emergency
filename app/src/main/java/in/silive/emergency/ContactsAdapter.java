@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class ContactsAdapter extends ArrayAdapter {
 
-     List list = new ArrayList();
+     private List list = new ArrayList();
     public ContactsAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -37,7 +37,9 @@ public class ContactsAdapter extends ArrayAdapter {
 
     @Override
     public void add(Object object) {
+        //noinspection unchecked
         super.add(object);
+        //noinspection unchecked
         list.add(object);
     }
 
@@ -48,7 +50,7 @@ public class ContactsAdapter extends ArrayAdapter {
 
     @Override
     public Object getItem(int position) {
-        return this.getItem(position);
+        return list.get(position);
     }
 
     /**

@@ -42,7 +42,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/etmobile"
         android:hint="Mobile No."
-        android:layout_below="@+id/etname"
+
+            android:layout_below="@+id/etname"
         android:inputType="phone"
         android:ems="10"
         android:maxLength="14" />
