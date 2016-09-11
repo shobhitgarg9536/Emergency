@@ -52,10 +52,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="SelectContacts">
+        <activity android:name=".SelectContacts">
             <intent-filter>
-                <action android:name="in.silive.emergency.SELECTCONTACTS" />
+                <action android:name="in.silive.emergency.SELECTCONTACTS"
+                        android:label="@string/title_activity_select_contacts"/>
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ShowSelectedContacts"
+                  android:label="@string/title_activity_show_selected_contacts">
+            <intent-filter>
+                <action android:name="in.silive.emergency.SHOWSELECTEDCONTACTS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -67,7 +76,7 @@
         <activity android:name = "MapsActivity">
             <intent-filter>
                 <action android:name="in.silive.emergency.MapsActivity" />
-                <category android:label="@string/title_activity_maps"  />
+                <category android:name="@string/title_activity_maps"  />
             </intent-filter>
         </activity>
 

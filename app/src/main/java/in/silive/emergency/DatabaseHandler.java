@@ -7,49 +7,58 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import in.silive.emergency.TableData.ContactsInfo;
+import java.util.ArrayList;
+import in.silive.emergency.TableData.TableInfo;
 
 /**
  * Created by Aniket on 07-09-2016.
  */
 
 
-/** Class created to handle saving and retrieval of saved contacts. Database stores contact names and their numbers.
- *
- *
+/** It handles all database operations. The operation includes creating database, deleting database, insertion
+ * deletion, updating database. The database and table information is stored in TableDate class.
  */
 public class DatabaseHandler extends SQLiteOpenHelper{
 
+    /** Database version **/
     public static final int DATABASE_VERSION = 1;
 
-    /** String statement of Query to create a table --- insert semicolon at the last**/
-    private String CREATE_QUERY = "CREATE TABLE " + ContactsInfo.TABLE_NAME +"(" + ContactsInfo._ID + " INTEGER, "+ ContactsInfo.CONTACT_NAME +" TEXT, " + ContactsInfo.CONTACT_NUMBER + " TEXT);";
 
 
+
+    /** Constructor. Creates a database**/
     public DatabaseHandler(Context context) {
-        super(context, ContactsInfo.DATABASE_NAME, null, DATABASE_VERSION ); // Creating database
-        Log.d("Database Operations", "Database created successfully");
+        super(context, TableInfo.DATABASE_NAME, null, DATABASE_VERSION ); // Creating database
+        Log.d("Database Operations", "Database created successfully.");
     }
 
 
+    /** Returns the name of database. **/
     @Override
     public String getDatabaseName() {
-        return ContactsInfo.DATABASE_NAME;  /** return database name **/
+        return TableInfo.DATABASE_NAME;  /** return database name **/
     }
 
 
-
+    /**
+     * Creates a Table. Executed when the database is created.
+     * @param sqLiteDatabase Database in which table will be created.
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
       try {
+          /** String statement of Query to create a table --- insert semicolon at the last.**/
+            String CREATE_QUERY = "CREATE TABLE " + TableInfo.TABLE_NAME +"(" + TableInfo._ID +
+                    " INTEGER, "+ TableInfo.CONTACT_NAME +" TEXT, " + TableInfo.CONTACT_NUMBER + " TEXT);";
+
           sqLiteDatabase.execSQL(CREATE_QUERY); // executes a sqLite statement which doesn't return any data(select)
-          Log.d("Database Operation", "Table created successfully");
+          Log.d("Database Operation", "Table created successfully.");
       }
       catch(SQLException e){
-        Log.e("Database Operations", "Cannot create table, invalid query", e);
+        Log.e("Database Operations", "Cannot create table, invalid query.", e);
       }
       }
+
 
 
     @Override
@@ -58,52 +67,113 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     }
 
+    /**
+     * Inserts a single contact into the database.
+     * @param contact Contact to be inserted
+     */
+    public void putContact(Contact contact) {
+        SQLiteDatabase database = this.getWritableDatabase();       // get database
+        ContentValues cv = new ContentValues();         // used to store set of values, maps a value to a key
+        cv.put(TableInfo.CONTACT_NAME, contact.getName());
+        cv.put(TableInfo.CONTACT_NUMBER, contact.getPhoneNumber());
 
-    public void putContact(DatabaseHandler handler, String contactName, String contactPhone) {
-        SQLiteDatabase database = handler.getWritableDatabase();       // get database
-        ContentValues cv = new ContentValues();         // used to store set of values
-        cv.put(ContactsInfo.CONTACT_NAME, contactName);
-        cv.put(ContactsInfo.CONTACT_NUMBER, contactPhone);
         /** cv object maps values to keys. They keys will act as column names for insert() method of database **/
-        long id = database.insert(ContactsInfo.TABLE_NAME, null, cv);
+        long id = database.insert(TableInfo.TABLE_NAME, null, cv);
         if (id == -1) {
             /** error in insertion **/
-            Log.e("Database Operations", "Error in inserting data into the database");
+            Log.e("Database Operations", "Error in inserting single contact into the database.");
         }
     }
 
-    /** Note: Put spaces while concatenation string in selection statement **/
+    /**
+     * Insert an entire list of contact into the database.
+     * @param contactList ArrayList of contacts.
+     */
+    public void putContactList(ArrayList<Contact> contactList ){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        for(int index = 0; index < contactList.size(); index++){
+           /** insert data into contentValue object **/
+            cv.put(TableInfo.CONTACT_NAME, contactList.get(index).getName());
+            cv.put(TableInfo.CONTACT_NUMBER, contactList.get(index).getPhoneNumber());
 
-        public Cursor getData(DatabaseHandler handler){
-            SQLiteDatabase database = handler.getReadableDatabase();
-            String[] columns = {ContactsInfo.CONTACT_NAME, ContactsInfo.CONTACT_NUMBER };
-            return database.query(ContactsInfo.TABLE_NAME, columns, null, null, null, null, null);
+            long id = database.insert(TableInfo.TABLE_NAME, null, cv);
+            if(id == -1){
+                /** error in insertion **/
+                Log.e("Database Operation", "Error in inserting ArrayList of contacts into the database.");
+            }
+        }
     }
 
-        public void deleteContact(DatabaseHandler handler, String contactName, String contactPhone){
-            SQLiteDatabase database = handler.getWritableDatabase();
-            String selection = ContactsInfo.CONTACT_NAME + " LIKE ? AND " + ContactsInfo.CONTACT_NUMBER + " LIKE ?";
-            String[] values = {contactName, contactPhone};
-            database.delete(ContactsInfo.TABLE_NAME, selection, values); // table name, selection criteria and where to be deleted
+
+    /**
+     * Returns cursor object and can be used for retrieval of data for custom queries
+     * @return Cursor object
+     */
+    public Cursor getCursor(){
+            SQLiteDatabase database = this.getReadableDatabase();    // only for reading
+            String[] columns = {TableInfo.CONTACT_NAME, TableInfo.CONTACT_NUMBER };
+            return database.query(TableInfo.TABLE_NAME, columns, null, null, null, null, null);
+    }
+
+
+    /**
+     * Retrieves entire data from the database and saves in ArrayList of Contact.
+     * @return  ArrayList of contacts containing all the contacts.
+     */
+    public ArrayList<Contact> getContactList() {
+            ArrayList contactList = new ArrayList();
+            Cursor cr = this.getCursor();
+
+        if(cr.moveToFirst()){
+                int index = 0;
+                do {
+                    /** Get the name and phone number of contact from database and save it into Contact object **/
+                    Contact contact = new Contact(cr.getString(0), cr.getString(1));  // 0,1 represents column index
+                    contactList.add(index++, contact);
+                }
+                while(cr.moveToNext());
+            }
+            else {
+                /** cursor is empty **/
+            Log.e("Database Operation", "Unable to get contact list. The cursor is empty.");
+            }
+            return contactList;
+        }
+
+
+    /**
+     * Deletes a single contact from the database
+     * @param contact Contact to be deleted
+     */
+    public void deleteContact(Contact contact){
+            SQLiteDatabase database = this.getWritableDatabase();
+            String selection = TableInfo.CONTACT_NAME + " LIKE ? AND " + TableInfo.CONTACT_NUMBER + " LIKE ?";
+            String[] values = {contact.getPhoneNumber(), contact.getPhoneNumber()};
+            database.delete(TableInfo.TABLE_NAME, selection, values); // table name, selection criteria and where to be deleted
     }
 
     /**
-     * Deletes all the contacts in the database
+     * Clears the entire database. Deletes all the contacts in the database.
      */
-    public void clearDatabase(DatabaseHandler handler){
-        SQLiteDatabase database = handler.getWritableDatabase();
-        database.delete(ContactsInfo.TABLE_NAME, null, null); // deletes all rows
+    public void clearDatabase(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TableInfo.TABLE_NAME, null, null); // deletes all rows
     }
 
-
-    public void updateDatabase(DatabaseHandler handler, String oldContactName, String oldContactPhone, String newContactName, String newContactPhone){
-        SQLiteDatabase database = handler.getWritableDatabase();
+    /**
+     * Updates a contact in the database.
+     * @param oldContact    The contact which needs to be updated. Old values of contact.
+     * @param newContact    New Contact that need to be saved in place of old contact.
+     */
+    public void updateContact(Contact oldContact, Contact newContact){
+        SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        String selection = ContactsInfo.CONTACT_NAME + " LIKE ? AND " + ContactsInfo.CONTACT_NUMBER + " LIKE ?"; // create selection statement
-        String[] values = {oldContactName, oldContactPhone};  // need values for selection statement
-        cv.put(ContactsInfo.CONTACT_NAME, newContactName); // create cv object for putting new values into the database
-        cv.put(ContactsInfo.CONTACT_NUMBER, newContactPhone);
-        database.update(ContactsInfo.TABLE_NAME, cv, selection, values); //update database
+        String selection = TableInfo.CONTACT_NAME + " LIKE ? AND " + TableInfo.CONTACT_NUMBER + " LIKE ?"; // create selection statement
+        String[] values = {oldContact.getName(), oldContact.getPhoneNumber()};  // need values for selection statement
+        cv.put(TableInfo.CONTACT_NAME, newContact.getName()); // create cv object for putting new values into the database
+        cv.put(TableInfo.CONTACT_NUMBER, newContact.getPhoneNumber());
+        database.update(TableInfo.TABLE_NAME, cv, selection, values); //update database
     }
 
 }
