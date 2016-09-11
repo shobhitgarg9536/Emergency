@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 
 
 public class TypeOfEmergency extends Fragment implements View.OnClickListener {
-Button hospital,police,pharmacy,fireBridage,contacts;
+Button hospital,police,pharmacy,contacts;
 
 
 
@@ -38,13 +38,13 @@ Button hospital,police,pharmacy,fireBridage,contacts;
         hospital = (Button) linearLayout.findViewById(R.id.bthospital);
         police = (Button) linearLayout.findViewById(R.id.btpolice);
         pharmacy = (Button) linearLayout.findViewById(R.id.btpharmacy);
-        fireBridage = (Button) linearLayout.findViewById(R.id.btfirebrigade);
+
         contacts = (Button) linearLayout.findViewById(R.id.btcontacts);
 
         hospital.setOnClickListener(this);
         police.setOnClickListener(this);
         pharmacy.setOnClickListener(this);
-        fireBridage.setOnClickListener(this);
+
         contacts.setOnClickListener(this);
         return linearLayout;
 
@@ -78,12 +78,9 @@ Button hospital,police,pharmacy,fireBridage,contacts;
                 startActivity(intent);
 
                 break;
-            case R.id.btfirebrigade:
+            case R.id.btcontacts:
 
-                intent = new Intent(getContext(), MapsActivity.class);
-                intent.putExtra("type","fire_station");
 
-                startActivity(intent);
 
                 break;
 

@@ -60,16 +60,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/handle"
-            android:background="#040404"
-
-
+            android:background="#e85243"
             android:text="-NA-"
-            android:maxHeight="40dp"
+            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:textSize="15dp"
+            android:fontFamily="cursive"
+            android:maxHeight="60dp"
+            android:minHeight="50dp"
+            android:layout_margin="10dp"
             android:textColor="#ffffff" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <LinearLayout android:id="@+id/content"
+        <LinearLayout
+            android:id="@+id/content"
             android:background="#FFFFFFFF"
             android:orientation="vertical" android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -85,7 +90,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="Vicinity:"
+                    android:text="Vicinity : "
+                    android:fontFamily="cursive"
 
                     />
 
@@ -95,7 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="-NA-"
+                    android:text=" -NA- "
+                    android:fontFamily="cursive"
                     android:id="@+id/tvVicinity"
 
                     />
@@ -105,12 +112,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+
                 android:weightSum="100">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="Address:"
+                    android:fontFamily="cursive"
+                    android:text="Address : "
 
                     />
 
@@ -118,7 +127,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="-NA-"
+                    android:text=" -NA- "
+                    android:fontFamily="cursive"
                     android:id="@+id/tvaddress"
 
                     android:layout_gravity="center_horizontal" />
@@ -133,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-
-                    android:text="Phone no:"
+                    android:fontFamily="cursive"
+                    android:text="Phone no : "
 
                     />
 
@@ -142,7 +152,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="-NA-"
+                    android:text=" -NA-"
+                    android:fontFamily="cursive"
                     android:id="@+id/tvphone"
 
                     android:layout_gravity="center_horizontal" />
@@ -157,7 +168,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="Website:"
+                    android:fontFamily="cursive"
+                    android:text="Website : "
 
                     />
 
@@ -165,7 +177,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="-NA-"
+                    android:text=" -NA-"
+                    android:fontFamily="cursive"
                     android:id="@+id/tvwebsite"
 
                     android:layout_gravity="center_horizontal" />
@@ -180,7 +193,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="International Phone :"
+                    android:fontFamily="cursive"
+                    android:text="International Phone : "
 
                     />
 
@@ -188,7 +202,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text="-NA-"
+                    android:text=" -NA-"
+                    android:fontFamily="cursive"
                     android:id="@+id/tvinternational"
 
                     android:layout_gravity="center_horizontal" />
@@ -197,4 +212,16 @@
         </LinearLayout>
         </ScrollView>
         </SlidingDrawer>
+    <RelativeLayout
+        android:id="@+id/rlprogesslayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:clickable="true"
+        android:visibility="visible" >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
     </FrameLayout>

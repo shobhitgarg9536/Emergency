@@ -1,20 +1,23 @@
 package in.silive.emergency;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.location.Criteria;
+import android.content.Context;
+
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
+
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+
+import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -51,7 +55,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     double mLongitude=0;
     String typeofemergency;
     HashMap<String, String> mMarkerPlaceLink = new HashMap<String, String>();
-
+    RelativeLayout progessLayout;
     SlidingDrawer slidingDrawerMove;
     TextView phone,website,international,vicinity,address,slidingText;
     private Toolbar toolbar;
@@ -64,8 +68,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        typeofemergency = getIntent().getStringExtra("type");
 
         slidingDrawerMove = (SlidingDrawer) findViewById(R.id.sdmove);
+        progessLayout = (RelativeLayout) findViewById(R.id.rlprogesslayout);
 
         slidingText =(TextView) findViewById(R.id.handle);
 
@@ -78,10 +84,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(typeofemergency.equals("hospital"))
+        getSupportActionBar().setTitle("HOSPITAL");
+        if(typeofemergency.equals("pharmacy"))
+            getSupportActionBar().setTitle("PHARMACY");
+        if(typeofemergency.equals("police"))
+            getSupportActionBar().setTitle("POLICE");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        typeofemergency = getIntent().getStringExtra("type");
+
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
         if(status!= ConnectionResult.SUCCESS){ // Google Play Services are not available
 
@@ -90,9 +102,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             dialog.show();
         }
         else {
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
+            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.map);
+                mapFragment.getMapAsync(this);
+            }
+            else {
+                Toast.makeText(this, "NOT COnnect", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
 
@@ -106,7 +126,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        googleMap.setPadding(0 ,0,0,100);
         mMap.getUiSettings().setCompassEnabled(true);
 
         mMap.setMyLocationEnabled(true);
@@ -125,7 +145,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
-        locationManager.requestLocationUpdates(String.valueOf(location), 20000, 0, new android.location.LocationListener() {
+        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
 
             @Override
             public void onLocationChanged(Location location) {
@@ -161,8 +181,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
-
-
+                progessLayout.setVisibility(View.VISIBLE);
                 String reference = mMarkerPlaceLink.get(arg0.getId());
                 StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
 
@@ -175,6 +194,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void processFinish(HashMap<String, String> output) {
 
                         slidingDrawerMove.setVisibility(View.VISIBLE);
+                        progessLayout.setVisibility(View.INVISIBLE);
+                        slidingDrawerMove.open();
                         slidingText.setText(output.get("name").toString());
 
                         address.setText(output.get("formatted_address").toString());
@@ -191,6 +212,43 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+             /*   mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+
+                        progessLayout.setVisibility(View.VISIBLE);
+
+                        String reference = mMarkerPlaceLink.get(marker.getId());
+
+                        StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
+
+                        sb.append("reference="+reference);
+                        sb.append("&sensor=true");
+                        sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
+
+                        NearestPlaceDetails pdAysnTask = new NearestPlaceDetails(new MapAsynResponse() {
+                            @Override
+                            public void processFinish(HashMap<String, String> output) {
+
+                                slidingDrawerMove.setVisibility(View.VISIBLE);
+                                slidingText.setText(output.get("name").toString());
+                                address.setText(output.get("formatted_address").toString());
+                                phone.setText(output.get("formatted_phone_number").toString());
+                                international.setText(output.get("international_phone_number").toString());
+                                website.setText(output.get("website").toString());
+                                vicinity.setText(output.get("vicinity").toString());
+
+                            }
+                        });
+                        pdAysnTask.execute(sb.toString());
+                        progessLayout.setVisibility(View.INVISIBLE);
+                        slidingDrawerMove.open();
+                        return true;
+                    }
+                });*/
+
+
         thread = new Thread() {
 
             @Override
@@ -300,7 +358,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         protected void onPostExecute(List<HashMap<String, String>> result) {
 
             mMap.clear();
-
+            progessLayout.setVisibility(View.INVISIBLE);
             for(int i=0;i<result.size();i++){
 
                 // Creating a marker
@@ -325,6 +383,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 // Setting the position for the marker
                 markerOptions.position(latLng);
+
+                if(typeofemergency.equals("hospital"))
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.hospitalicon));
+                if(typeofemergency.equals("pharmacy"))
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pharmacyicon));
+                if(typeofemergency.equals("police"))
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.policeicon));
+
+
 
                 // Setting the title for the marker.
                 //This will be displayed on taping the marker
