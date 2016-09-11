@@ -3,7 +3,10 @@ package in.silive.emergency;
 import android.app.Dialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +14,8 @@ import android.os.AsyncTask;
 
 import android.os.Bundle;
 
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -61,6 +66,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Toolbar toolbar;
     Thread thread;
     int count=5000;
+    Location location;
+
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
 
 
     @Override
@@ -110,14 +119,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mapFragment.getMapAsync(this);
             }
             else {
-                Toast.makeText(this, "NOT COnnect", Toast.LENGTH_SHORT).show();
+
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Sorry, your device doesn't connect to internet!");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                alertDialog.create();
+                alertDialog.show();
             }
 
         }
-
-
-
-
     }
 
 
@@ -133,7 +149,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 
-
+/*
         // Getting Current Location From GPS
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -175,6 +191,89 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+*/
+        isGPSEnabled = locationManager
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+
+        isNetworkEnabled = locationManager
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+if(isGPSEnabled && isNetworkEnabled) {
+
+    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+
+}
+        else {
+    if(isGPSEnabled)
+    location = locationManager
+            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    else {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("GPS is settings");
+
+        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        alertDialog.show();
+
+    }
+
+}
+
+        try {
+
+            onLocationChanged(location);
+
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
+
+            @Override
+            public void onLocationChanged(Location location) {
+
+                mLatitude = location.getLatitude();
+                mLongitude = location.getLongitude();
+
+                LatLng latLng = new LatLng(mLatitude, mLongitude);
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        });
+
+
 
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -272,6 +371,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     public void onLocationChanged(Location location) {
+
         mLatitude = location.getLatitude();
         mLongitude = location.getLongitude();
         LatLng latLng = new LatLng(mLatitude, mLongitude);
@@ -481,5 +581,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
     }
 }
