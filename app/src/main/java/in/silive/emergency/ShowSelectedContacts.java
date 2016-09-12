@@ -34,7 +34,7 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
         adapter = new ContactsAdapter(getApplicationContext(), R.layout.select_contact_row, false);
         button = (Button)findViewById(R.id.bt_save_contacts);
         button.setOnClickListener(this);    // set action listener
-
+        adapter.clear();    // clear the adapter
         /** add the contact to adapter **/
         for(int index = 0; index < contactName.size(); index++){
             adapter.add(new Contact(contactName.get(index), contactPhone.get(index)));
@@ -61,22 +61,16 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
                 Contact contact = (Contact)adapter.getItem(index);
                     dbHandler.putContact(contact);
                 }
-
-            Intent intent = new Intent(this , FragmentCallingActivity.class);
+                /** ADDED TO TEST ConnectContacts.class , remove it
+                 * TODO remove the unnecessary intent
+                 * **/
+            Intent intent = new Intent(this , ConnectContacts.class);
             startActivity(intent);
             }
     }
 
 
 
-    @Override
-    public void onBackPressed(){        // when back key is pressed
-        DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
-        /** clear the previous database **/
-        dbHandler.clearDatabase();
-        Intent intent = new Intent(this, SelectContacts.class);
-        startActivity(intent);
-    }
 
 
 }// end of class

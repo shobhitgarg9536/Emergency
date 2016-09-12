@@ -7,654 +7,8 @@
                     "startLine": 2,
                     "startColumn": 4,
                     "startOffset": 105,
-                    "endColumn": 107,
-                    "endOffset": 208
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 344,
-                        "endColumn": 107,
-                        "endOffset": 447
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 213,
-                    "endColumn": 87,
-                    "endOffset": 296
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 452,
-                        "endColumn": 87,
-                        "endOffset": 535
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 301,
-                    "endColumn": 108,
-                    "endOffset": 405
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 540,
-                        "endColumn": 108,
-                        "endOffset": 644
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 410,
-                    "endColumn": 88,
-                    "endOffset": 494
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 649,
-                        "endColumn": 88,
-                        "endOffset": 733
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 499,
                     "endColumn": 109,
-                    "endOffset": 604
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 8,
-                        "startColumn": 4,
-                        "startOffset": 738,
-                        "endColumn": 109,
-                        "endOffset": 843
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 609,
-                    "endColumn": 111,
-                    "endOffset": 716
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 9,
-                        "startColumn": 4,
-                        "startOffset": 848,
-                        "endColumn": 111,
-                        "endOffset": 955
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 721,
-                    "endColumn": 82,
-                    "endOffset": 799
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 10,
-                        "startColumn": 4,
-                        "startOffset": 960,
-                        "endColumn": 82,
-                        "endOffset": 1038
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 804,
-                    "endColumn": 95,
-                    "endOffset": 895
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 11,
-                        "startColumn": 4,
-                        "startOffset": 1043,
-                        "endColumn": 95,
-                        "endOffset": 1134
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 10,
-                    "startColumn": 4,
-                    "startOffset": 900,
-                    "endColumn": 98,
-                    "endOffset": 994
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 12,
-                        "startColumn": 4,
-                        "startOffset": 1139,
-                        "endColumn": 98,
-                        "endOffset": 1233
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 11,
-                    "startColumn": 4,
-                    "startOffset": 999,
-                    "endColumn": 107,
-                    "endOffset": 1102
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 13,
-                        "startColumn": 4,
-                        "startOffset": 1238,
-                        "endColumn": 107,
-                        "endOffset": 1341
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 12,
-                    "startColumn": 4,
-                    "startOffset": 1107,
-                    "endColumn": 77,
-                    "endOffset": 1180
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 14,
-                        "startColumn": 4,
-                        "startOffset": 1346,
-                        "endColumn": 77,
-                        "endOffset": 1419
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 13,
-                    "startColumn": 4,
-                    "startOffset": 1185,
-                    "endColumn": 140,
-                    "endOffset": 1321
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 333,
-                        "endColumn": 140,
-                        "endOffset": 469
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 14,
-                    "startColumn": 4,
-                    "startOffset": 1326,
-                    "endColumn": 147,
-                    "endOffset": 1469
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 474,
-                        "endColumn": 147,
-                        "endOffset": 617
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 15,
-                    "startColumn": 4,
-                    "startOffset": 1474,
-                    "endColumn": 101,
-                    "endOffset": 1571
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 622,
-                        "endColumn": 101,
-                        "endOffset": 719
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 16,
-                    "startColumn": 4,
-                    "startOffset": 1576,
-                    "endColumn": 75,
-                    "endOffset": 1647
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 1424,
-                        "endColumn": 75,
-                        "endOffset": 1495
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 17,
-                    "startColumn": 4,
-                    "startOffset": 1652,
-                    "endColumn": 73,
-                    "endOffset": 1721
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 16,
-                        "startColumn": 4,
-                        "startOffset": 1500,
-                        "endColumn": 73,
-                        "endOffset": 1569
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 18,
-                    "startColumn": 4,
-                    "startOffset": 1726,
-                    "endColumn": 82,
-                    "endOffset": 1804
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 17,
-                        "startColumn": 4,
-                        "startOffset": 1574,
-                        "endColumn": 82,
-                        "endOffset": 1652
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 19,
-                    "startColumn": 4,
-                    "startOffset": 1809,
-                    "endColumn": 95,
-                    "endOffset": 1900
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 18,
-                        "startColumn": 4,
-                        "startOffset": 1657,
-                        "endColumn": 95,
-                        "endOffset": 1748
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 1905,
-                    "endColumn": 98,
-                    "endOffset": 1999
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 19,
-                        "startColumn": 4,
-                        "startOffset": 1753,
-                        "endColumn": 98,
-                        "endOffset": 1847
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 21,
-                    "startColumn": 4,
-                    "startOffset": 2004,
-                    "endColumn": 107,
-                    "endOffset": 2107
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 20,
-                        "startColumn": 4,
-                        "startOffset": 1852,
-                        "endColumn": 107,
-                        "endOffset": 1955
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 22,
-                    "startColumn": 4,
-                    "startOffset": 2112,
-                    "endColumn": 89,
-                    "endOffset": 2197
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 21,
-                        "startColumn": 4,
-                        "startOffset": 1960,
-                        "endColumn": 89,
-                        "endOffset": 2045
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 23,
-                    "startColumn": 4,
-                    "startOffset": 2202,
-                    "endColumn": 93,
-                    "endOffset": 2291
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 2050,
-                        "endColumn": 93,
-                        "endOffset": 2139
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 24,
-                    "startColumn": 4,
-                    "startOffset": 2296,
-                    "endColumn": 72,
-                    "endOffset": 2364
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 23,
-                        "startColumn": 4,
-                        "startOffset": 2144,
-                        "endColumn": 72,
-                        "endOffset": 2212
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 25,
-                    "startColumn": 4,
-                    "startOffset": 2369,
-                    "endColumn": 97,
-                    "endOffset": 2462
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 24,
-                        "startColumn": 4,
-                        "startOffset": 2217,
-                        "endColumn": 97,
-                        "endOffset": 2310
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 26,
-                    "startColumn": 4,
-                    "startOffset": 2467,
-                    "endColumn": 95,
-                    "endOffset": 2558
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 25,
-                        "startColumn": 4,
-                        "startOffset": 2315,
-                        "endColumn": 95,
-                        "endOffset": 2406
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 27,
-                    "startColumn": 4,
-                    "startOffset": 2563,
-                    "endColumn": 98,
-                    "endOffset": 2657
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 26,
-                        "startColumn": 4,
-                        "startOffset": 2411,
-                        "endColumn": 98,
-                        "endOffset": 2505
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 28,
-                    "startColumn": 4,
-                    "startOffset": 2662,
-                    "endColumn": 143,
-                    "endOffset": 2801
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 27,
-                        "startColumn": 4,
-                        "startOffset": 2510,
-                        "endColumn": 143,
-                        "endOffset": 2649
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 29,
-                    "startColumn": 4,
-                    "startOffset": 2806,
-                    "endColumn": 128,
-                    "endOffset": 2930
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 28,
-                        "startColumn": 4,
-                        "startOffset": 2654,
-                        "endColumn": 128,
-                        "endOffset": 2778
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 30,
-                    "startColumn": 4,
-                    "startOffset": 2935,
-                    "endColumn": 130,
-                    "endOffset": 3061
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 29,
-                        "startColumn": 4,
-                        "startOffset": 2783,
-                        "endColumn": 130,
-                        "endOffset": 2909
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 31,
-                    "startColumn": 4,
-                    "startOffset": 3066,
-                    "endColumn": 127,
-                    "endOffset": 3189
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 30,
-                        "startColumn": 4,
-                        "startOffset": 2914,
-                        "endColumn": 127,
-                        "endOffset": 3037
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 32,
-                    "startColumn": 4,
-                    "startOffset": 3194,
-                    "endColumn": 98,
-                    "endOffset": 3288
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 31,
-                        "startColumn": 4,
-                        "startOffset": 3042,
-                        "endColumn": 98,
-                        "endOffset": 3136
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 33,
-                    "startColumn": 4,
-                    "startOffset": 3293,
-                    "endColumn": 91,
-                    "endOffset": 3380
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 32,
-                        "startColumn": 4,
-                        "startOffset": 3141,
-                        "endColumn": 91,
-                        "endOffset": 3228
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 34,
-                    "startColumn": 4,
-                    "startOffset": 3385,
-                    "endColumn": 104,
-                    "endOffset": 3485
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 33,
-                        "startColumn": 4,
-                        "startOffset": 3233,
-                        "endColumn": 104,
-                        "endOffset": 3333
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 35,
-                    "startColumn": 4,
-                    "startOffset": 3490,
-                    "endColumn": 81,
-                    "endOffset": 3567
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 34,
-                        "startColumn": 4,
-                        "startOffset": 3338,
-                        "endColumn": 81,
-                        "endOffset": 3415
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 36,
-                    "startColumn": 4,
-                    "startOffset": 3572,
-                    "endColumn": 109,
-                    "endOffset": 3677
+                    "endOffset": 210
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -669,11 +23,11 @@
             },
             {
                 "to": {
-                    "startLine": 37,
+                    "startLine": 3,
                     "startColumn": 4,
-                    "startOffset": 3682,
+                    "startOffset": 215,
                     "endColumn": 197,
-                    "endOffset": 3875
+                    "endOffset": 408
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -688,11 +42,11 @@
             },
             {
                 "to": {
-                    "startLine": 38,
+                    "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 3880,
+                    "startOffset": 413,
                     "endColumn": 126,
-                    "endOffset": 4002
+                    "endOffset": 535
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -707,11 +61,11 @@
             },
             {
                 "to": {
-                    "startLine": 39,
+                    "startLine": 5,
                     "startColumn": 4,
-                    "startOffset": 4007,
+                    "startOffset": 540,
                     "endColumn": 124,
-                    "endOffset": 4127
+                    "endOffset": 660
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -726,11 +80,11 @@
             },
             {
                 "to": {
-                    "startLine": 40,
+                    "startLine": 6,
                     "startColumn": 4,
-                    "startOffset": 4132,
+                    "startOffset": 665,
                     "endColumn": 200,
-                    "endOffset": 4328
+                    "endOffset": 861
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -745,11 +99,11 @@
             },
             {
                 "to": {
-                    "startLine": 41,
+                    "startLine": 7,
                     "startColumn": 4,
-                    "startOffset": 4333,
+                    "startOffset": 866,
                     "endColumn": 205,
-                    "endOffset": 4534
+                    "endOffset": 1067
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -764,11 +118,11 @@
             },
             {
                 "to": {
-                    "startLine": 42,
+                    "startLine": 8,
                     "startColumn": 4,
-                    "startOffset": 4539,
+                    "startOffset": 1072,
                     "endColumn": 123,
-                    "endOffset": 4658
+                    "endOffset": 1191
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -783,11 +137,11 @@
             },
             {
                 "to": {
-                    "startLine": 43,
+                    "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 4663,
+                    "startOffset": 1196,
                     "endColumn": 128,
-                    "endOffset": 4787
+                    "endOffset": 1320
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -802,11 +156,11 @@
             },
             {
                 "to": {
-                    "startLine": 44,
+                    "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 4792,
+                    "startOffset": 1325,
                     "endColumn": 252,
-                    "endOffset": 5040
+                    "endOffset": 1573
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-gu\\values.xml",
@@ -821,11 +175,11 @@
             },
             {
                 "to": {
-                    "startLine": 45,
+                    "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 5045,
+                    "startOffset": 1578,
                     "endColumn": 241,
-                    "endOffset": 5282
+                    "endOffset": 1815
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -840,11 +194,11 @@
             },
             {
                 "to": {
-                    "startLine": 46,
+                    "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 5287,
+                    "startOffset": 1820,
                     "endColumn": 120,
-                    "endOffset": 5403
+                    "endOffset": 1936
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -859,11 +213,11 @@
             },
             {
                 "to": {
-                    "startLine": 47,
+                    "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 5408,
+                    "startOffset": 1941,
                     "endColumn": 109,
-                    "endOffset": 5513
+                    "endOffset": 2046
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -878,11 +232,11 @@
             },
             {
                 "to": {
-                    "startLine": 48,
+                    "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 5518,
+                    "startOffset": 2051,
                     "endColumn": 194,
-                    "endOffset": 5708
+                    "endOffset": 2241
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -897,11 +251,11 @@
             },
             {
                 "to": {
-                    "startLine": 49,
+                    "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 5713,
+                    "startOffset": 2246,
                     "endColumn": 126,
-                    "endOffset": 5835
+                    "endOffset": 2368
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -916,11 +270,11 @@
             },
             {
                 "to": {
-                    "startLine": 50,
+                    "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 5840,
+                    "startOffset": 2373,
                     "endColumn": 201,
-                    "endOffset": 6037
+                    "endOffset": 2570
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -935,11 +289,11 @@
             },
             {
                 "to": {
-                    "startLine": 51,
+                    "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 6042,
+                    "startOffset": 2575,
                     "endColumn": 134,
-                    "endOffset": 6172
+                    "endOffset": 2705
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -954,11 +308,11 @@
             },
             {
                 "to": {
-                    "startLine": 52,
+                    "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 6177,
+                    "startOffset": 2710,
                     "endColumn": 179,
-                    "endOffset": 6352
+                    "endOffset": 2885
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -973,11 +327,11 @@
             },
             {
                 "to": {
-                    "startLine": 53,
+                    "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 6357,
+                    "startOffset": 2890,
                     "endColumn": 90,
-                    "endOffset": 6443
+                    "endOffset": 2976
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -992,11 +346,11 @@
             },
             {
                 "to": {
-                    "startLine": 54,
+                    "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 6448,
+                    "startOffset": 2981,
                     "endColumn": 95,
-                    "endOffset": 6539
+                    "endOffset": 3072
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -1011,11 +365,11 @@
             },
             {
                 "to": {
-                    "startLine": 55,
+                    "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 6544,
+                    "startOffset": 3077,
                     "endColumn": 110,
-                    "endOffset": 6650
+                    "endOffset": 3183
                 },
                 "from": {
                     "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-gu\\values.xml",
@@ -1025,44 +379,6 @@
                         "startOffset": 3048,
                         "endColumn": 110,
                         "endOffset": 3154
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 56,
-                    "startColumn": 4,
-                    "startOffset": 6655,
-                    "endColumn": 101,
-                    "endOffset": 6752
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 281,
-                        "endColumn": 101,
-                        "endOffset": 378
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 57,
-                    "startColumn": 4,
-                    "startOffset": 6757,
-                    "endColumn": 93,
-                    "endOffset": 6846
-                },
-                "from": {
-                    "file": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 383,
-                        "endColumn": 93,
-                        "endOffset": 472
                     }
                 }
             }

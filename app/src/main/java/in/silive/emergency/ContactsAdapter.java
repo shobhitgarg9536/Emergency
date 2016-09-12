@@ -84,7 +84,12 @@ public class ContactsAdapter extends ArrayAdapter {
         return list.get(position);
     }
 
-
+    /**
+     * Clears the list of the adapter. Removes all the contacts saved in the list.
+     */
+    public void clear(){
+        list.clear();
+    }
 
     /**
      * The getView() works as ..

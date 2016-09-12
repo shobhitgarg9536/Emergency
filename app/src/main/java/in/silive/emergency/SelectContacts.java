@@ -48,6 +48,8 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         /** When next button is clicked **/
         if(view.getId() == button.getId()){
 
+            /** clear the contactNames and contactPhones before adding any, useful to avoid redundancy when back button is pressed **/
+                contactNames.clear(); contactPhones.clear();
         /** add selected contact's name and phone to respective array list **/
             Bundle bundle = new Bundle();           // for storing data and passind to next activity
             for(int adapterIndex = 0, listIndex = 0; adapterIndex <adapter.getCount(); adapterIndex++){
