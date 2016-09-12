@@ -11,5 +11,10 @@
         app:showAsAction="ifRoom"
         >
     </item>
+    <item android:id="@+id/flashlight"
+        android:icon="@drawable/flashlightoff"
+        app:showAsAction="ifRoom"
+        android:title="Flashlight">
+    </item>
 
 </menu>

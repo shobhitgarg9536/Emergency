@@ -8,6 +8,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
 
+    String MobileNO;
     SharedPreferences sharedPreferences;
     String MyProfile = "Profile";
 
@@ -16,15 +17,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences(MyProfile, MODE_PRIVATE);
-        String MobileNO = (sharedPreferences.getString("MobileNO", ""));
-        if(MobileNO.isEmpty()){
-            Intent intent = new Intent(this,EnterPersonalDetail.class);
-            startActivity(intent);
-        }
-        else {
-            Intent intent = new Intent(this,TypeOfEmergency.class);
-            startActivity(intent);
-        }
+        MobileNO = (sharedPreferences.getString("MobileNO", ""));
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                try{
+                    sleep(2000);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                finally {
+
+                    if(MobileNO.isEmpty()){
+                        Intent intent = new Intent(getApplication(),EnterPersonalDetail.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(getApplication(),FragmentCallingActivity.class);
+                        startActivity(intent);
+
+                    }
+                }
+            }
+        };
+thread.start();
     }
 
     @Override
