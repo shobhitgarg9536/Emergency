@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="45dp"
     android:weightSum="1">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_weight="0.7">
+        android:layout_weight="0.65">
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_weight="0.3">
+        android:layout_weight="0.35">
 
         <ImageButton
             android:layout_width="0dp"

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,8 +36,8 @@ Context context;
 
     @Override
     public void add(Object object) {
-        super.add(object);
         list.add((Contact)object);
+        super.add(object);
     }
 
     @Override
@@ -77,9 +79,14 @@ Context context;
             public void onClick(View view) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:" + contact.getPhoneNumber().trim()));
-                   if(context instanceof  ConnectContacts)
-                    context.startActivity(intent);
+                    String phone = contact.getPhoneNumber().trim();
+                        intent.setData(Uri.parse("tel:" + contact.getPhoneNumber().trim()));
+
+                    /** Validate phone number before calling **/
+                        if (isValidPhoneNumber(phone))
+                            context.startActivity(intent);
+
+                    else Toast.makeText(getContext(),"Phone number validation failed", Toast.LENGTH_SHORT).show();
 
                 }
                 catch(Exception e){
@@ -92,12 +99,27 @@ Context context;
             @Override
             public void onClick(View view) {
                 /** CALL SMS ACTIVITY **/
-                Intent intent;
-               // context.startActivity(intent);
+
+                String phoneNumber = contact.getPhoneNumber().trim();
+                Intent intent = new Intent(context, SendMessage.class);
+                intent.putExtra("message_phone", phoneNumber);
+                context.startActivity(intent);
             }
         });
 
         return row;
     }
+
+    /**
+     * The method validates the phone number before calling
+     * @param number
+     * @return
+     */
+    private boolean isValidPhoneNumber(String number){
+        if(number.length()!= 0)     return false;
+        return    Patterns.PHONE.matcher(number).matches();
+
+    }
+
 }
 

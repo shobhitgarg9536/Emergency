@@ -15,8 +15,10 @@ public class ConnectContacts extends AppCompatActivity {
         setContentView(R.layout.activity_connect_contacts);
         ListView listView = (ListView)findViewById(R.id.lv_connect_contact);
         DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
+
         ArrayList<Contact> contactList = dbHandler.getContactList();
         adapter = new ConnectContactsAdapter(ConnectContacts.this, R.layout.connect_contact_row);
+
         for(int index = 0; index < contactList.size(); index++){
             adapter.add(contactList.get(index));
         }

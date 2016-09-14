@@ -64,8 +64,8 @@ public class ContactsAdapter extends ArrayAdapter {
 
     @Override
     public void add(Object object) {
-        super.add(object);
         list.add((Contact)object);     // add the object to the list
+        super.add(object);
     }
 
 

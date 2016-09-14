@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="bloodgroup_spinner_items">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
         <item>When possible</item>
@@ -376,6 +386,10 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="emergency_message">Hello, I am in emergency. Contact me as soon as you can.\n
+                    \n
+                    \n
+                    My Location is </string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyC6RseknFfChBnHP3iol2AomGTU2VTzwe0
     </string>

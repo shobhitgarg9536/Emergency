@@ -53,7 +53,7 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
         if(view.getId() == button.getId()){
             DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
 
-            /** clear the previous database **/
+            /** clear the previous database before adding any new**/
             dbHandler.clearDatabase();
 
             /** retrieve the contacts from adapter and store it in database **/

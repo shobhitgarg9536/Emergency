@@ -8,6 +8,10 @@
         "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.0\\res\\layout\\notification_template_lines.xml"
     },
     {
+        "merged": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_send_message.xml",
+        "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\src\\main\\res\\layout\\activity_send_message.xml"
+    },
+    {
         "merged": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
         "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.0\\res\\layout\\notification_template_big_media_narrow.xml"
     },

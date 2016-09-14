@@ -26,7 +26,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     ContactsAdapter adapter;
     Button button ;
     ProgressDialog progressDialog;                          // to show loading
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,27 +91,31 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
 
             /** save to contactNames array **/
             String tempName =cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                 if (hasPhone.equalsIgnoreCase("1"))     // has atlease one phone
-                    {
-                        // to navigate through different phone numbers, only one phone number per contact is shown
-                        Cursor phones = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                        phones.moveToFirst();
-                        /** save to contactPhones array list**/
-                        if (phones != null) {
-                            String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                                 if (tempPhone != null)     contactList.add(index, new Contact(tempName, tempPhone));
-                }
+                 if(cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {   // has atlease one phone
 
-                phones.close();
-            }
-                ++index;
+                     // to navigate through different phone numbers, only one phone number per contact is shown
+                     Cursor phones = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                     if (phones != null) {
+                         phones.moveToFirst();
+                         /** save to contactPhones array list**/
+                         if (phones != null) {
+                             String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                             if (tempPhone != null)
+                                 contactList.add(index, new Contact(tempName, tempPhone));
+                                ++index;
+                         }
+
+                         phones.close();
+                     }
+                 }
+
 
         }
         cursor.close();
         return contactList;
     }
+
 
 
 
@@ -127,7 +130,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             ArrayList<Contact> contactList = retrieveContacts();
             for(int index = 0; index < contactList.size(); index++){   // add retrieved contacts to adapter
                 adapter.add(contactList.get(index));
-                ++index;
             }
             return null;
         } /** end of method **/
