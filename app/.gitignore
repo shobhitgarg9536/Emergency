@@ -1,1 +1,4 @@
+*.iml
 /build
+src/main/java/com/
+src/test/
