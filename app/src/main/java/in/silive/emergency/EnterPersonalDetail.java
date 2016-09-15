@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,9 +28,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Shobhit-pc on 8/31/2016.
@@ -38,10 +43,13 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     EditText mobile,name,dob,address,bloodgroup,inheriteddiseases,diseases;
     Button submit;
     SharedPreferences sharedPreferences;
+    SharedPreferences shared;
     String MyProfile = "Profile";
     Toolbar toolbar;
 
     TextInputLayout inputLayoutName,inputLayoutMobile,inputLayoutdob;
+
+    String Sname,Smobile,Saddress,Sblood,Sdob,Sinherited,Sdiseases;
 
     private int year;
     private int month;
@@ -70,17 +78,68 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
 
         submit = (Button) findViewById(R.id.btSubmit);
 
+        shared = getSharedPreferences(MyProfile , MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MyProfile, MODE_PRIVATE);
+        Sname = sharedPreferences.getString("Name", "");
+        Smobile = sharedPreferences.getString("MobileNO", "");
+        Saddress = sharedPreferences.getString("Address", "");
+        Sdob = sharedPreferences.getString("DOB", "");
+        Sblood = sharedPreferences.getString("BloodGroup", "");
+        Sinherited = sharedPreferences.getString("InheritedDiseases", "");
+        Sdiseases = sharedPreferences.getString("Diseases", "");
+
+        if(!Sname.isEmpty())
+            name.setText(Sname);
+
+        if(!Smobile.isEmpty())
+            mobile.setText(Smobile);
+
+        if(!Saddress.isEmpty())
+            address.setText(Saddress);
+
+        if(!Sblood.isEmpty())
+            bloodgroup.setText(Sblood);
+
+        if(!Sdob.isEmpty())
+            dob.setText(Sdob);
+
+        if(!Sinherited.isEmpty())
+            inheriteddiseases.setText(Sinherited);
+
+        if(!Sdiseases.isEmpty())
+            diseases.setText(Sdiseases);
+
+
+
         name.addTextChangedListener(new MyTextWatcher(name));
         mobile.addTextChangedListener(new MyTextWatcher(mobile));
         dob.addTextChangedListener(new MyTextWatcher(dob));
 
         submit.setOnClickListener(this);
 
-        dob.setOnTouchListener(new View.OnTouchListener() {
+       /* dob.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 showDialog(DATE_PICKER_ID);
                 return false;
+            }
+        });
+
+
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DATE_PICKER_ID);
+            }
+        });*/
+
+        dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                if(b){
+                    showDialog(DATE_PICKER_ID);
+                }
             }
         });
 
@@ -141,6 +200,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                        startnewactivity();
                    }
                });
+               alertDialog.setCancelable(false);
                alertDialog.create();
                alertDialog.show();
            }
@@ -157,10 +217,13 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         switch (id) {
             case DATE_PICKER_ID:
 
-                // open datepicker dialog.
-                // set date picker for current date
-                // add pickerListener listner to date picker
-                return new DatePickerDialog(this, pickerListener, year, month,day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, pickerListener, 1990, month,1);
+                datePickerDialog.getDatePicker().setMinDate(new Date().getDate());
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.YEAR , -7);
+                long time = calendar.getTimeInMillis();
+                datePickerDialog.getDatePicker().setMaxDate(time);
+                return datePickerDialog;
         }
         return null;
     }
@@ -171,15 +234,14 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         @Override
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
-
             year  = selectedYear;
             month = selectedMonth;
             day   = selectedDay;
 
-            // Show selected date
             dob.setText(new StringBuilder().append(month + 1)
                     .append("-").append(day).append("-").append(year)
                     .append(" "));
+
 
         }
     };

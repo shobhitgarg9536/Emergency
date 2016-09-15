@@ -10,8 +10,8 @@
     tools:context="in.silive.emergency.MainActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1000dp"
+        android:layout_height="400dp"
         android:background="@drawable/logo"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

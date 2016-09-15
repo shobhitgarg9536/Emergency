@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sdmove"
+        android:clickable="true"
         android:content="@+id/content"
         android:topOffset="250dp"
         android:visibility="invisible"
@@ -76,6 +77,7 @@
         <LinearLayout
             android:id="@+id/content"
             android:background="#FFFFFFFF"
+
             android:orientation="vertical" android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

@@ -134,6 +134,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
         }
+        slidingDrawerMove.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                slidingDrawerMove.setClickable(false);
+            }
+        });
+        slidingDrawerMove.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
+            @Override
+            public void onDrawerOpened() {
+                slidingDrawerMove.setClickable(true);
+            }
+        });
+
+
     }
 
 
@@ -294,9 +308,10 @@ if(isGPSEnabled && isNetworkEnabled) {
 
                         slidingDrawerMove.setVisibility(View.VISIBLE);
                         progessLayout.setVisibility(View.INVISIBLE);
-                        slidingDrawerMove.open();
-                        slidingText.setText(output.get("name").toString());
 
+                        slidingDrawerMove.open();
+
+                        slidingText.setText(output.get("name").toString());
                         address.setText(output.get("formatted_address").toString());
                         phone.setText(output.get("formatted_phone_number").toString());
                         international.setText(output.get("international_phone_number").toString());
@@ -347,6 +362,14 @@ if(isGPSEnabled && isNetworkEnabled) {
                     }
                 });*/
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                slidingDrawerMove.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
 
         thread = new Thread() {
 
@@ -374,6 +397,23 @@ if(isGPSEnabled && isNetworkEnabled) {
 
         mLatitude = location.getLatitude();
         mLongitude = location.getLongitude();
+        if( mLatitude == 0 && mLongitude == 0){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+            alertDialog.setTitle("Network Error");
+
+            alertDialog.setMessage("Network Connectivity Error! Try Again");
+
+            alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int which) {
+                    finish();
+                }
+            });
+
+            alertDialog.show();
+
+        }
+
         LatLng latLng = new LatLng(mLatitude, mLongitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
@@ -496,6 +536,8 @@ if(isGPSEnabled && isNetworkEnabled) {
                 // Setting the title for the marker.
                 //This will be displayed on taping the marker
                 markerOptions.title(name + " : " + vicinity);
+
+
 
                 // Placing a marker on the touched position
                 Marker m = mMap.addMarker(markerOptions);

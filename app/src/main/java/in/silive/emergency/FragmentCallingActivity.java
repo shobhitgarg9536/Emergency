@@ -1,6 +1,7 @@
 package in.silive.emergency;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -98,6 +99,9 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.profile){
+
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
 
         }
         if(id == R.id.flashlight){
