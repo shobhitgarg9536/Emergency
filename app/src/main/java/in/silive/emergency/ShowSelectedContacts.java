@@ -53,20 +53,16 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
         if(view.getId() == button.getId()){
             DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
 
-            /** clear the previous database before adding any new**/
-            dbHandler.clearDatabase();
 
             /** retrieve the contacts from adapter and store it in database **/
             for(int index = 0; index < adapter.getCount(); index++){
                 Contact contact = (Contact)adapter.getItem(index);
                     dbHandler.putContact(contact);
                 }
-                /** ADDED TO TEST ConnectContacts.class , remove it
-                 * TODO remove the unnecessary intent
-                 * **/
-            Intent intent = new Intent(this , ConnectContacts.class);
+
+            Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
             startActivity(intent);
-            }
+        }
     }
 
 

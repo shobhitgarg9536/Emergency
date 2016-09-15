@@ -79,14 +79,11 @@ Context context;
             public void onClick(View view) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_CALL);
-                    String phone = contact.getPhoneNumber().trim();
                         intent.setData(Uri.parse("tel:" + contact.getPhoneNumber().trim()));
 
                     /** Validate phone number before calling **/
-                        if (isValidPhoneNumber(phone))
                             context.startActivity(intent);
 
-                    else Toast.makeText(getContext(),"Phone number validation failed", Toast.LENGTH_SHORT).show();
 
                 }
                 catch(Exception e){

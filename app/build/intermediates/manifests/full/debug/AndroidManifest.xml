@@ -87,6 +87,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="in.silive.emergency.DeleteContacts" >
+            <intent-filter>
+                <action android:name="in.silive.emergency.DELETECONTACTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

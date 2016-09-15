@@ -101,9 +101,10 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
                          /** save to contactPhones array list**/
                          if (phones != null) {
                              String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                             if (tempPhone != null)
+                             if (tempPhone != null) {
                                  contactList.add(index, new Contact(tempName, tempPhone));
-                                ++index;
+                                 ++index;
+                             }
                          }
 
                          phones.close();

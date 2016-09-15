@@ -141,17 +141,19 @@ public class ContactsAdapter extends ArrayAdapter {
             holder.checkBox.setChecked(contact.isSelected());  // set checkbox checked state
             holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
 
-            if(this.isSelectionAdapter) {
-                holder.checkBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        /** reverse the state of selected contacts **/
-                        contact.setSelected(!contact.isSelected());
-                        holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
-                        holder.checkBox.setChecked(contact.isSelected());   // set checkbox checked state
-                    }
-                });
+
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** reverse the state of selected contacts **/
+                contact.setSelected(!contact.isSelected());
+                holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
+                holder.checkBox.setChecked(contact.isSelected());   // set checkbox checked state
+
+
             }
+        });
 
         return row;
     }

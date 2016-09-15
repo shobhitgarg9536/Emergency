@@ -148,9 +148,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
      */
     public void deleteContact(Contact contact){
             SQLiteDatabase database = this.getWritableDatabase();
-            String selection = TableInfo.CONTACT_NAME + " LIKE ? AND " + TableInfo.CONTACT_NUMBER + " LIKE ?";
-            String[] values = {contact.getPhoneNumber(), contact.getPhoneNumber()};
-            database.delete(TableInfo.TABLE_NAME, selection, values); // table name, selection criteria and where to be deleted
+            String selection = TableInfo.CONTACT_NAME + " LIKE ? AND " + TableInfo.CONTACT_NUMBER + " LIKE ?;";
+            String[] values = {contact.getName(), contact.getPhoneNumber()};
+        int x =   database.delete(TableInfo.TABLE_NAME, selection, values); // table name, selection criteria and where to be deleted
+        if(x <= 0){
+            Log.e("Database Operations", "Error in deletion");
+        }
     }
 
     /**

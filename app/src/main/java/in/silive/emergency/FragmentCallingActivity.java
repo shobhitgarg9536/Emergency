@@ -52,6 +52,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new TypeOfEmergency(), "EMERGENCY'S");
+        /** ADD CONTACT'S FRAGMENT HERE **/
         adapter.addFragment(new ContactsFragment(), "CONTACTS");
 
         viewPager.setAdapter(adapter);
