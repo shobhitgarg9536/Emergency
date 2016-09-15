@@ -6,6 +6,5 @@
     <string name = "title_activity_show_selected_contacts">Selected Contacts</string>
     <string name="emergency_message">Hello, I am in trouble. Contact me as soon as you can.\n
                     \n
-                    \n
-                    My Location is \n\n\n</string>
+                    My Location is \n</string>
 </resources>

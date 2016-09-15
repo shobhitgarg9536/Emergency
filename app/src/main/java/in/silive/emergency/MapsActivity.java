@@ -188,14 +188,15 @@ if(isGPSEnabled && isNetworkEnabled) {
 
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
+
             }
         });
 
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 finish();
             }
@@ -364,6 +365,8 @@ if(isGPSEnabled && isNetworkEnabled) {
 
                 // Connecting to url
                 urlConnection.connect();
+
+
 
                 // Reading data from url
                 iStream = urlConnection.getInputStream();
@@ -559,4 +562,5 @@ if(isGPSEnabled && isNetworkEnabled) {
         startActivity(intent);
 
     }
+
 }

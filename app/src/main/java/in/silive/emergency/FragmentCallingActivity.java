@@ -2,6 +2,7 @@ package in.silive.emergency;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
     private boolean isFlashOn;
     private boolean hasFlash;
     Camera.Parameters params;
+    String MyChat = "Chat";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,25 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
+        sharedPreferences = getSharedPreferences(MyChat, MODE_PRIVATE);
+        String chat = (sharedPreferences.getString("chat", ""));
+        if(chat.equals("hospital")){
+            Intent i = new Intent(this ,MapsActivity.class );
+            i.putExtra("type","hospital");
+            startActivity(i);
+        }
+        if(chat.equals("pharmacy")){
+            Intent i = new Intent(this ,MapsActivity.class );
+            i.putExtra("type","pharmacy");
+            startActivity(i);
+        }
+        if(chat.equals("police")){
+            Intent i = new Intent(this ,MapsActivity.class );
+            i.putExtra("type","police");
+            startActivity(i);
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -149,6 +171,18 @@ public class FragmentCallingActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+        if(id == R.id.mstartChatHead){
+
+            Intent intent = new Intent(this , ChatHeadService.class);
+            startService(intent);
+
+        }
+        if(id == R.id.mstopChatHead){
+
+            Intent intent = new Intent(this , ChatHeadService.class);
+            stopService(intent);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -193,7 +227,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().commit();
         turnOffFlash();
     }
     @Override

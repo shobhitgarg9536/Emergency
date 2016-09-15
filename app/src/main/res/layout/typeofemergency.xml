@@ -36,13 +36,6 @@
         android:translationZ="20dp" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-       android:layout_margin="20dp"
-        android:background="@drawable/contact"
-        android:id="@+id/btcontacts"
-        android:translationZ="20dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

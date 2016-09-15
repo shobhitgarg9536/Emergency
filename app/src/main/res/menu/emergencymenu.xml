@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/about"
-        android:title="About"
-        app:showAsAction="never">
-    </item>
     <item android:id="@+id/profile"
         android:title="Profile"
         app:showAsAction="ifRoom"
@@ -25,6 +21,14 @@
         android:title="Delete Contacts"
         app:showAsAction="never"
         >
+    </item>
+    <item android:id="@+id/mstartChatHead"
+        android:title="Start ChatHead"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/mstopChatHead"
+        android:title="Stop ChatHead"
+        app:showAsAction="never">
     </item>
 
 

@@ -1,9 +1,15 @@
 package in.silive.emergency;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -14,18 +20,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 /**
  * Created by Aniket on 12-09-2016.
  */
-public class ConnectContactsAdapter extends ArrayAdapter{
+public class ConnectContactsAdapter extends ArrayAdapter implements LocationListener{
     Context context;
+
+    double mLatitude =0;
+    double mLongitude=0;
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    Location location;
+
     ArrayList<Contact> list = new ArrayList<>();
     public ConnectContactsAdapter(Context context, int resource) {
         super(context, resource);
         this.context =context;
     }
+
 
 
     private class ViewHolder {
@@ -98,10 +116,33 @@ public class ConnectContactsAdapter extends ArrayAdapter{
             public void onClick(View view) {
                 /** CALL SMS ACTIVITY **/
 
-                String phoneNumber = contact.getPhoneNumber().trim();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
-                intent.putExtra("sms_body", createEmergencyMessage().toString());
-                context.startActivity(intent);
+
+                    String phoneNumber = contact.getPhoneNumber().trim();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                    intent.putExtra("sms_body", createEmergencyMessage().toString());
+                if(mLatitude !=0 && mLongitude !=0) {
+                    context.startActivity(intent);
+                }
+                else
+                {
+
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setTitle("Location");
+
+                    alertDialog.setMessage("Cannot access location! Try again");
+
+                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int which) {
+                            alertDialog.setCancelable(true);
+                        }
+                    });
+
+
+
+
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                }
             }
         });
 
@@ -122,12 +163,116 @@ public class ConnectContactsAdapter extends ArrayAdapter{
 
     private StringBuilder createEmergencyMessage(){
         StringBuilder builder = new StringBuilder(context.getResources().getString(R.string.emergency_message));
+
+        Location();
+
         SharedPreferences preferences = context.getSharedPreferences("Profile", context.MODE_PRIVATE);
         /** add location before name **/
 
+        String Slocation = "Latitude: "+ String.valueOf(mLatitude) + " , "+"Longitude: "+String.valueOf(mLongitude)+"\n";
+        builder.append(Slocation);
         String name = preferences.getString("Name", null);
         if(name != null)        builder.append(name);
         return builder;
     }
+
+    private void Location() {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+
+
+        isGPSEnabled = locationManager
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+
+        isNetworkEnabled = locationManager
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if(isGPSEnabled && isNetworkEnabled) {
+
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+
+        }
+        else {
+            if(isGPSEnabled)
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            else {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+                alertDialog.setTitle("GPS is settings");
+
+                alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        context.startActivity(intent);
+                    }
+                });
+
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.setCancelable(true);
+                    }
+                });
+
+
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+
+            }
+
+        }
+
+        try {
+
+            onLocationChanged(location);
+
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
+
+            @Override
+            public void onLocationChanged(Location location) {
+
+                mLatitude = location.getLatitude();
+                mLongitude = location.getLongitude();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        });
+
+        if(mLatitude ==0 && mLongitude ==0) {
+
+        }
+
+
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLatitude = location.getLatitude();
+        mLongitude = location.getLongitude();
+
+
+    }
+
 
 }
