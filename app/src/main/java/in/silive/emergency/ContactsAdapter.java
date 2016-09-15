@@ -48,7 +48,7 @@ public class ContactsAdapter extends ArrayAdapter {
     }
 
     /** ViewHolder class will contain the view used to display data **/
-   private static class ViewHolder {
+    private static class ViewHolder {
         TextView nameView;      // display name of contact
         TextView phoneView;     // display phone of contact
         CheckBox checkBox;      // only for selecting contact
@@ -64,8 +64,8 @@ public class ContactsAdapter extends ArrayAdapter {
 
     @Override
     public void add(Object object) {
-        super.add(object);
         list.add((Contact)object);     // add the object to the list
+        super.add(object);
     }
 
 
@@ -84,7 +84,12 @@ public class ContactsAdapter extends ArrayAdapter {
         return list.get(position);
     }
 
-
+    /**
+     * Clears the list of the adapter. Removes all the contacts saved in the list.
+     */
+    public void clear(){
+        list.clear();
+    }
 
     /**
      * The getView() works as ..
@@ -124,29 +129,32 @@ public class ContactsAdapter extends ArrayAdapter {
         else        holder = (ViewHolder) row.getTag();
 
         /** storing data into the holder **/
-            final Contact contact = (Contact) this.getItem(position); // get contact
-            holder.nameView.setText(contact.getName());
-            holder.phoneView.setText(contact.getPhoneNumber());     // save data into respective views
+        final Contact contact = (Contact) this.getItem(position); // get contact
+        holder.nameView.setText(contact.getName());
+        holder.phoneView.setText(contact.getPhoneNumber());     // save data into respective views
 
-           /** If adapter will be used for selecting contacts then make checkbox visible else gone **/
-            if(this.isSelectionAdapter)    holder.checkBox.setVisibility(CheckBox.VISIBLE);
-            else                            holder.checkBox.setVisibility(CheckBox.GONE);   /** free up space on layout **/
+        /** If adapter will be used for selecting contacts then make checkbox visible else gone **/
+        if(this.isSelectionAdapter)    holder.checkBox.setVisibility(CheckBox.VISIBLE);
+        else                            holder.checkBox.setVisibility(CheckBox.GONE);   /** free up space on layout **/
 
-            holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
-            holder.checkBox.setChecked(contact.isSelected());  // set checkbox checked state
-            holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
+        holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
+        holder.checkBox.setChecked(contact.isSelected());  // set checkbox checked state
+        holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
 
-            if(this.isSelectionAdapter) {
-                holder.checkBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        /** reverse the state of selected contacts **/
-                        contact.setSelected(!contact.isSelected());
-                        holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
-                        holder.checkBox.setChecked(contact.isSelected());   // set checkbox checked state
-                    }
-                });
-            }
+
+        if(this.isSelectionAdapter) {
+            holder.checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /** reverse the state of selected contacts **/
+                    contact.setSelected(!contact.isSelected());
+                    holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
+                    holder.checkBox.setChecked(contact.isSelected());   // set checkbox checked state
+
+
+                }
+            });
+        }
 
         return row;
     }

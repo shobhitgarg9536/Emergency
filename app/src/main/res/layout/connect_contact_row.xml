@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="0.65">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/tv_connect_contactname"
+            android:layout_weight="0.55"
+            android:hint="Name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/tv_connect_contactphone"
+            android:hint="Phone"
+            android:layout_weight="0.45"
+            android:textIsSelectable="false"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layoutDirection="ltr"
+
+        >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_call"
+            android:layout_gravity="left"
+
+            android:background="@drawable/call"
+            android:contentDescription="Call Contact"
+
+            android:scaleType="centerCrop"
+             />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_sendmessage"
+           android:layout_gravity="left"
+
+            android:contentDescription="SMS Contact"
+            android:background="@drawable/sms"
+            android:scaleType="center"
+           />
+
+    </LinearLayout>
+
+</LinearLayout>

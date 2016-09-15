@@ -194,7 +194,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                editor.commit();
                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                alertDialog.setTitle("Personal Details");
-               alertDialog.setMessage("You have successfull enter your details");
+               alertDialog.setMessage("You have successfull entered your details");
                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {

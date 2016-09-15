@@ -145,6 +145,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         if(id == R.id.deleteContacts){
 
+            Intent intent = new Intent(this , DeleteContacts.class);
+            startActivity(intent);
 
         }
         return super.onOptionsItemSelected(item);
