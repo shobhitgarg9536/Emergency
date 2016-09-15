@@ -3,6 +3,7 @@ package in.silive.emergency;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,12 +18,20 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
     private ListView listView;      // listView for showing all contacts
     ContactsAdapter adapter;        // adapter for saving data to view
     Button button;                  // save button
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_selected_contacts);
         listView = (ListView)findViewById(R.id.lv_show_selected_contacts);
+
+        toolbar = (Toolbar) findViewById(R.id.tbShowContacts);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Selected Contacts");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
        /** Get the selected contacts passed by the SelectContacts activity**/
         Bundle bundle = getIntent().getExtras();

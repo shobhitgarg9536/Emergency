@@ -246,9 +246,20 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         }
     };
     public void startnewactivity(){
-        Intent intent = new Intent(this, FragmentCallingActivity.class);
-        startActivity(intent);
+        String edit = "";
+        Intent i=getIntent();
+        edit=  i.getStringExtra("mobile");
+        String edit2=  i.getStringExtra("profile");
+        if(edit.equals("no")){
+            Intent intent = new Intent(this, SelectContacts.class);
+            startActivity(intent);
+        }
+        else  {
+            Intent intent = new Intent(this, FragmentCallingActivity.class);
+            startActivity(intent);
+        }
     }
+
 
     @Override
     protected void onPause() {

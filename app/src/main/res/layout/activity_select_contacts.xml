@@ -3,8 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     tools:context=".SelectContacts">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tbContacts"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+        </android.support.design.widget.AppBarLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <ListView
         android:layout_width="match_parent"
@@ -12,13 +34,28 @@
         android:id="@+id/lv_contacts"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.90"
-        android:background="#ffffff" />
+         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text="Next"
-        android:id="@+id/bt_next"
+        android:fontFamily="sans-serif-condensed"
         android:layout_gravity="center_horizontal"
+        android:background="#c62818"
+        android:textColor="#ffffff"
+        android:id="@+id/bt_next"
         android:layout_weight="0.1" />
+
+    <RelativeLayout
+        android:id="@+id/rlprogessbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:visibility="visible" >
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    </RelativeLayout>
 </LinearLayout>

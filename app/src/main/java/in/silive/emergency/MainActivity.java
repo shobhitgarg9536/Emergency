@@ -29,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
                 finally {
 
                     if(MobileNO.isEmpty()){
-                        Intent intent = new Intent(getApplication(),EnterPersonalDetail.class);
+                        Intent intent = new Intent(MainActivity.this,EnterPersonalDetail.class);
+                        intent.putExtra("mobile","no");
                         startActivity(intent);
                     }
                     else {
-                        Intent intent = new Intent(getApplication(),FragmentCallingActivity.class);
+                        Intent intent = new Intent(MainActivity.this,FragmentCallingActivity.class);
                         startActivity(intent);
 
                     }

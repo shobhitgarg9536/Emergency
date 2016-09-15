@@ -130,6 +130,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 });
                 alertDialog.create();
+                alertDialog.setCancelable(false);
                 alertDialog.show();
             }
 
@@ -163,49 +164,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 
-/*
-        // Getting Current Location From GPS
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-        try {
-
-            onLocationChanged(location);
-
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
-        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-
-                mLatitude = location.getLatitude();
-                mLongitude = location.getLongitude();
-
-                LatLng latLng = new LatLng(mLatitude, mLongitude);
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        });
-*/
         isGPSEnabled = locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -242,6 +201,8 @@ if(isGPSEnabled && isNetworkEnabled) {
             }
         });
 
+
+        alertDialog.setCancelable(false);
         alertDialog.show();
 
     }
@@ -326,41 +287,7 @@ if(isGPSEnabled && isNetworkEnabled) {
 
             }
         });
-             /*   mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
 
-
-                        progessLayout.setVisibility(View.VISIBLE);
-
-                        String reference = mMarkerPlaceLink.get(marker.getId());
-
-                        StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
-
-                        sb.append("reference="+reference);
-                        sb.append("&sensor=true");
-                        sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
-
-                        NearestPlaceDetails pdAysnTask = new NearestPlaceDetails(new MapAsynResponse() {
-                            @Override
-                            public void processFinish(HashMap<String, String> output) {
-
-                                slidingDrawerMove.setVisibility(View.VISIBLE);
-                                slidingText.setText(output.get("name").toString());
-                                address.setText(output.get("formatted_address").toString());
-                                phone.setText(output.get("formatted_phone_number").toString());
-                                international.setText(output.get("international_phone_number").toString());
-                                website.setText(output.get("website").toString());
-                                vicinity.setText(output.get("vicinity").toString());
-
-                            }
-                        });
-                        pdAysnTask.execute(sb.toString());
-                        progessLayout.setVisibility(View.INVISIBLE);
-                        slidingDrawerMove.open();
-                        return true;
-                    }
-                });*/
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -391,8 +318,6 @@ if(isGPSEnabled && isNetworkEnabled) {
     }
 
 
-
-
     public void onLocationChanged(Location location) {
 
         mLatitude = location.getLatitude();
@@ -410,6 +335,7 @@ if(isGPSEnabled && isNetworkEnabled) {
                 }
             });
 
+            alertDialog.setCancelable(false);
             alertDialog.show();
 
         }

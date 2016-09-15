@@ -137,6 +137,16 @@ public class FragmentCallingActivity extends AppCompatActivity {
             }
 
         }
+        if(id == R.id.addContacts){
+            Intent intent = new Intent(this , SelectContacts.class);
+            startActivity(intent);
+
+        }
+
+        if(id == R.id.deleteContacts){
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

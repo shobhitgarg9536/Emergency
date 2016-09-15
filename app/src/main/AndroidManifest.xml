@@ -64,6 +64,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShowSelectedContacts"
+            android:parentActivityName=".SelectContacts"
             >
             <intent-filter>
                 <action android:name="in.silive.emergency.SHOWSELECTEDCONTACTS" />

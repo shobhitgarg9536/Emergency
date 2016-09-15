@@ -87,6 +87,7 @@ public class Profile extends AppCompatActivity {
         if(item.getItemId() == R.id.itedit){
 
             Intent intent = new Intent(this , EnterPersonalDetail.class);
+            intent.putExtra("profile", "edit");
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

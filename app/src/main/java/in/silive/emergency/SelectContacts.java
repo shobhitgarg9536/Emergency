@@ -8,12 +8,15 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class SelectContacts extends AppCompatActivity implements Button.OnClickListener {
@@ -25,14 +28,22 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     ArrayList<String> contactPhones = new ArrayList<>() ;   // for storing selected phone numbers
     ContactsAdapter adapter;
     Button button ;
-    ProgressDialog progressDialog;                          // to show loading
+    RelativeLayout relativeLayout;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_contacts);
         button = (Button)findViewById(R.id.bt_next);
+        relativeLayout = (RelativeLayout) findViewById(R.id.rlprogessbar);
+        toolbar = (Toolbar) findViewById(R.id.tbContacts);
         button.setOnClickListener(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Select Contacts");
+
         listView = (ListView)findViewById(R.id.lv_contacts);
         /** if any item is clicked, then contacts will change its selected state **/
 
@@ -96,16 +107,21 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
                         // to navigate through different phone numbers, only one phone number per contact is shown
                         Cursor phones = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                        phones.moveToFirst();
-                        /** save to contactPhones array list**/
-                        if (phones != null) {
-                            String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                                 if (tempPhone != null)     contactList.add(index, new Contact(tempName, tempPhone));
-                }
+                        if(phones != null) {
+                            phones.moveToFirst();
+                            /** save to contactPhones array list**/
+                            if (phones != null) {
+                                String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                if (tempPhone != null) {
+                                    contactList.add(index++, new Contact(tempName, tempPhone));
+                                }
 
-                phones.close();
+                            }
+
+                            phones.close();
+                        }
             }
-                ++index;
+
 
         }
         cursor.close();
@@ -115,7 +131,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
 
 
 
-    private class MySyncTask extends AsyncTask{
+    private class MySyncTask extends AsyncTask<Object , String , Object>{
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -125,7 +141,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             ArrayList<Contact> contactList = retrieveContacts();
             for(int index = 0; index < contactList.size(); index++){   // add retrieved contacts to adapter
                 adapter.add(contactList.get(index));
-                ++index;
             }
             return null;
         } /** end of method **/
@@ -134,17 +149,14 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         @Override
         protected void onPreExecute() {
           /** show loading **/
-            progressDialog = new ProgressDialog(SelectContacts.this);
-            progressDialog.setMessage("Loading Contacts ......");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+            relativeLayout.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Object o) {
             listView.setAdapter(adapter);
             /** if loading , them stop it **/
-            if(progressDialog.isShowing())      progressDialog.dismiss();
+            relativeLayout.setVisibility(View.GONE);
         }
     }
 
