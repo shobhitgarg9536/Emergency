@@ -79,8 +79,7 @@ Button hospital,police,pharmacy,contacts;
 
                 break;
             case R.id.btcontacts:
-                intent = new Intent(getContext(), ConnectContacts.class);
-                startActivity(intent);
+
 
 
 

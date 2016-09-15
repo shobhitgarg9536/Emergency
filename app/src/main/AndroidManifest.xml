@@ -64,20 +64,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConnectContacts">
-            <intent-filter>
-                <action android:name="in.silive.emergency.CONNECTCONTACTS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SendMessage">
-            <intent-filter>
-                <action android:name="in.silive.emergency.SENDMESSAGE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity android:name=".DeleteContacts">
             <intent-filter>

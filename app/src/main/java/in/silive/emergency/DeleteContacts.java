@@ -30,7 +30,6 @@ public class DeleteContacts extends AppCompatActivity {
             adapter.add(contactList.get(index));
         }
         listView.setAdapter(adapter);
-        contactList.clear();   /** so that it can be used again **/
 
 
         deleteButton.setOnClickListener(new View.OnClickListener() {

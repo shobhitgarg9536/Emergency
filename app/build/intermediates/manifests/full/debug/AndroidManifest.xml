@@ -73,20 +73,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.emergency.ConnectContacts" >
-            <intent-filter>
-                <action android:name="in.silive.emergency.CONNECTCONTACTS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="in.silive.emergency.SendMessage" >
-            <intent-filter>
-                <action android:name="in.silive.emergency.SENDMESSAGE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name="in.silive.emergency.DeleteContacts" >
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />

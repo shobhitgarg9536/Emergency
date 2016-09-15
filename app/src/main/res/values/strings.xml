@@ -64,9 +64,9 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
-    <!-- String related to emergency message -->
+    <!-- String related to emergency message First message, then location and then name will be displayed -->
     <string name="emergency_message">Hello, I am in emergency. Contact me as soon as you can.\n
                     \n
                     \n
-                    My Location is </string>
+                    My Location is \n\n\n</string>
 </resources>

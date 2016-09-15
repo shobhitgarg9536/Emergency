@@ -142,7 +142,7 @@ public class ContactsAdapter extends ArrayAdapter {
             holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
 
 
-
+    if(this.isSelectionAdapter) {
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +154,7 @@ public class ContactsAdapter extends ArrayAdapter {
 
             }
         });
+    }
 
         return row;
     }

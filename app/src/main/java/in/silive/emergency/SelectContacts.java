@@ -132,6 +132,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             for(int index = 0; index < contactList.size(); index++){   // add retrieved contacts to adapter
                 adapter.add(contactList.get(index));
             }
+
             return null;
         } /** end of method **/
 

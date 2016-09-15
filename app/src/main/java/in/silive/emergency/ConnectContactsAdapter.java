@@ -2,6 +2,7 @@ package in.silive.emergency;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.util.Patterns;
@@ -98,8 +99,8 @@ Context context;
                 /** CALL SMS ACTIVITY **/
 
                 String phoneNumber = contact.getPhoneNumber().trim();
-                Intent intent = new Intent(context, SendMessage.class);
-                intent.putExtra("message_phone", phoneNumber);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                intent.putExtra("sms_body", createEmergencyMessage().toString());
                 context.startActivity(intent);
             }
         });
@@ -116,6 +117,17 @@ Context context;
         if(number.length()!= 0)     return false;
         return    Patterns.PHONE.matcher(number).matches();
 
+    }
+
+
+    private StringBuilder createEmergencyMessage(){
+        StringBuilder builder = new StringBuilder(context.getResources().getString(R.string.emergency_message));
+        SharedPreferences preferences = context.getSharedPreferences("Profile", context.MODE_PRIVATE);
+        /** add location before name **/
+
+        String name = preferences.getString("Name", null);
+        if(name != null)        builder.append(name);
+        return builder;
     }
 
 }
