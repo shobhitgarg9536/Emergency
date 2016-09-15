@@ -28,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,12 +41,13 @@ import java.util.Date;
  * Created by Shobhit-pc on 8/31/2016.
  */
 public class EnterPersonalDetail extends AppCompatActivity implements View.OnClickListener {
-    EditText mobile,name,dob,address,bloodgroup,inheriteddiseases,diseases;
+    EditText mobile,name,dob,address,inheriteddiseases,diseases;
     Button submit;
     SharedPreferences sharedPreferences;
     SharedPreferences shared;
     String MyProfile = "Profile";
     Toolbar toolbar;
+    Spinner bloodgroup;
 
     TextInputLayout inputLayoutName,inputLayoutMobile,inputLayoutdob;
 
@@ -72,7 +74,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         name = (EditText) findViewById(R.id.etname);
         dob = (EditText) findViewById(R.id.etdob);
         address = (EditText) findViewById(R.id.etaddress);
-        bloodgroup = (EditText) findViewById(R.id.etbloodgroup);
+        bloodgroup = (Spinner) findViewById(R.id.sp_bloodgroup);
         inheriteddiseases = (EditText) findViewById(R.id.etinheriteddiseases);
         diseases = (EditText) findViewById(R.id.etdiseases);
 
@@ -97,8 +99,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         if(!Saddress.isEmpty())
             address.setText(Saddress);
 
-        if(!Sblood.isEmpty())
-            bloodgroup.setText(Sblood);
+
 
         if(!Sdob.isEmpty())
             dob.setText(Sdob);
@@ -187,7 +188,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                editor.putString("DOB", dob.getText().toString());
 
                editor.putString("Address", address.getText().toString());
-               editor.putString("BloodGroup", bloodgroup.getText().toString());
+               editor.putString("BloodGroup", bloodgroup.getSelectedItem().toString());
                editor.putString("InheritedDiseases", inheriteddiseases.getText().toString());
                editor.putString("Diseases", diseases.getText().toString());
                editor.commit();
@@ -249,12 +250,11 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         String edit = "";
         Intent i=getIntent();
         edit=  i.getStringExtra("mobile");
-        String edit2=  i.getStringExtra("profile");
         if(edit.equals("no")){
             Intent intent = new Intent(this, SelectContacts.class);
             startActivity(intent);
         }
-        else  {
+        else if(edit.equals("edit")) {
             Intent intent = new Intent(this, FragmentCallingActivity.class);
             startActivity(intent);
         }
