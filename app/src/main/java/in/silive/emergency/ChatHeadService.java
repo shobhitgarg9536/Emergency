@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,14 +23,15 @@ import android.widget.Toast;
 /**
  * Created by Shobhit-pc on 9/16/2016.
  */
-public class ChatHeadService extends Service implements View.OnClickListener {
+public class ChatHeadService extends Service implements View.OnClickListener,View.OnKeyListener
+{
 
 
     private WindowManager windowManager;
     private Button chatHead;
     WindowManager.LayoutParams params,params2;
     float screenWidth = 0, screenHeight = 0;
-    private Button chatHead2;
+
     View popupView;
     LinearLayout layout;
 
@@ -37,17 +40,6 @@ public class ChatHeadService extends Service implements View.OnClickListener {
     @Override
     public void onCreate() {
         super.onCreate();
-
-    }
-
-    @Override
-    public void onStart(Intent intent, int startId) {
-
-
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
 
@@ -65,22 +57,13 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         Button pharmacy = (Button) popupView.findViewById(R.id.bphar);
         Button police = (Button) popupView.findViewById(R.id.bpolic);
         Button contact = (Button) popupView.findViewById(R.id.bcontac);
+        Button delete = (Button) popupView.findViewById(R.id.bdel);
         hospital.setOnClickListener(this);
         pharmacy.setOnClickListener(this);
         police.setOnClickListener(this);
         contact.setOnClickListener(this);
+        delete.setOnClickListener(this);
 
-      /*  layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupView.setVisibility(View.GONE);
-                windowManager.removeView(layout);
-                windowManager.addView(layout , params);
-            }
-        });*/
-        // chatHead2 = new Button(this);
-        //  chatHead2.setBackgroundResource(R.mipmap.ic_launcher);
-        //  chatHead2.setVisibility(View.GONE);
         layout.addView(chatHead);
         layout.addView(popupView);
         params = new WindowManager.LayoutParams(
@@ -99,13 +82,7 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         params.gravity = Gravity.TOP | Gravity.LEFT;
         params.x = 0;
         params.y = 100;
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext() , "snvjnf" ,Toast.LENGTH_SHORT).show();
-            }
-        });
-        //this code is for dragging the chat head
+
         chatHead.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
@@ -145,7 +122,18 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         windowManager.addView(layout, params);
 
 
-        return START_STICKY ;
+    }
+
+    @Override
+    public void onStart(Intent intent, int startId) {
+
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        return 1 ;
     }
 
     @Override
@@ -174,6 +162,9 @@ public class ChatHeadService extends Service implements View.OnClickListener {
                 break;
             case R.id.bcontac:
                 contacts();
+                break;
+            case R.id.bdel:
+                stopSelf();
                 break;
         }
     }
@@ -207,4 +198,15 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         if (chatHead != null)
             windowManager.removeView(layout);
     }
-}
+
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {
+            Toast.makeText(getApplicationContext() , "asss" ,Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+
+        }
+
+    }

@@ -1,5 +1,8 @@
 package in.silive.emergency;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import java.security.Policy;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -52,6 +56,14 @@ public class FragmentCallingActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        Intent alarmIntent = new Intent(getApplicationContext(), VolumeReceiver.class);
+        // Pending Intent Object
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Alarm Manager Object
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        // Alarm Manager calls BroadCast for every Ten seconds (10 * 1000), BroadCase further calls service to check if new records are inserted in
+        // Remote MySQL DB
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + 3000, 20 * 900, pendingIntent);
 
     }
 

@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#a08e09">
+    >
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/cb_selectcontact"
         android:checked="false"
+        android:layout_marginLeft="5dp"
         android:layout_weight="0.1"
-        android:buttonTint="#100f0f"
-        android:buttonTintMode="multiply"
-        android:drawableTint="#000000"
         android:gravity="center"
-        android:background="@drawable/checkbox_background" />
+        />
+
+
 
     <LinearLayout
             android:layout_width="0dp"
@@ -31,18 +31,19 @@
             android:layout_height="0dp"
             android:id="@+id/tv_contactname"
             android:layout_weight="0.55"
-            android:background="#c881f4"
+
             android:hint="Name"
             android:textSize="22sp"
-            android:textColor="#000000"
-            android:textStyle="bold" />
+
+            android:textStyle="bold"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/tv_contactno"
             android:layout_weight="0.45"
-            android:background="#c881f4"
+
             android:hint="Phone"
             android:textSize="16sp"
             android:textColor="#000000" />

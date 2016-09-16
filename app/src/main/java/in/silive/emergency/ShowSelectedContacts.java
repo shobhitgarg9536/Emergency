@@ -72,8 +72,9 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
         }
     }
 
-
-
-
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }// end of class

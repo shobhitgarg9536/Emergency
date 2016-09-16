@@ -174,6 +174,10 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             if(progressDialog.isShowing())      progressDialog.dismiss();
         }
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
 }
