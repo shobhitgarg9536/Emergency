@@ -33,8 +33,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
     private boolean isFlashOn;
     private boolean hasFlash;
     Camera.Parameters params;
-    String MyChat = "Chat";
-    SharedPreferences sharedPreferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,23 +53,6 @@ public class FragmentCallingActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        sharedPreferences = getSharedPreferences(MyChat, MODE_PRIVATE);
-        String chat = (sharedPreferences.getString("chat", ""));
-        if(chat.equals("hospital")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","hospital");
-            startActivity(i);
-        }
-        if(chat.equals("pharmacy")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","pharmacy");
-            startActivity(i);
-        }
-        if(chat.equals("police")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","police");
-            startActivity(i);
-        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -228,8 +211,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear().commit();
+
         turnOffFlash();
     }
     @Override

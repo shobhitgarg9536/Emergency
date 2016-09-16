@@ -31,7 +31,7 @@ public class ChatHeadService extends Service implements View.OnClickListener {
     private Button chatHead2;
     View popupView;
     LinearLayout layout;
-    String ChatService = "Chat";
+
     String type = "";
 
     @Override
@@ -42,6 +42,12 @@ public class ChatHeadService extends Service implements View.OnClickListener {
 
     @Override
     public void onStart(Intent intent, int startId) {
+
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
 
@@ -63,12 +69,7 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         pharmacy.setOnClickListener(this);
         police.setOnClickListener(this);
         contact.setOnClickListener(this);
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ChatHeadService.this , "snvjnf" ,Toast.LENGTH_SHORT).show();
-            }
-        });
+
       /*  layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +99,12 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         params.gravity = Gravity.TOP | Gravity.LEFT;
         params.x = 0;
         params.y = 100;
-
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext() , "snvjnf" ,Toast.LENGTH_SHORT).show();
+            }
+        });
         //this code is for dragging the chat head
         chatHead.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
@@ -114,12 +120,14 @@ public class ChatHeadService extends Service implements View.OnClickListener {
                         initialY = params.y;
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
-                        //    chatHead2.setVisibility(View.VISIBLE);
                         popupView.setVisibility(View.GONE);
 
                         return true;
                     case MotionEvent.ACTION_UP:
-                        popupView.setVisibility(View.VISIBLE);
+                        if(popupView.getVisibility() == View.VISIBLE)
+                            popupView.setVisibility(View.GONE);
+                        else
+                            popupView.setVisibility(View.VISIBLE);
                         return true;
                     case MotionEvent.ACTION_MOVE:
                         params.x = initialX
@@ -129,16 +137,14 @@ public class ChatHeadService extends Service implements View.OnClickListener {
                         windowManager.updateViewLayout(layout, params);
                         return true;
 
+
                 }
                 return false;
             }
         });
         windowManager.addView(layout, params);
 
-    }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY ;
     }
 
@@ -167,19 +173,30 @@ public class ChatHeadService extends Service implements View.OnClickListener {
                 emergency();
                 break;
             case R.id.bcontac:
-                emergency();
+                contacts();
                 break;
         }
     }
 
-    public void emergency(){
-        Intent i = new Intent(getBaseContext(),MainActivity.class);
-        SharedPreferences sharedPreferences = getSharedPreferences(ChatService, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("chat", type);
-        editor.commit();
+    private void contacts() {
+        Intent i = new Intent(getBaseContext(),FragmentCallingActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        i.setClass(getBaseContext(), MainActivity.class);
+        i.setClass(getBaseContext(), FragmentCallingActivity.class);
+        i.putExtra("type" , type);
+        startActivity(i);
+        popupView.setVisibility(View.GONE);
+        windowManager.removeView(layout);
+        windowManager.addView(layout, params);
+
+    }
+
+    public void emergency(){
+
+
+        Intent i = new Intent(getBaseContext(),MapsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        i.setClass(getBaseContext(), MapsActivity.class);
+        i.putExtra("type" , type);
         startActivity(i);
         popupView.setVisibility(View.GONE);
         windowManager.removeView(layout);
