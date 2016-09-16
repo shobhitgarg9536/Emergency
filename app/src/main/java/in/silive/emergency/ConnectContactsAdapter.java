@@ -8,10 +8,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +27,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Aniket on 12-09-2016.
  */
-public class ConnectContactsAdapter extends ArrayAdapter implements LocationListener{
+public class ConnectContactsAdapter extends ArrayAdapter{
     Context context;
 
-    double mLatitude =0;
-    double mLongitude=0;
+    double latitude =0;
+    double longitude=0;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     Location location;
+    String address ="";
 
     ArrayList<Contact> list = new ArrayList<>();
     public ConnectContactsAdapter(Context context, int resource) {
@@ -118,10 +122,44 @@ public class ConnectContactsAdapter extends ArrayAdapter implements LocationList
 
 
                     String phoneNumber = contact.getPhoneNumber().trim();
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
-                    intent.putExtra("sms_body", createEmergencyMessage().toString());
-                if(mLatitude !=0 && mLongitude !=0) {
-                    context.startActivity(intent);
+                   final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                getCurrentLocation();
+
+
+                if(latitude !=0 && longitude !=0) {
+                    final LocationAddress locationAddress = new LocationAddress(getContext() ,new AddressResponse() {
+                        @Override
+                        public void processFinish(String output) {
+
+                            address = output;
+                            if(address!=null) {
+
+                                intent.putExtra("sms_body", createEmergencyMessage().toString());
+                                context.startActivity(intent);
+                            }
+                            else {
+
+                                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                                alertDialog.setTitle("Location");
+
+                                alertDialog.setMessage("Cannot access location! Try again");
+
+                                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int which) {
+                                        alertDialog.setCancelable(true);
+                                    }
+                                });
+
+
+
+
+                                alertDialog.setCancelable(false);
+                                alertDialog.show();
+                            }
+                        }
+                    } );
+                    locationAddress.execute(latitude,longitude);
+
                 }
                 else
                 {
@@ -160,23 +198,63 @@ public class ConnectContactsAdapter extends ArrayAdapter implements LocationList
 
     }
 
+     public void getCurrentLocation(){
+
+         CurrentLocation currentLocation = new CurrentLocation(getContext());
+
+         Location location =currentLocation.getLocation(LocationManager.NETWORK_PROVIDER);
+
+         if(location!=null){
+             latitude = location.getLatitude();
+             longitude = location.getLongitude();
+         }
+         else {
+             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+             alertDialog.setTitle("GPS is settings");
+
+             alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+             alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog,int which) {
+                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                     context.startActivity(intent);
+                 }
+             });
+
+             alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int which) {
+                     alertDialog.setCancelable(true);
+                 }
+             });
+
+
+             alertDialog.setCancelable(false);
+             alertDialog.show();
+
+         }
+    }
 
     private StringBuilder createEmergencyMessage(){
         StringBuilder builder = new StringBuilder(context.getResources().getString(R.string.emergency_message));
 
-        Location();
 
         SharedPreferences preferences = context.getSharedPreferences("Profile", context.MODE_PRIVATE);
         /** add location before name **/
 
-        String Slocation = "Latitude: "+ String.valueOf(mLatitude) + " , "+"Longitude: "+String.valueOf(mLongitude)+"\n";
-        builder.append(Slocation);
+
+
+
+
+        String Slocation = "Latitude: "+ String.valueOf(latitude) + " , "+"Longitude: "+String.valueOf(longitude)+"\n";
+        builder.append(Slocation+"\n");
+        builder.append("Address:\n"+address+"\n");
         String name = preferences.getString("Name", null);
-        if(name != null)        builder.append(name);
+        if(name != null)        builder.append("\n"+name);
         return builder;
     }
 
-    private void Location() {
+   /* private void Location() {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
 
@@ -272,7 +350,21 @@ public class ConnectContactsAdapter extends ArrayAdapter implements LocationList
         mLongitude = location.getLongitude();
 
 
-    }
+    }*/
+   private class GeocoderHandler extends Handler {
+       @Override
+       public void handleMessage(Message message) {
 
+           switch (message.what) {
+               case 1:
+                   Bundle bundle = message.getData();
+                   address = bundle.getString("address");
+                   break;
+               default:
+                   address = null;
+           }
+
+       }
+   }
 
 }
