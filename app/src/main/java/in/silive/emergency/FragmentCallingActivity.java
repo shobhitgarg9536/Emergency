@@ -134,13 +134,13 @@ public class FragmentCallingActivity extends AppCompatActivity {
                 // device doesn't support flash
                 // Show alert message and close the application
 
-                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
+                final android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
                 alertDialog.setTitle("Error");
                 alertDialog.setMessage("Sorry, your device doesn't support flash light!");
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                        alertDialog.setCancelable(true);
                     }
                 });
                 alertDialog.create();

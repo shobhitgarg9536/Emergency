@@ -63,7 +63,7 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         pharmacy.setOnClickListener(this);
         police.setOnClickListener(this);
         contact.setOnClickListener(this);
-        chatHead.setOnClickListener(new View.OnClickListener() {
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ChatHeadService.this , "snvjnf" ,Toast.LENGTH_SHORT).show();
@@ -135,6 +135,11 @@ public class ChatHeadService extends Service implements View.OnClickListener {
         });
         windowManager.addView(layout, params);
 
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY ;
     }
 
     @Override
