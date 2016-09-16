@@ -6,5 +6,13 @@
     {
         "merged": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
         "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\profile_menu.xml",
+        "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\src\\main\\res\\menu\\profile_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\map_menu.xml",
+        "source": "C:\\Users\\Aniket\\Desktop\\SI_PROJECTS\\Emergency\\app\\src\\main\\res\\menu\\map_menu.xml"
     }
 ]

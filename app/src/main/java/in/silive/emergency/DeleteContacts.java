@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/** This activity deletes the contacts. If all the contacts are selected then the user is not allowed to delete
+ * the contacts. A message is shown in that case **/
 public class DeleteContacts extends AppCompatActivity {
 
     ContactsAdapter adapter;
@@ -22,6 +25,8 @@ public class DeleteContacts extends AppCompatActivity {
         deleteButton = (Button)findViewById(R.id.bt_delete);
         listView = (ListView)findViewById(R.id.lv_delete_contacts);
         adapter = new ContactsAdapter(getApplicationContext(), R.layout.select_contact_row, true);
+
+        /** Get the contact list from database **/
         final DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
         ArrayList<Contact> contactList = dbHandler.getContactList();
 
@@ -35,19 +40,34 @@ public class DeleteContacts extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            if(view.getId() == R.id.bt_delete) {
+                int count = 0;
+                int indexPositions[] = new int[adapter.getCount()];
 
-                for(int index = 0; index < adapter.getCount(); index++){
+                /** count the number of selected contacts and store their positions **/
+                for (int index = 0; index < adapter.getCount(); index++) {
                     Contact contact = (Contact) adapter.getItem(index);
-                    if(contact.isSelected()){
-                        dbHandler.deleteContact(contact);
+                    if (contact.isSelected()) {
+                        indexPositions[count++] = index;
                     }
                 }
-                Intent  intent = new Intent(DeleteContacts.this, FragmentCallingActivity.class);
-                startActivity(intent);
 
+                /** If all contacts not selected **/
+                if (count < adapter.getCount()) {
+                    for (int index = 0; index < count; index++)
+                        dbHandler.deleteContact((Contact) adapter.getItem(indexPositions[index]));
+                    Intent intent = new Intent(DeleteContacts.this, FragmentCallingActivity.class);
+                    startActivity(intent);
+                } else {
+                    /** show message **/
+                    Toast.makeText(getApplicationContext(), "Cannot delete all emergency contacts.", Toast.LENGTH_LONG).show();
+                }
+            }
             }
         });
     }
+
+
 
 
 }

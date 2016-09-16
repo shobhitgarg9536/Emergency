@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class SelectContacts extends AppCompatActivity implements Button.OnClickListener {
@@ -59,11 +61,11 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             /** clear the contactNames and contactPhones before adding any, useful to avoid redundancy when back button is pressed **/
             contactNames.clear(); contactPhones.clear();
             /** add selected contact's name and phone to respective array list **/
+
             Bundle bundle = new Bundle();           // for storing data and passind to next activity
             for(int adapterIndex = 0, listIndex = 0; adapterIndex <adapter.getCount(); adapterIndex++){
                 Contact contact = (Contact)adapter.getItem(adapterIndex);
                 if(contact.isSelected()) {
-
                     contactNames.add(listIndex, contact.getName());
                     contactPhones.add(listIndex, contact.getPhoneNumber());
 
@@ -97,7 +99,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         while(cursor.moveToNext()) {    /* returns false if the cursor is already past the last entry */
             // ContactsContracts.Contact contains constants for contacts table
             String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-
             /** save to contactNames array **/
             String tempName =cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             if(cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {   // has atlease one phone
@@ -108,13 +109,11 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
                 if (phones != null) {
                     phones.moveToFirst();
                     /** save to contactPhones array list**/
-                    if (phones != null) {
                         String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                         if (tempPhone != null) {
                             contactList.add(index, new Contact(tempName, tempPhone));
                             ++index;
                         }
-                    }
 
                     phones.close();
                 }
@@ -138,8 +137,15 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
 
             /** retrieve contacts and add them to adapter **/
             ArrayList<Contact> contactList = retrieveContacts();
+            ArrayList<Contact>  databaseContactList = new DatabaseHandler(getApplicationContext()).getContactList();
+
+            /** first sor the list **/
+            SelectContacts.sort(contactList);
+
             for(int index = 0; index < contactList.size(); index++){   // add retrieved contacts to adapter
-                adapter.add(contactList.get(index));
+                Contact contact = contactList.get(index);
+                if(contact.isInList(databaseContactList))       contact.setSelected(true);
+                adapter.add(contact);
             }
 
             return null;
@@ -161,4 +167,19 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     }
 
 
-}
+    /**
+     * Sorts a contact list using Collections.sort() method in ascending order.
+     * @param contactList   List to be sorted.
+     */
+    private static void sort(ArrayList<Contact> contactList) {
+        if(contactList != null) {
+            Collections.sort(contactList, new Comparator<Contact>() {
+                @Override
+                public int compare(Contact contact1, Contact contact2) {
+                    return ( contact1.getName().compareToIgnoreCase(contact2.getName()) );
+                }
+            });
+        }
+    }
+
+}// end of class

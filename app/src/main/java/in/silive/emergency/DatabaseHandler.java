@@ -49,10 +49,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         try {
             /** String statement of Query to create a table --- insert semicolon at the last.**/
             String CREATE_QUERY = "CREATE TABLE " + TableInfo.TABLE_NAME +"(" + TableInfo._ID +
-                    " INTEGER, "+ TableInfo.CONTACT_NAME +" TEXT, " + TableInfo.CONTACT_NUMBER + " TEXT);";
+                    " INTEGER PRIMARY KEY, "+ TableInfo.CONTACT_NAME +" TEXT, " + TableInfo.CONTACT_NUMBER + " TEXT);";
 
             sqLiteDatabase.execSQL(CREATE_QUERY); // executes a sqLite statement which doesn't return any data(select)
-            Log.d("Database Operation", "Table created successfully.");
+            Log.d("Database Operations", "Table created successfully.");
         }
         catch(SQLException e){
             Log.e("Database Operations", "Cannot create table, invalid query.", e);
@@ -96,12 +96,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             /** insert data into contentValue object **/
             cv.put(TableInfo.CONTACT_NAME, contactList.get(index).getName());
             cv.put(TableInfo.CONTACT_NUMBER, contactList.get(index).getPhoneNumber());
-
+                
             long id = database.insert(TableInfo.TABLE_NAME, null, cv);
             if(id == -1){
                 /** error in insertion **/
-                Log.e("Database Operation", "Error in inserting ArrayList of contacts into the database.");
+                Log.e("Database Operations", "Error in inserting ArrayList of contacts into the database.");
             }
+            else Log.d("Database Operations", "Insertion Successful");
         }
     }
 
@@ -136,8 +137,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
         else {
             /** cursor is empty **/
-            Log.e("Database Operation", "Unable to get contact list. The cursor is empty.");
+            Log.e("Database Operations", "Unable to get contact list. The cursor is empty.");
         }
+        cr.close();
         return contactList;
     }
 
@@ -178,5 +180,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         cv.put(TableInfo.CONTACT_NUMBER, newContact.getPhoneNumber());
         database.update(TableInfo.TABLE_NAME, cv, selection, values); //update database
     }
+
+
+
+
 
 }
