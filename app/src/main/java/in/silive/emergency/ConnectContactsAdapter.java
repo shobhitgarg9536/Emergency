@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
@@ -119,68 +121,80 @@ public class ConnectContactsAdapter extends ArrayAdapter{
             @Override
             public void onClick(View view) {
                 /** CALL SMS ACTIVITY **/
-
+                ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
 
                     String phoneNumber = contact.getPhoneNumber().trim();
-                   final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
-                getCurrentLocation();
+                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                    getCurrentLocation();
 
 
-                if(latitude !=0 && longitude !=0) {
-                    final LocationAddress locationAddress = new LocationAddress(getContext() ,new AddressResponse() {
-                        @Override
-                        public void processFinish(String output) {
+                    if (latitude != 0 && longitude != 0) {
+                        final LocationAddress locationAddress = new LocationAddress(getContext(), new AddressResponse() {
+                            @Override
+                            public void processFinish(String output) {
 
-                            address = output;
-                            if(address!=null) {
+                                address = output;
+                                if (address != null) {
 
-                                intent.putExtra("sms_body", createEmergencyMessage().toString());
-                                context.startActivity(intent);
+                                    intent.putExtra("sms_body", createEmergencyMessage().toString());
+                                    context.startActivity(intent);
+                                } else {
+
+                                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                                    alertDialog.setTitle("Location");
+
+                                    alertDialog.setMessage("Cannot access location! Try again");
+
+                                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog.setCancelable(true);
+                                        }
+                                    });
+
+
+                                    alertDialog.setCancelable(false);
+                                    alertDialog.show();
+                                }
                             }
-                            else {
+                        });
+                        locationAddress.execute(latitude, longitude);
 
-                                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                                alertDialog.setTitle("Location");
+                    } else {
 
-                                alertDialog.setMessage("Cannot access location! Try again");
+                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                        alertDialog.setTitle("Location");
 
-                                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int which) {
-                                        alertDialog.setCancelable(true);
-                                    }
-                                });
+                        alertDialog.setMessage("Cannot access location! Try again");
 
-
-
-
-                                alertDialog.setCancelable(false);
-                                alertDialog.show();
+                        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.setCancelable(true);
                             }
-                        }
-                    } );
-                    locationAddress.execute(latitude,longitude);
+                        });
 
+
+                        alertDialog.setCancelable(false);
+                        alertDialog.show();
+                    }
                 }
-                else
-                {
+                else {
 
-                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                    alertDialog.setTitle("Location");
-
-                    alertDialog.setMessage("Cannot access location! Try again");
-
-                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int which) {
-                            alertDialog.setCancelable(true);
+                    final android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getContext());
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Sorry, your device doesn't connect to internet!");
+                    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                           alertDialog.setCancelable(true);
                         }
                     });
-
-
-
-
+                    alertDialog.create();
                     alertDialog.setCancelable(false);
                     alertDialog.show();
                 }
+
             }
         });
 

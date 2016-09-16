@@ -3,6 +3,7 @@ package in.silive.emergency;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ public class DeleteContacts extends AppCompatActivity {
     ContactsAdapter adapter;
     Button deleteButton;
     ListView listView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,13 @@ public class DeleteContacts extends AppCompatActivity {
         setContentView(R.layout.activity_delete_contacts);
         deleteButton = (Button)findViewById(R.id.bt_delete);
         listView = (ListView)findViewById(R.id.lv_delete_contacts);
+        toolbar = (Toolbar) findViewById(R.id.tbdelete);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Delete Contact");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         adapter = new ContactsAdapter(getApplicationContext(), R.layout.select_contact_row, true);
         final DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
         ArrayList<Contact> contactList = dbHandler.getContactList();

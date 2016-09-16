@@ -161,6 +161,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
         }
         if(id == R.id.addContacts){
             Intent intent = new Intent(this , SelectContacts.class);
+            intent.putExtra("contact" , "back");
             startActivity(intent);
 
         }

@@ -16,6 +16,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -77,6 +78,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         bloodgroup = (Spinner) findViewById(R.id.sp_bloodgroup);
         inheriteddiseases = (EditText) findViewById(R.id.etinheriteddiseases);
         diseases = (EditText) findViewById(R.id.etdiseases);
+
 
         submit = (Button) findViewById(R.id.btSubmit);
 
@@ -150,22 +152,6 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         day   = c.get(Calendar.DAY_OF_MONTH);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.about){
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -252,6 +238,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         edit=  i.getStringExtra("mobile");
         if(edit.equals("no")){
             Intent intent = new Intent(this, SelectContacts.class);
+            intent.putExtra("contact" , "ba");
             startActivity(intent);
         }
         else if(edit.equals("edit")) {
@@ -285,10 +272,9 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             requestFocus(mobile);
             return false;
         }
-           else if( mobileNoLength < 7 ){
+           else if( mobileNoLength <= 7 ){
                 inputLayoutMobile.setError("Enter your correct Mobile No.");
                 requestFocus(mobile);
-
             return false;
         } else {
             inputLayoutMobile.setErrorEnabled(false);

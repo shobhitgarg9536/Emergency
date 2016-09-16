@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -27,8 +28,10 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     ArrayList<String> contactPhones = new ArrayList<>() ;   // for storing selected phone numbers
     ContactsAdapter adapter;
     Button button ;
-    RelativeLayout relativeLayout;                          // to show loading
+                         // to show loading
     Toolbar toolbar;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +39,19 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         button = (Button)findViewById(R.id.bt_next);
         button.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.tbContacts);
-        relativeLayout = (RelativeLayout) findViewById(R.id.rlprogessbar);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Contacts");
+
+
+        Intent intent =getIntent();
+         String con = intent.getStringExtra("contact");
+
+        if(con.equals("back")){
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         listView = (ListView)findViewById(R.id.lv_contacts);
         /** if any item is clicked, then contacts will change its selected state **/
@@ -149,14 +161,17 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         @Override
         protected void onPreExecute() {
             /** show loading **/
-          relativeLayout.setVisibility(View.VISIBLE);
+            progressDialog = new ProgressDialog(SelectContacts.this);
+            progressDialog.setMessage("Loading your phone Contacts ......");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(Object o) {
             listView.setAdapter(adapter);
             /** if loading , them stop it **/
-           relativeLayout.setVisibility(View.GONE);
+            if(progressDialog.isShowing())      progressDialog.dismiss();
         }
     }
 

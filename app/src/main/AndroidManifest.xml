@@ -60,7 +60,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DeleteContacts">
+        <activity android:name=".DeleteContacts"
+            android:parentActivityName=".FragmentCallingActivity">
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />
 
@@ -70,6 +71,7 @@
 
 
         <activity android:name=".SelectContacts"
+            android:parentActivityName=".FragmentCallingActivity"
             >
             <intent-filter>
                 <action android:name="in.silive.emergency.SELECTCONTACTS" />
