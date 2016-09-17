@@ -4,6 +4,8 @@ package in.silive.emergency;
  * Created by Aniket on 06-09-2016.
  */
 
+import java.util.ArrayList;
+
 /** This class stores basic information of a contact. It includes name, phone number.**/
 public class Contact {
 
@@ -48,4 +50,25 @@ public class Contact {
         this.selected = selectedStatus ;
     }
 
+
+    /**
+     * Checks whethe this contact is present in an Array List or not.
+     * @param contactList   List in which the array needs to be checked.
+     * @return  true if present else false
+     */
+    public boolean isInList(ArrayList<Contact> contactList){
+        for(int index = 0; index < contactList.size(); index++){
+            Contact tempContact = contactList.get(index);
+            if(tempContact.getName().equals(this.getName()) &&
+                    tempContact.getPhoneNumber().equals(this.getPhoneNumber()))
+                return true;
+        }
+        return false;
+
+    }
+
 }
+
+
+
+
