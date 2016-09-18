@@ -20,10 +20,11 @@ public class LocationAddress extends AsyncTask<Double , String ,String> {
 
 
     private Context mContext;
-    public AddressResponse delegate = null;
+    public AddressResponse addressResponse = null;
 
-    public LocationAddress(Context context ,AddressResponse addressResponse ){
-        delegate = addressResponse;
+    //defining constructor
+    public LocationAddress(Context context ,AddressResponse Response ){
+        addressResponse = Response;
         mContext = context;
 
     }
@@ -32,23 +33,32 @@ public class LocationAddress extends AsyncTask<Double , String ,String> {
     @Override
     protected String doInBackground(Double... params) {
 
+        //getting latitude and longitude
         double latitude = params[0];
         double longitude = params[1];
-
 
         Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
         String result = null;
         try {
+            //getting address from latitude and longitude
             List<Address> addressList = geocoder.getFromLocation(
                     latitude, longitude, 1);
+            //if address list is not empty
             if (addressList != null && addressList.size() > 0) {
                 Address address = addressList.get(0);
                 StringBuilder sb = new StringBuilder();
+                //appending address
                 for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                     sb.append(address.getAddressLine(i)).append("\n");
                 }
+                //appending locality of address
+                if(address.getLocality()!=null)
                 sb.append(address.getLocality()).append("\n");
+                //appending postal code of address
+                if(address.getPostalCode()!=null)
                 sb.append(address.getPostalCode()).append("\n");
+                //appending country name of address
+                if(address.getCountryName()!=null)
                 sb.append(address.getCountryName());
                 result = sb.toString();
                 return result;
@@ -64,7 +74,7 @@ public class LocationAddress extends AsyncTask<Double , String ,String> {
 
         try {
 
-            delegate.processFinish(s);
+            addressResponse.processFinish(s);
         }catch (Exception e){
             e.printStackTrace();
         }

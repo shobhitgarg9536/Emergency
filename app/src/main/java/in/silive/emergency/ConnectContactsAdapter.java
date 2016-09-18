@@ -109,7 +109,6 @@ public class ConnectContactsAdapter extends ArrayAdapter{
                     /** Validate phone number before calling **/
                     context.startActivity(intent);
 
-
                 }
                 catch(Exception e){
                     Log.e("Call", e.getMessage(), e);

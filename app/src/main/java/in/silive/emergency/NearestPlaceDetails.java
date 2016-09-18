@@ -2,6 +2,7 @@ package in.silive.emergency;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,12 +15,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class NearestPlaceDetails  extends AsyncTask<String, Integer, HashMap<String, String>> {
+public class NearestPlaceDetails  extends AsyncTask<String, Integer, String> {
 
-        HashMap<String, String> placedetail;
+        HashMap<String, String> placedetail = null;
 
         public MapAsynResponse delegate = null;
 
@@ -28,21 +30,19 @@ public class NearestPlaceDetails  extends AsyncTask<String, Integer, HashMap<Str
     }
 
         @Override
-        protected HashMap<String, String> doInBackground(String... params) {
+        protected String doInBackground(String... params) {
 
 
+            String data = "";
             InputStream iStream = null;
             HttpURLConnection urlConnection = null;
             try{
                 URL url = new URL(params[0]);
-
-
+                //making connection with url
                 urlConnection = (HttpURLConnection) url.openConnection();
-
-
+                //connect with url
                 urlConnection.connect();
-
-
+                //taking input from url
                 iStream = urlConnection.getInputStream();
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
@@ -50,46 +50,52 @@ public class NearestPlaceDetails  extends AsyncTask<String, Integer, HashMap<Str
                 StringBuffer sb = new StringBuffer();
 
                 String line = "";
+                //reading from buffered reader
                 while( ( line = br.readLine()) != null){
                     sb.append(line);
                 }
 
-
+                data = sb.toString();
+                //closing all connections
                 br.close();
+                iStream.close();
+                urlConnection.disconnect();
 
-                JSONObject jsonObject = new JSONObject(sb.toString());
-                JSONObject jsonPlace = jsonObject.getJSONObject("result");
-                placedetail = getPlaceDetails(jsonPlace);
-            }catch(Exception e){
-
-            }finally{
-                try {
-                    iStream.close();
-                    urlConnection.disconnect();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return placedetail;
+            return data; // return result
         }
 
         @Override
-        protected void onPostExecute(HashMap<String, String> result) {
-            try {
+        protected void onPostExecute(String result) {
 
-                delegate.processFinish(result);
-            }catch (Exception e){
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(result);
+                JSONObject jsonPlace = jsonObject.getJSONObject("result");
+
+                placedetail = getPlaceDetails(jsonPlace);
+
+                delegate.processFinish(placedetail);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }  catch (Exception e){
                 e.printStackTrace();
             }
-            super.onPostExecute(result);
+            finally {
+
+
+            }
+
         }
         private HashMap<String, String> getPlaceDetails(JSONObject jPlaceDetails){
 
             HashMap<String, String> hPlaceDetails = new HashMap<String, String>();
 
             String name = "";
-            String icon = "";
             String vicinity="";
             String latitude="";
             String longitude="";
@@ -105,43 +111,30 @@ public class NearestPlaceDetails  extends AsyncTask<String, Integer, HashMap<Str
                     name = jPlaceDetails.getString("name");
                 }
 
-
-                if(!jPlaceDetails.isNull("icon")){
-                    icon = jPlaceDetails.getString("icon");
-                }
-
-
                 if(!jPlaceDetails.isNull("vicinity")){
                     vicinity = jPlaceDetails.getString("vicinity");
                 }
-
 
                 if(!jPlaceDetails.isNull("formatted_address")){
                     formatted_address = jPlaceDetails.getString("formatted_address");
                 }
 
-
                 if(!jPlaceDetails.isNull("formatted_phone_number")){
                     formatted_phone = jPlaceDetails.getString("formatted_phone_number");
                 }
-
 
                 if(!jPlaceDetails.isNull("website")){
                     website = jPlaceDetails.getString("website");
                 }
 
-
-
                 if(!jPlaceDetails.isNull("international_phone_number")){
                     international_phone_number = jPlaceDetails.getString("international_phone_number");
                 }
 
-
                 latitude = jPlaceDetails.getJSONObject("geometry").getJSONObject("location").getString("lat");
                 longitude = jPlaceDetails.getJSONObject("geometry").getJSONObject("location").getString("lng");
-
+                //putting values in hashmap
                 hPlaceDetails.put("name", name);
-                hPlaceDetails.put("icon", icon);
                 hPlaceDetails.put("vicinity", vicinity);
                 hPlaceDetails.put("lat", latitude);
                 hPlaceDetails.put("lng", longitude);
@@ -153,7 +146,7 @@ public class NearestPlaceDetails  extends AsyncTask<String, Integer, HashMap<Str
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return hPlaceDetails;
+            return hPlaceDetails;//return hashmap
         }
     }
 

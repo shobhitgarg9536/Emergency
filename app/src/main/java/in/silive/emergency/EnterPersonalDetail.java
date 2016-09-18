@@ -45,7 +45,6 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     EditText mobile,name,dob,address,inheriteddiseases,diseases;
     Button submit;
     SharedPreferences sharedPreferences;
-    SharedPreferences shared;
     String MyProfile = "Profile";
     Toolbar toolbar;
     Spinner bloodgroup;
@@ -82,7 +81,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
 
         submit = (Button) findViewById(R.id.btSubmit);
 
-        shared = getSharedPreferences(MyProfile , MODE_PRIVATE);
+        //accessing MyProfile file
         sharedPreferences = getSharedPreferences(MyProfile, MODE_PRIVATE);
         Sname = sharedPreferences.getString("Name", "");
         Smobile = sharedPreferences.getString("MobileNO", "");
@@ -92,26 +91,24 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         Sinherited = sharedPreferences.getString("InheritedDiseases", "");
         Sdiseases = sharedPreferences.getString("Diseases", "");
 
+        //if name is not null
         if(!Sname.isEmpty())
             name.setText(Sname);
-
+        //if mobile is not null
         if(!Smobile.isEmpty())
             mobile.setText(Smobile);
-
+        //if address is not null
         if(!Saddress.isEmpty())
             address.setText(Saddress);
-
-
-
+        //if date of birth is not null
         if(!Sdob.isEmpty())
             dob.setText(Sdob);
-
+        //if inherited diseases is not null
         if(!Sinherited.isEmpty())
             inheriteddiseases.setText(Sinherited);
-
+        //if diseases is not null
         if(!Sdiseases.isEmpty())
             diseases.setText(Sdiseases);
-
 
 
         name.addTextChangedListener(new MyTextWatcher(name));
@@ -119,22 +116,6 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         dob.addTextChangedListener(new MyTextWatcher(dob));
 
         submit.setOnClickListener(this);
-
-       /* dob.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                showDialog(DATE_PICKER_ID);
-                return false;
-            }
-        });
-
-
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(DATE_PICKER_ID);
-            }
-        });*/
 
         dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -146,6 +127,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             }
         });
 
+        //getting year,month,day from calender
         final Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -156,28 +138,37 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onClick(View view) {
+        //on submit button click
        if( view.getId() == R.id.btSubmit){
            try  {
+               //disabling keyboard
                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
            } catch (Exception e) {
                e.printStackTrace();
            }
+           //getting mobile length
           int mobileNoLength =  mobile.getText().toString().length();
+           //if validations are true
            if(validateName() && validateMobile() && mobileNoLength > 7
                    && !dob.getText().toString().isEmpty()
                    ) {
+             //putting values through sharedPreference
                sharedPreferences = getSharedPreferences(MyProfile, Context.MODE_PRIVATE);
+              //getting sharedPreferences editor
                SharedPreferences.Editor editor = sharedPreferences.edit();
+             //putting values
                editor.putString("Name", name.getText().toString());
                editor.putString("MobileNO", mobile.getText().toString());
                editor.putString("DOB", dob.getText().toString());
-
                editor.putString("Address", address.getText().toString());
                editor.putString("BloodGroup", bloodgroup.getSelectedItem().toString());
                editor.putString("InheritedDiseases", inheriteddiseases.getText().toString());
                editor.putString("Diseases", diseases.getText().toString());
+
                editor.commit();
+               //shoeing alert dialog
                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                alertDialog.setTitle("Personal Details");
                alertDialog.setMessage("You have successfull entered your details");
@@ -203,11 +194,13 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DATE_PICKER_ID:
-
+                //adding date picker
                 DatePickerDialog datePickerDialog = new DatePickerDialog(this, pickerListener, 1990, month,1);
                 datePickerDialog.getDatePicker().setMinDate(new Date().getDate());
                 Calendar calendar = Calendar.getInstance();
+                //going 7 years back from current calender
                 calendar.add(Calendar.YEAR , -7);
+                //converting date to millisecond
                 long time = calendar.getTimeInMillis();
                 datePickerDialog.getDatePicker().setMaxDate(time);
                 return datePickerDialog;
@@ -234,13 +227,17 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     };
     public void startnewactivity(){
         String edit = "";
+        //getting intent
         Intent i=getIntent();
-        edit=  i.getStringExtra("mobile");
+        edit =  i.getStringExtra("mobile");
+
         if(edit.equals("no")){
+
             Intent intent = new Intent(this, SelectContacts.class);
             intent.putExtra("contact" , "ba");
             startActivity(intent);
         }
+
         else if(edit.equals("edit")) {
             Intent intent = new Intent(this, FragmentCallingActivity.class);
             startActivity(intent);
@@ -257,6 +254,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     private boolean validateName() {
         if (name.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError("Enter your full name");
+            //requsting focus on editText
             requestFocus(name);
             return false;
         } else {
@@ -269,11 +267,13 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         int mobileNoLength =  mobile.getText().toString().length();
         if (mobile.getText().toString().trim().isEmpty()) {
             inputLayoutMobile.setError("Enter your Mobile No.");
+            //requsting focus on editText
             requestFocus(mobile);
             return false;
         }
            else if( mobileNoLength <= 7 ){
                 inputLayoutMobile.setError("Enter your correct Mobile No.");
+            //requsting focus on editText
                 requestFocus(mobile);
             return false;
         } else {
@@ -286,6 +286,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     private boolean validateDob() {
         if (dob.getText().toString().isEmpty()) {
             inputLayoutdob.setError("Enter your Date Of Birth");
+            //requsting focus on editText
             requestFocus(dob);
             return false;
 
@@ -298,6 +299,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
+            //showing keyboard
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }

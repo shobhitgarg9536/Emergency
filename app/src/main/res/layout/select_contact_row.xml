@@ -9,10 +9,10 @@
         android:layout_height="match_parent"
         android:id="@+id/cb_selectcontact"
         android:checked="false"
+        android:buttonTint="#c62818"
         android:layout_marginLeft="5dp"
         android:layout_weight="0.1"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
 
 

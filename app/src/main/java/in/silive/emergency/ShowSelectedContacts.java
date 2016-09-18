@@ -72,48 +72,18 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
             DatabaseHandler dbHandler = new DatabaseHandler(getApplicationContext());
             ArrayList<Contact> databaseContactList = dbHandler.getContactList();
 
-            /** check whether each contact is in both adapter and database list. If so, ignore the contact
-             * else put it into the database **/
-            boolean isInBothList = false;       // false by default
-            for(int index = 0; index < adapter.getCount(); index++){
-                Contact contact = (Contact)adapter.getItem(index);
-                boolean isInDatabaseList = contact.isInList(databaseContactList);
-                if(!isInDatabaseList)   dbHandler.putContact(contact);
-                isInBothList = isInBothList || isInDatabaseList;
 
+            for(int index = 0; index < adapter.getCount(); index++) {
+                Contact contact = (Contact) adapter.getItem(index);
+                if (!contact.isInList(databaseContactList)) dbHandler.putContact(contact);
             }
 
-            /** if contact is in both list then show the message **/
-            if(isInBothList){
-                AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(this);
-                final AlertDialog alertDialog =  alertDialogBuilder.create();
-                alertDialog.setTitle("Notice");
-                alertDialog.setMessage("You have selected contacts that are already present in database. These contacts will be ignored.");
-                alertDialog.setCancelable(false);
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        alertDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
-                        startActivity(intent);
-
-                    }
-                });
-                alertDialog.show();
-
-            }
-            else {
-                Intent intent= new Intent(getApplicationContext(), FragmentCallingActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
+            startActivity(intent);
 
 
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+
 }// end of class

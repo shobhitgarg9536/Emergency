@@ -16,15 +16,19 @@ import android.widget.Toast;
 public class VolumeReceiver extends BroadcastReceiver {
     AudioManager audio;
     Context mcontext;
-    int previousVolume;
+    int currentVolume;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         mcontext=context;
-        audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-int max = audio.getStreamMaxVolume(AudioManager.STREAM_RING);
-        previousVolume = audio.getStreamVolume(AudioManager.STREAM_RING);
-        if(max == previousVolume) {
+        audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        //getting maximum volume
+         int max = audio.getStreamMaxVolume(AudioManager.STREAM_RING);
+       //getting current volume
+        currentVolume = audio.getStreamVolume(AudioManager.STREAM_RING);
+        if(max == currentVolume) {
+            //if condition is true then open chat head
             Intent in = new Intent(mcontext, ChatHeadService.class);
             mcontext.startService(in);
         }

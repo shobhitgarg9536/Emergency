@@ -22,13 +22,14 @@ import android.widget.TextView;
 
 
 public class TypeOfEmergency extends Fragment implements View.OnClickListener {
-Button hospital,police,pharmacy;
-TextView address;
-double latitude = 0,longitude =0;
+
+    Button hospital,police,pharmacy;
+    TextView address;
+    double latitude = 0,longitude =0;
     String currentaddress = "";
 
     public TypeOfEmergency() {
-        // Required empty public constructor
+        // empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,25 +49,29 @@ double latitude = 0,longitude =0;
         address = (TextView) linearLayout.findViewById(R.id.tvaddress);
 
 
-
         hospital.setOnClickListener(this);
         police.setOnClickListener(this);
         pharmacy.setOnClickListener(this);
 
+        //object of current location
         CurrentLocation currentLocation = new CurrentLocation(getContext());
-
+        //accessing location
         Location location =currentLocation.getLocation(LocationManager.NETWORK_PROVIDER);
-
+        //if location is not null
         if(location!=null){
+            //get latitude from location
             latitude = location.getLatitude();
+            //get longitude from location
             longitude = location.getLongitude();
 
+            //object of locationaddress
             final LocationAddress locationAddress = new LocationAddress(getContext() ,new AddressResponse() {
                 @Override
                 public void processFinish(String output) {
 
                     currentaddress = output;
                     if(currentaddress!=null) {
+                        //if address is not null then make it visible in textview
                         address.setVisibility(View.VISIBLE);
                         address.setText("Your Location:\n" + currentaddress);
                     }
@@ -79,6 +84,7 @@ double latitude = 0,longitude =0;
 
         }
         else {
+            //showing alertDialog if gps is off
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
             alertDialog.setTitle("GPS is settings");
