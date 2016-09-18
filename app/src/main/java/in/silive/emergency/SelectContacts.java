@@ -29,7 +29,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     ArrayList<String> contactPhones = new ArrayList<>() ;   // for storing selected phone numbers
     ContactsAdapter adapter;
     Button button ;
-    RelativeLayout relativeLayout;                          // to show loading
+    ProgressDialog progressDialog;     // to show loading
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,18 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         button = (Button)findViewById(R.id.bt_next);
         button.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.tbContacts);
-        relativeLayout = (RelativeLayout) findViewById(R.id.rlprogessbar);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Contacts");
+
+            Intent intent =getIntent();
+           String con = intent.getStringExtra("contact");
+
+        if(con.equals("back")){
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      }
 
         listView = (ListView)findViewById(R.id.lv_contacts);
         /** if any item is clicked, then contacts will change its selected state **/
@@ -94,32 +102,15 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         ContentResolver resolver = getContentResolver();
         /** gives you access to database **/
 
-        Cursor cursor = resolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        Cursor cursor = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER}
+                , null, null, null);
         int index = 0;
         while(cursor.moveToNext()) {    /* returns false if the cursor is already past the last entry */
             // ContactsContracts.Contact contains constants for contacts table
-            String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            /** save to contactNames array **/
-            String tempName =cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            if(cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {   // has atlease one phone
-
-                // to navigate through different phone numbers, only one phone number per contact is shown
-                Cursor phones = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                if (phones != null) {
-                    phones.moveToFirst();
-                    /** save to contactPhones array list**/
-                        String tempPhone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        if (tempPhone != null) {
-                            contactList.add(index, new Contact(tempName, tempPhone));
-                            ++index;
-                        }
-
-                    phones.close();
-                }
-            }
-
-
+            String tempName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String tempNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            if(tempName != null && tempNumber != null)  contactList.add(index++, new Contact(tempName,tempNumber));
         }
         cursor.close();
         return contactList;
@@ -155,22 +146,25 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         @Override
         protected void onPreExecute() {
             /** show loading **/
-          relativeLayout.setVisibility(View.VISIBLE);
+            progressDialog = new ProgressDialog(SelectContacts.this);
+            progressDialog.setMessage("Loading your phone Contacts ......");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(Object o) {
             listView.setAdapter(adapter);
             /** if loading , them stop it **/
-           relativeLayout.setVisibility(View.GONE);
+            if(progressDialog.isShowing())      progressDialog.dismiss();
         }
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
-
-    /**
-     * Sorts a contact list using Collections.sort() method in ascending order.
-     * @param contactList   List to be sorted.
-     */
     private static void sort(ArrayList<Contact> contactList) {
         if(contactList != null) {
             Collections.sort(contactList, new Comparator<Contact>() {
@@ -182,4 +176,4 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         }
     }
 
-}// end of class
+}
