@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
@@ -73,7 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     Location location;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
-
+    ImageButton callInternational, callPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +93,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         address =(TextView) findViewById(R.id.tvaddress);
         international =(TextView) findViewById(R.id.tvinternational);
         vicinity =(TextView) findViewById(R.id.tvVicinity);
-
+        callInternational = (ImageButton)findViewById(R.id.bt_call_international);
+        callPhone = (ImageButton)findViewById(R.id.bt_call_phone);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        /** adding calling features to the button **/
+        callInternational.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumber = international.getText().toString();
+                call(phoneNumber);
+            }
+        });
+
+        callPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumber = phone.getText().toString();
+                call(phoneNumber);
+            }
+        });
+
+
+
         setSupportActionBar(toolbar);
 
         if(typeofemergency.equals("hospital"))
@@ -583,4 +606,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-}
+    /**
+     * To call a specific phone number
+     * @param phoneNumber phone number in string
+     */
+    private void call(String phoneNumber){
+     try {
+
+      if(phoneNumber != null || ! phoneNumber.equals("-NA-")) {
+          Intent intent = new Intent(Intent.ACTION_CALL);
+          intent.setData(Uri.parse("tel:" + phoneNumber.trim()));
+
+          startActivity(intent);
+      }
+
+    }
+    catch(Exception e){
+        Log.e("Call", e.getMessage(), e);
+    }
+    }
+
+}//end of class

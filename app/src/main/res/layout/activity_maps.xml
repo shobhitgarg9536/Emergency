@@ -154,11 +154,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#040404"
-                    android:text=" -NA-"
+                    android:text="-NA-"
                     android:fontFamily="cursive"
                     android:id="@+id/tvphone"
 
                     android:layout_gravity="center_horizontal" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bt_call_phone"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/call"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -209,6 +216,13 @@
                     android:id="@+id/tvinternational"
 
                     android:layout_gravity="center_horizontal" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bt_call_international"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/call"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -224,6 +238,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:indeterminate="false" />
     </RelativeLayout>
     </FrameLayout>
