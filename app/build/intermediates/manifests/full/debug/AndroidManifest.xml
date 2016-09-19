@@ -69,14 +69,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.emergency.DeleteContacts" >
+        <activity
+            android:name="in.silive.emergency.DeleteContacts"
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" >
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.emergency.SelectContacts" >
+        <activity
+            android:name="in.silive.emergency.SelectContacts"
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" >
             <intent-filter>
                 <action android:name="in.silive.emergency.SELECTCONTACTS" />
 
@@ -101,6 +105,13 @@
             android:name="in.silive.emergency.MapsActivity"
             android:label="@string/title_activity_maps"
             android:parentActivityName="in.silive.emergency.FragmentCallingActivity" />
+
+        <receiver android:name="in.silive.emergency.VolumeReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <service android:name="in.silive.emergency.ChatHeadService" />
 

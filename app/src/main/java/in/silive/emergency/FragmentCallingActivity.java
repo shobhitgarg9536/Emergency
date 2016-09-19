@@ -1,26 +1,26 @@
 package in.silive.emergency;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.maps.GoogleMap;
-
-import java.security.Policy;
+import android.view.View;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -33,8 +33,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
     private boolean isFlashOn;
     private boolean hasFlash;
     Camera.Parameters params;
-    String MyChat = "Chat";
-    SharedPreferences sharedPreferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +52,16 @@ public class FragmentCallingActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        Intent alarmIntent = new Intent(getApplicationContext(), VolumeReceiver.class);
+        // Pending Intent Object
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Alarm Manager Object
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        // Alarm Manager calls BroadCast for every Ten seconds (10 * 1000), BroadCase further calls service to check if new records are inserted in
+        // Remote MySQL DB
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + 3000, 4000, pendingIntent);
 
-        sharedPreferences = getSharedPreferences(MyChat, MODE_PRIVATE);
-        String chat = (sharedPreferences.getString("chat", ""));
-        if(chat.equals("hospital")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","hospital");
-            startActivity(i);
-        }
-        if(chat.equals("pharmacy")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","pharmacy");
-            startActivity(i);
-        }
-        if(chat.equals("police")){
-            Intent i = new Intent(this ,MapsActivity.class );
-            i.putExtra("type","police");
-            startActivity(i);
-        }
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -81,8 +73,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private final List<Fragment> mFragmentList = new ArrayList<>(); //for fragments
+        private final List<String> mFragmentTitleList = new ArrayList<>(); //for fragment titles
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -127,13 +119,13 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         }
         if(id == R.id.flashlight){
+            //getting flashLight feature
             hasFlash = getApplicationContext().getPackageManager()
                     .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
             if (!hasFlash) {
                 // device doesn't support flash
                 // Show alert message and close the application
-
                 final android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this);
                 alertDialog.setTitle("Error");
                 alertDialog.setMessage("Sorry, your device doesn't support flash light!");
@@ -161,6 +153,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
         }
         if(id == R.id.addContacts){
             Intent intent = new Intent(this , SelectContacts.class);
+            intent.putExtra("contact" , "back");
             startActivity(intent);
 
         }
@@ -187,6 +180,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
     }
 
     private void turnOnFlash() {
+        //if flash is in off condition
         if(!isFlashOn){
             if(camera == null || params == null)
                 return;
@@ -199,17 +193,20 @@ public class FragmentCallingActivity extends AppCompatActivity {
     }
 
     private void turnOffFlash() {
-
+        //checking is flash is on or off
         if(isFlashOn){
             if(camera == null || params == null)
                 return;
         }
         try {
+            //get the parameters for camera
             params = camera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            //set the camera parameters
             camera.setParameters(params);
             camera.stopPreview();
             isFlashOn = false;
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -217,7 +214,9 @@ public class FragmentCallingActivity extends AppCompatActivity {
     private void getCamera() {
         if (camera == null) {
             try {
+                //open camera
                 camera = Camera.open();
+                //get the camera parameters
                 params = camera.getParameters();
             } catch (RuntimeException e) {
                 e.printStackTrace();
@@ -227,14 +226,11 @@ public class FragmentCallingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear().commit();
         turnOffFlash();
     }
     @Override
     protected void onStop() {
         super.onStop();
-
         if (camera != null) {
             camera.release();
             camera = null;

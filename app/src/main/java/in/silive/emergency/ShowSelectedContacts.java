@@ -76,10 +76,10 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
             for(int index = 0; index < adapter.getCount(); index++) {
                 Contact contact = (Contact) adapter.getItem(index);
                 if (!contact.isInList(databaseContactList)) dbHandler.putContact(contact);
-                }
+            }
 
-                Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
+            startActivity(intent);
 
 
         }

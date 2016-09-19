@@ -12,6 +12,7 @@
     <ImageView
         android:layout_width="1000dp"
         android:layout_height="400dp"
+        android:background="@drawable/splash"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

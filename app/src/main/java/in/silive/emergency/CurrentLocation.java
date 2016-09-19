@@ -15,12 +15,13 @@ import android.os.IBinder;
 public class CurrentLocation extends Service implements LocationListener {
 
     protected LocationManager locationManager;
-    Location location;
+    Location location;//to store location
 
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
 
     public CurrentLocation(Context context) {
+        //getting location services
         locationManager = (LocationManager) context
                 .getSystemService(LOCATION_SERVICE);
     }
@@ -31,9 +32,11 @@ public class CurrentLocation extends Service implements LocationListener {
                     MIN_TIME_FOR_UPDATE, MIN_DISTANCE_FOR_UPDATE, this);
             if (locationManager != null) {
                 location = locationManager.getLastKnownLocation(provider);
+                //return location
                 return location;
             }
         }
+        //return null if location manager is null
         return null;
     }
 

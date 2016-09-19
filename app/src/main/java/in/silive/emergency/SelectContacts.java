@@ -43,13 +43,18 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Contacts");
 
-            Intent intent =getIntent();
-           String con = intent.getStringExtra("contact");
 
-        if(con.equals("back")){
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      }
+        try {
+            Intent intent = getIntent();
+            String Scontact = intent.getStringExtra("contact");
+
+            if (Scontact.equals("back")) {
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         listView = (ListView)findViewById(R.id.lv_contacts);
         /** if any item is clicked, then contacts will change its selected state **/
@@ -159,11 +164,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             if(progressDialog.isShowing())      progressDialog.dismiss();
         }
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+
 
     private static void sort(ArrayList<Contact> contactList) {
         if(contactList != null) {

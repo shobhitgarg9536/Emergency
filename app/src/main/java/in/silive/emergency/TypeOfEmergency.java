@@ -1,9 +1,14 @@
 package in.silive.emergency;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,15 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 public class TypeOfEmergency extends Fragment implements View.OnClickListener {
-Button hospital,police,pharmacy;
 
-
+    Button hospital,police,pharmacy;
+    TextView address;
+    double latitude = 0,longitude =0;
+    String currentaddress = "";
 
     public TypeOfEmergency() {
-        // Required empty public constructor
+        // empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,69 @@ Button hospital,police,pharmacy;
         hospital = (Button) linearLayout.findViewById(R.id.bthospital);
         police = (Button) linearLayout.findViewById(R.id.btpolice);
         pharmacy = (Button) linearLayout.findViewById(R.id.btpharmacy);
-
+        address = (TextView) linearLayout.findViewById(R.id.tvaddress);
 
 
         hospital.setOnClickListener(this);
         police.setOnClickListener(this);
         pharmacy.setOnClickListener(this);
+
+        //object of current location
+        CurrentLocation currentLocation = new CurrentLocation(getContext());
+        //accessing location
+        Location location =currentLocation.getLocation(LocationManager.NETWORK_PROVIDER);
+        //if location is not null
+        if(location!=null){
+            //get latitude from location
+            latitude = location.getLatitude();
+            //get longitude from location
+            longitude = location.getLongitude();
+
+            //object of locationaddress
+            final LocationAddress locationAddress = new LocationAddress(getContext() ,new AddressResponse() {
+                @Override
+                public void processFinish(String output) {
+
+                    currentaddress = output;
+                    if(currentaddress!=null) {
+                        //if address is not null then make it visible in textview
+                        address.setVisibility(View.VISIBLE);
+                        address.setText("Your Location:\n" + currentaddress);
+                    }
+                }
+            } );
+            locationAddress.execute(latitude,longitude);
+
+
+
+
+        }
+        else {
+            //showing alertDialog if gps is off
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+            alertDialog.setTitle("GPS is settings");
+
+            alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+            alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    getContext().startActivity(intent);
+                }
+            });
+
+            alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.setCancelable(true);
+                }
+            });
+
+
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+
+        }
 
         return linearLayout;
 

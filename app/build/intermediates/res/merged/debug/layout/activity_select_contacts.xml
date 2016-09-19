@@ -28,6 +28,16 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_gravity="center_horizontal"
+        android:background="#c62818"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:text="Selects Contacts which can help you in emergency "
+        />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -47,15 +57,5 @@
         android:id="@+id/bt_next"
         android:layout_weight="0.1" />
 
-    <RelativeLayout
-        android:id="@+id/rlprogessbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:visibility="visible" >
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-    </RelativeLayout>
+
 </LinearLayout>

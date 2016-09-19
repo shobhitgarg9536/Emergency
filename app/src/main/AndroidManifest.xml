@@ -28,14 +28,17 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
         >
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="userPortrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EnterPersonalDetail">
+        <activity android:name=".EnterPersonalDetail"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.ENTERPERSONALDETAIL" />
 
@@ -43,6 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Profile"
+            android:screenOrientation="userPortrait"
             android:parentActivityName=".FragmentCallingActivity">
             <intent-filter>
                 <action android:name="in.silive.emergency.PROFILE" />
@@ -51,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".FragmentCallingActivity"
-
+            android:screenOrientation="userPortrait"
             >
             <intent-filter>
                 <action android:name="in.silive.emergency.FRAGMENTCALLINGACTIVITY" />
@@ -60,7 +64,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DeleteContacts">
+        <activity android:name=".DeleteContacts"
+            android:parentActivityName=".FragmentCallingActivity"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />
 
@@ -70,6 +76,8 @@
 
 
         <activity android:name=".SelectContacts"
+            android:parentActivityName=".FragmentCallingActivity"
+            android:screenOrientation="userPortrait"
             >
             <intent-filter>
                 <action android:name="in.silive.emergency.SELECTCONTACTS" />
@@ -79,6 +87,7 @@
         </activity>
         <activity android:name=".ShowSelectedContacts"
             android:parentActivityName=".SelectContacts"
+            android:screenOrientation="userPortrait"
             >
             <intent-filter>
                 <action android:name="in.silive.emergency.SHOWSELECTEDCONTACTS" />
@@ -95,7 +104,14 @@
             android:name="in.silive.emergency.MapsActivity"
             android:label="@string/title_activity_maps"
             android:parentActivityName=".FragmentCallingActivity"
+            android:screenOrientation="userPortrait"
             ></activity>
+        <receiver android:name=".VolumeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <service android:name=".ChatHeadService"
 
