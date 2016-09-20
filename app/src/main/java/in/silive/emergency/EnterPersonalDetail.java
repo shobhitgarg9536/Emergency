@@ -360,7 +360,7 @@ Bitmap bitmap;
                         data.getData());
                 bitmap = BitmapFactory.decodeStream(stream);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 40, byteArrayOutputStream);
                 byte[] image = byteArrayOutputStream.toByteArray();
                 String Simage = Base64.encodeToString(image, Base64.DEFAULT);
                 //putting values through sharedPreference

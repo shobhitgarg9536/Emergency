@@ -52,6 +52,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.ProviderException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -158,12 +159,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //enabling my location on maps
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        //getting gps provider
-        isGPSEnabled = locationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        //geting network provider
-        isNetworkEnabled = locationManager
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        try {
+            //getting gps provider
+            isGPSEnabled = locationManager
+                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+            //geting network provider
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }catch (ProviderException e){
+            e.printStackTrace();
+        }
          if(isGPSEnabled && isNetworkEnabled) {
 
     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -205,39 +210,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
-        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-
-                mLatitude = location.getLatitude();
-                mLongitude = location.getLongitude();
-
-                LatLng latLng = new LatLng(mLatitude, mLongitude);
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        });
+        try {
 
 
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 40000, 0, new android.location.LocationListener() {
 
+                @Override
+                public void onLocationChanged(Location location) {
+
+                    mLatitude = location.getLatitude();
+                    mLongitude = location.getLongitude();
+
+                    LatLng latLng = new LatLng(mLatitude, mLongitude);
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            });
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }catch (ProviderException e){
+            e.printStackTrace();
+        }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
