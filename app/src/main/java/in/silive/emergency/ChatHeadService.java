@@ -63,12 +63,14 @@ public class ChatHeadService extends Service implements View.OnClickListener,Vie
         popupView = layoutInflater.inflate(R.layout.chatheadlayout, null);
         popupView.setVisibility(View.GONE);
 
+        Button profile = (Button) popupView.findViewById(R.id.bProfile);
         Button hospital = (Button) popupView.findViewById(R.id.bhospital);
         Button pharmacy = (Button) popupView.findViewById(R.id.bphar);
         Button police = (Button) popupView.findViewById(R.id.bpolic);
         Button contact = (Button) popupView.findViewById(R.id.bcontac);
         Button delete = (Button) popupView.findViewById(R.id.bdel);
        //adding onClick Listerner to hospital,pharmacy,etc
+        profile.setOnClickListener(this);
         hospital.setOnClickListener(this);
         pharmacy.setOnClickListener(this);
         police.setOnClickListener(this);
@@ -175,6 +177,9 @@ public class ChatHeadService extends Service implements View.OnClickListener,Vie
 
         switch (view.getId()){
 
+            case R.id.bProfile:
+                profile();
+                break;
             case R.id.bhospital:
                 type = "hospital";
                 emergency();
@@ -194,6 +199,22 @@ public class ChatHeadService extends Service implements View.OnClickListener,Vie
                 stopSelf();
                 break;
         }
+    }
+
+    private void profile() {
+        //passing intent
+        Intent i = new Intent(getBaseContext(),Profile.class);
+        //to make app2 starts on app1
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //setting class of app2
+        i.setClass(getBaseContext(), Profile.class);
+        startActivity(i);
+        //setting class of app2
+        popupView.setVisibility(View.GONE);
+        //removing layout from windows  manager
+        windowManager.removeView(layout);
+        windowManager.addView(layout, params);
+
     }
 
     private void contacts() {

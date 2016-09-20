@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
 
@@ -12,4 +12,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarColoredBackArrow" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorSecondary">#FFFFFFFF</item>
+    </style>
 </resources>

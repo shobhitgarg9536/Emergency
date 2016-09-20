@@ -1,6 +1,7 @@
 package in.silive.emergency;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,6 +11,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -18,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +37,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -235,21 +243,17 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
 
             Intent intent = new Intent(this, SelectContacts.class);
             intent.putExtra("contact" , "ba");
+            finish();
             startActivity(intent);
         }
 
         else if(edit.equals("edit")) {
             Intent intent = new Intent(this, FragmentCallingActivity.class);
+            finish();
             startActivity(intent);
         }
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
 
     private boolean validateName() {
         if (name.getText().toString().trim().isEmpty()) {
@@ -334,4 +338,46 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             }
         }
     }
+
+    public void openPic(View view){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+       // intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+    final int REQUEST_CODE = 1;
+Bitmap bitmap;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
+            try {
+                // We need to recyle unused bitmaps
+                if (bitmap != null) {
+                    bitmap.recycle();
+                }
+                InputStream stream = getContentResolver().openInputStream(
+                        data.getData());
+                bitmap = BitmapFactory.decodeStream(stream);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
+                byte[] image = byteArrayOutputStream.toByteArray();
+                String Simage = Base64.encodeToString(image, Base64.DEFAULT);
+                //putting values through sharedPreference
+                sharedPreferences = getSharedPreferences(MyProfile, Context.MODE_PRIVATE);
+                //getting sharedPreferences editor
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                //putting values
+                editor.putString("icon" , Simage);
+                editor.commit();
+                stream.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

@@ -83,7 +83,9 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener {
 
 
         }
-        else {
+        boolean isNetworkenable = currentLocation.isNetworkEnable();
+
+        if(!isNetworkenable) {
             //showing alertDialog if gps is off
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
@@ -124,7 +126,6 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener {
 
                 Intent intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra("type","hospital");
-
                 startActivity(intent);
 
                 break;
@@ -132,7 +133,6 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener {
 
                 intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra("type","pharmacy");
-
                 startActivity(intent);
 
                 break;
@@ -140,7 +140,6 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener {
 
                 intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra("type","police");
-
                 startActivity(intent);
 
                 break;

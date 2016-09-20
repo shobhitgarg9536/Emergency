@@ -1,66 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="in.silive.emergency.MainActivity">
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/MyAppbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="350dp"
+    android:fitsSystemWindows="true">
 
-        <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapse_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/ivIcon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tbProfile"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
+            android:background="@drawable/noimage"
+            app:layout_collapseMode="pin" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tbProfile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:layout_collapseMode="pin" />
+    </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="5dp"
 
-        android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name: "
-
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="25dp"
-        android:layout_gravity="center_vertical" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-Na-"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="25dp"
-        android:id="@+id/tvname"
-        android:layout_gravity="center_horizontal" />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,5 +188,6 @@
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
