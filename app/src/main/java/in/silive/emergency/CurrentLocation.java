@@ -40,6 +40,17 @@ public class CurrentLocation extends Service implements LocationListener {
         return null;
     }
 
+    public boolean isNetworkEnable(){
+        boolean isNetworkEnabled = false;
+        //geting network provider
+        isNetworkEnabled = locationManager
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if(isNetworkEnabled)
+            return true;
+        else
+            return false;
+    }
+
     @Override
     public void onLocationChanged(Location location) {
     }

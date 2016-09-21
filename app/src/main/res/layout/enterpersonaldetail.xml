@@ -156,13 +156,25 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginTop="15dp"
-        android:id="@+id/btSubmit"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Profile Pic"
+                android:id="@+id/button"
                 android:fontFamily="sans-serif-condensed"
-        android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:background="#c62818"
+                android:textColor="#ffffff"
+                android:onClick="openPic" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="15dp"
+                android:id="@+id/btSubmit"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center_horizontal"
                 android:background="#c62818"
                 android:textColor="#ffffff" />
         </LinearLayout>
