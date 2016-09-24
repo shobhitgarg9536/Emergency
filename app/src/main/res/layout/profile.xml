@@ -61,7 +61,8 @@
             android:text="Mobile No.: "
             android:fontFamily="sans-serif-condensed"
             android:textSize="25dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +85,8 @@
             android:text="DOB: "
             android:fontFamily="sans-serif-condensed"
             android:textSize="25dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,7 +109,8 @@
             android:text="Blood Group: "
             android:fontFamily="sans-serif-condensed"
             android:textSize="25dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,7 +133,8 @@
             android:text="Address: "
             android:fontFamily="sans-serif-condensed"
             android:textSize="25dp"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -153,7 +157,8 @@
             android:text="Inherited Diseases: "
             android:textSize="25dp"
             android:fontFamily="sans-serif-condensed"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -176,7 +181,8 @@
             android:text="Diseases: "
             android:textSize="25dp"
             android:fontFamily="sans-serif-condensed"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -36,17 +36,20 @@
         android:id="@+id/lv_show_selected_contacts"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.9"
+        android:layout_margin="5dp"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Save"
         android:id="@+id/bt_save_contacts"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="0.1"
         android:fontFamily="sans-serif-condensed"
         android:layout_gravity="center_horizontal"
-        android:background="#c62818"
-        android:textColor="#ffffff"  />
+        android:background="@drawable/abc_popup_background_mtrl_mult"
+        android:textColor="#000000"  />
 
 </LinearLayout>

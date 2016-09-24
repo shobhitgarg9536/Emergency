@@ -1,5 +1,7 @@
 package in.silive.emergency;
 
+import android.*;
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,10 +12,13 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -51,6 +56,8 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        insertDummyInternetPermission();
 
         Intent alarmIntent = new Intent(getApplicationContext(), VolumeReceiver.class);
         // Pending Intent Object
@@ -165,7 +172,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         }
         if(id == R.id.mstartChatHead){
-
+            insertDummySystemAlertWindowPermission();
             Intent intent = new Intent(this , ChatHeadService.class);
             startService(intent);
 
@@ -180,6 +187,7 @@ public class FragmentCallingActivity extends AppCompatActivity {
     }
 
     private void turnOnFlash() {
+        insertDummyCameraPermission();
         //if flash is in off condition
         if(!isFlashOn){
             if(camera == null || params == null)
@@ -236,5 +244,77 @@ public class FragmentCallingActivity extends AppCompatActivity {
             camera = null;
         }
     }
+    final private int REQUEST_CODE_ASK_PERMISSIONS_CAMERA = 123;
+    private void insertDummyCameraPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(FragmentCallingActivity.this,
+                Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(FragmentCallingActivity.this,
+                    android.Manifest.permission.CAMERA)) {
 
+                                ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                                        new String[] {android.Manifest.permission.CAMERA},
+                                        REQUEST_CODE_ASK_PERMISSIONS_CAMERA);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                    new String[] {android.Manifest.permission.CAMERA},
+                    REQUEST_CODE_ASK_PERMISSIONS_CAMERA);
+            return;
+        }
+    }
+
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS_INTERNET = 123;
+    private void insertDummyInternetPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(FragmentCallingActivity.this,
+                Manifest.permission.INTERNET);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(FragmentCallingActivity.this,
+                    android.Manifest.permission.INTERNET)) {
+
+                ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                        new String[] {android.Manifest.permission.INTERNET},
+                        REQUEST_CODE_ASK_PERMISSIONS_INTERNET);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                    new String[] {android.Manifest.permission.INTERNET},
+                    REQUEST_CODE_ASK_PERMISSIONS_INTERNET);
+            return;
+        }
+
+    }
+    final private int REQUEST_CODE_ASK_PERMISSIONS_SYSTEM_ALERT = 123;
+    private void insertDummySystemAlertWindowPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(FragmentCallingActivity.this,
+                Manifest.permission.SYSTEM_ALERT_WINDOW);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(FragmentCallingActivity.this,
+                    android.Manifest.permission.SYSTEM_ALERT_WINDOW)) {
+
+                ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                        new String[] {android.Manifest.permission.SYSTEM_ALERT_WINDOW},
+                        REQUEST_CODE_ASK_PERMISSIONS_SYSTEM_ALERT);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(FragmentCallingActivity.this,
+                    new String[] {android.Manifest.permission.SYSTEM_ALERT_WINDOW},
+                    REQUEST_CODE_ASK_PERMISSIONS_SYSTEM_ALERT);
+            return;
+        }
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS_CAMERA){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+               turnOnFlash();
+            }
+        }
+    }
 }

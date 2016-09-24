@@ -1,11 +1,17 @@
 package in.silive.emergency;
 
+import android.*;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +45,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         button.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.tbContacts);
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Contacts");
 
@@ -59,9 +64,8 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         listView = (ListView)findViewById(R.id.lv_contacts);
         /** if any item is clicked, then contacts will change its selected state **/
 
-        /** for loading contacts **/
-        MySyncTask task = new MySyncTask();
-        task.execute();
+        insertDummyContactWrapper();
+
     }
 
 
@@ -124,7 +128,6 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
 
 
 
-
     private class MySyncTask extends AsyncTask{
 
         @Override
@@ -135,7 +138,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
             ArrayList<Contact> contactList = retrieveContacts();
             ArrayList<Contact>  databaseContactList = new DatabaseHandler(getApplicationContext()).getContactList();
 
-            /** first sor the list **/
+            /** first sort the list **/
             SelectContacts.sort(contactList);
 
             for(int index = 0; index < contactList.size(); index++){   // add retrieved contacts to adapter
@@ -177,4 +180,38 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         }
     }
 
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private void insertDummyContactWrapper() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(SelectContacts.this,
+                android.Manifest.permission.READ_CONTACTS);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(SelectContacts.this,
+                    android.Manifest.permission.READ_CONTACTS)) {
+
+                                ActivityCompat.requestPermissions(SelectContacts.this,
+                                        new String[] {android.Manifest.permission.READ_CONTACTS},
+                                        REQUEST_CODE_ASK_PERMISSIONS);
+
+
+                return;
+            }
+            ActivityCompat.requestPermissions(SelectContacts.this,
+                    new String[] {android.Manifest.permission.READ_CONTACTS},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+
+            return;
+        }
+        MySyncTask task = new MySyncTask();
+        task.execute();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                MySyncTask task = new MySyncTask();
+                task.execute();
+            }
+        }
+    }
 }

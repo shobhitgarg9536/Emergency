@@ -1,9 +1,13 @@
 package in.silive.emergency;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -12,6 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
@@ -40,8 +46,6 @@ public class ConnectContactsAdapter extends ArrayAdapter{
     double latitude =0;
     double longitude=0;
     boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    Location location;
     String address ="";
 
     ArrayList<Contact> list = new ArrayList<>();
@@ -102,6 +106,7 @@ public class ConnectContactsAdapter extends ArrayAdapter{
         holder.callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                insertDummyCallPermission();
                 try {
                     Intent intent = new Intent(Intent.ACTION_CALL);
                     intent.setData(Uri.parse("tel:" + contact.getPhoneNumber().trim()));
@@ -117,9 +122,11 @@ public class ConnectContactsAdapter extends ArrayAdapter{
         });
 
         holder.smsButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 /** CALL SMS ACTIVITY **/
+                insertDummyMessagePermission();
                 ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -128,56 +135,57 @@ public class ConnectContactsAdapter extends ArrayAdapter{
                     final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
                     getCurrentLocation();
 
+                    if (isGPSEnabled == true){
+                        if (latitude != 0 && longitude != 0) {
+                            final LocationAddress locationAddress = new LocationAddress(getContext(), new AddressResponse() {
+                                @Override
+                                public void processFinish(String output) {
 
-                    if (latitude != 0 && longitude != 0) {
-                        final LocationAddress locationAddress = new LocationAddress(getContext(), new AddressResponse() {
-                            @Override
-                            public void processFinish(String output) {
+                                    address = output;
+                                    if (address != null) {
 
-                                address = output;
-                                if (address != null) {
+                                        intent.putExtra("sms_body", createEmergencyMessage().toString());
+                                        context.startActivity(intent);
+                                    } else {
 
-                                    intent.putExtra("sms_body", createEmergencyMessage().toString());
-                                    context.startActivity(intent);
-                                } else {
+                                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                                        alertDialog.setTitle("Error");
 
-                                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                                    alertDialog.setTitle("Location");
+                                        alertDialog.setMessage("Service not available. Reboot your device");
 
-                                    alertDialog.setMessage("Cannot access location! Try again");
-
-                                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            alertDialog.setCancelable(true);
-                                        }
-                                    });
+                                        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                alertDialog.setCancelable(true);
+                                            }
+                                        });
 
 
-                                    alertDialog.setCancelable(false);
-                                    alertDialog.show();
+                                        alertDialog.setCancelable(false);
+                                        alertDialog.show();
+                                    }
                                 }
-                            }
-                        });
-                        locationAddress.execute(latitude, longitude);
+                            });
+                            locationAddress.execute(latitude, longitude);
 
-                    } else {
+                        } else {
 
-                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                        alertDialog.setTitle("Location");
+                            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                            alertDialog.setTitle("Location");
 
-                        alertDialog.setMessage("Cannot access location! Try again");
+                            alertDialog.setMessage("Cannot access location! Try again");
 
-                        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                alertDialog.setCancelable(true);
-                            }
-                        });
+                            alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.setCancelable(true);
+                                }
+                            });
 
 
-                        alertDialog.setCancelable(false);
-                        alertDialog.show();
-                    }
+                            alertDialog.setCancelable(false);
+                            alertDialog.show();
+                        }
                 }
+            }
                 else {
 
                     final android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getContext());
@@ -217,10 +225,13 @@ public class ConnectContactsAdapter extends ArrayAdapter{
 
          Location location =currentLocation.getLocation(LocationManager.NETWORK_PROVIDER);
 
-         if(location!=null){
-             latitude = location.getLatitude();
-             longitude = location.getLongitude();
-         }
+         isGPSEnabled = currentLocation.isGPSEnable();
+if(isGPSEnabled == true) {
+    if (location != null) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+    }
+}
          else {
              final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
@@ -255,10 +266,6 @@ public class ConnectContactsAdapter extends ArrayAdapter{
         SharedPreferences preferences = context.getSharedPreferences("Profile", context.MODE_PRIVATE);
         /** add location before name **/
 
-
-
-
-
         String Slocation = "Latitude: "+ String.valueOf(latitude) + " , "+"Longitude: "+String.valueOf(longitude)+"\n";
         builder.append(Slocation+"\n");
         builder.append("Address:\n"+address+"\n");
@@ -267,103 +274,7 @@ public class ConnectContactsAdapter extends ArrayAdapter{
         return builder;
     }
 
-   /* private void Location() {
-        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-
-
-        isGPSEnabled = locationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-
-        isNetworkEnabled = locationManager
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if(isGPSEnabled && isNetworkEnabled) {
-
-            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-
-        }
-        else {
-            if(isGPSEnabled)
-                location = locationManager
-                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            else {
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-
-                alertDialog.setTitle("GPS is settings");
-
-                alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        context.startActivity(intent);
-                    }
-                });
-
-                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertDialog.setCancelable(true);
-                    }
-                });
-
-
-                alertDialog.setCancelable(false);
-                alertDialog.show();
-
-            }
-
-        }
-
-        try {
-
-            onLocationChanged(location);
-
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
-        locationManager.requestLocationUpdates(String.valueOf(location), 40000, 0, new android.location.LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-
-                mLatitude = location.getLatitude();
-                mLongitude = location.getLongitude();
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        });
-
-        if(mLatitude ==0 && mLongitude ==0) {
-
-        }
-
-
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mLatitude = location.getLatitude();
-        mLongitude = location.getLongitude();
-
-
-    }*/
    private class GeocoderHandler extends Handler {
        @Override
        public void handleMessage(Message message) {
@@ -379,5 +290,46 @@ public class ConnectContactsAdapter extends ArrayAdapter{
 
        }
    }
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private void insertDummyCallPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.CALL_PHONE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
+                    android.Manifest.permission.CALL_PHONE)) {
+
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[] {android.Manifest.permission.CALL_PHONE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {android.Manifest.permission.CALL_PHONE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
+    private void insertDummyMessagePermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.SEND_SMS);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
+                    android.Manifest.permission.SEND_SMS)) {
+
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[] {android.Manifest.permission.SEND_SMS},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] {android.Manifest.permission.SEND_SMS},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
 
 }

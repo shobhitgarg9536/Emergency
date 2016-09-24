@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     >
 
     <CheckBox
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/cb_selectcontact"
         android:checked="false"
-        android:buttonTint="#c62818"
+        android:background="@drawable/abc_btn_check_material"
         android:layout_marginLeft="5dp"
-        android:layout_weight="0.1"
+android:layout_marginTop="8dp"
         android:gravity="center" />
 
 
 
     <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-                android:weightSum="1"
-                android:layout_weight="0.9"
+                android:layout_marginLeft="10dp"
+
         android:visibility="visible"
         android:paddingTop="2dp"
         android:paddingBottom="2dp">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/tv_contactname"
-            android:layout_weight="0.55"
+
 
             android:hint="Name"
             android:textSize="22sp"
 
-            android:textStyle="bold"
+
             android:textColor="#000000" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/tv_contactno"
-            android:layout_weight="0.45"
+
 
             android:hint="Phone"
             android:textSize="16sp"

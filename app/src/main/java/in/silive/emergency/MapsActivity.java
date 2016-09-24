@@ -1,10 +1,15 @@
 package in.silive.emergency;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +21,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +39,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -52,12 +61,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.Provider;
 import java.security.ProviderException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
 
     private GoogleMap mMap;
@@ -75,6 +86,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
 
+    // Google client to interact with Google API
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +121,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
+        insertDummyLocationPermission();
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
         if(status!= ConnectionResult.SUCCESS){ // Google Play Services are not available
 
@@ -158,7 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setCompassEnabled(true);
         //enabling my location on maps
         mMap.setMyLocationEnabled(true);
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         try {
             //getting gps provider
             isGPSEnabled = locationManager
@@ -169,16 +184,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }catch (ProviderException e){
             e.printStackTrace();
         }
-         if(isGPSEnabled && isNetworkEnabled) {
 
-    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-         }
-        else {
-    if(isGPSEnabled)
-    location = locationManager
-            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-    else {
+    buildGoogleApiClient();
+             displayLocation();
+
+
+
+    if(!isGPSEnabled)
+    {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
         alertDialog.setTitle("GPS is settings");
@@ -200,54 +214,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-}
-
-        try {
-
-            onLocationChanged(location);
-
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
-        try {
-
-
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 40000, 0, new android.location.LocationListener() {
-
-                @Override
-                public void onLocationChanged(Location location) {
-
-                    mLatitude = location.getLatitude();
-                    mLongitude = location.getLongitude();
-
-                    LatLng latLng = new LatLng(mLatitude, mLongitude);
-
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-                }
-
-                @Override
-                public void onStatusChanged(String s, int i, Bundle bundle) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String s) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String s) {
-
-                }
-            });
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }catch (ProviderException e){
-            e.printStackTrace();
-        }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -333,21 +299,71 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    public void onLocationChanged(Location location) {
-        //getting latitude of current location
-        mLatitude = location.getLatitude();
-        //getting longitude of current location
-        mLongitude = location.getLongitude();
-        if( mLatitude == 0 && mLongitude == 0){
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+    }
+    private void displayLocation() {
+
+        mLastLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        if (mLastLocation != null) {
+            mLatitude = mLastLocation.getLatitude();
+            mLongitude = mLastLocation.getLongitude();
+            LatLng latLng = new LatLng(mLatitude, mLongitude);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+
+        }else{
+            currentlocation();
+        }
+
+    }
+    private void currentlocation() {
+
+        //object of current location
+        CurrentLocation currentLocation = new CurrentLocation(this);
+
+        //accessing location
+        Location location = currentLocation.getLocation(LocationManager.NETWORK_PROVIDER);
+        //if location is not null
+        if (location != null) {
+            //get latitude from location
+            mLatitude = location.getLatitude();
+            //get longitude from location
+            mLongitude = location.getLongitude();
+        }else{
 
             alertDialog("Network Error" , "Network Connectivity Error! Try Again");
 
         }
-
         LatLng latLng = new LatLng(mLatitude, mLongitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
     }
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+
+    }
+
+    @Override
+    public void onConnected(Bundle arg0) {
+
+        // Once connected with google api, get the location
+        displayLocation();
+    }
+
+    @Override
+    public void onConnectionSuspended(int arg0) {
+        mGoogleApiClient.connect();
+    }
+
+
 
 
     public class PlacesAsynTask extends AsyncTask<String,Integer , String> {
@@ -592,5 +608,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         alertDialog.show();
 
     }
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private void insertDummyLocationPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(MapsActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale( MapsActivity.this,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
+                ActivityCompat.requestPermissions(MapsActivity.this,
+                        new String[] {android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(MapsActivity.this,
+                    new String[] {android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
 }

@@ -1,5 +1,7 @@
 package in.silive.emergency;
 
+import android.*;
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,11 +13,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -30,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,7 +63,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     Toolbar toolbar;
     Spinner bloodgroup;
 
-    TextInputLayout inputLayoutName,inputLayoutMobile,inputLayoutdob;
+    TextInputLayout inputLayoutName,inputLayoutMobile;
 
     String Sname,Smobile,Saddress,Sblood,Sdob,Sinherited,Sdiseases;
 
@@ -76,7 +82,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
         inputLayoutMobile = (TextInputLayout) findViewById(R.id.input_layout_mobile);
-        inputLayoutdob = (TextInputLayout) findViewById(R.id.input_layout_dob);
+
 
         mobile = (EditText) findViewById(R.id.etmobile);
         name = (EditText) findViewById(R.id.etname);
@@ -85,6 +91,9 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         bloodgroup = (Spinner) findViewById(R.id.sp_bloodgroup);
         inheriteddiseases = (EditText) findViewById(R.id.etinheriteddiseases);
         diseases = (EditText) findViewById(R.id.etdiseases);
+
+        name.addTextChangedListener(new MyTextWatcher(name));
+        mobile.addTextChangedListener(new MyTextWatcher(mobile));
 
 
         submit = (Button) findViewById(R.id.btSubmit);
@@ -119,9 +128,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             diseases.setText(Sdiseases);
 
 
-        name.addTextChangedListener(new MyTextWatcher(name));
-        mobile.addTextChangedListener(new MyTextWatcher(mobile));
-        dob.addTextChangedListener(new MyTextWatcher(dob));
+
 
         submit.setOnClickListener(this);
 
@@ -130,7 +137,9 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             public void onFocusChange(View view, boolean b) {
 
                 if(b){
+
                     showDialog(DATE_PICKER_ID);
+
                 }
             }
         });
@@ -148,6 +157,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         //on submit button click
        if( view.getId() == R.id.btSubmit){
+
            try  {
                //disabling keyboard
                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -159,9 +169,9 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
            //getting mobile length
           int mobileNoLength =  mobile.getText().toString().length();
            //if validations are true
-           if(validateName() && validateMobile() && mobileNoLength > 7
-                   && !dob.getText().toString().isEmpty()
-                   ) {
+           if(validateName() && validateMobile() && mobileNoLength > 7) {
+
+               insertDummyWriteStoragePermission();
              //putting values through sharedPreference
                sharedPreferences = getSharedPreferences(MyProfile, Context.MODE_PRIVATE);
               //getting sharedPreferences editor
@@ -190,10 +200,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                alertDialog.create();
                alertDialog.show();
            }
-           else if (dob.getText().toString().isEmpty()){
-               validateDob();
 
-           }
        }
 
     }
@@ -229,6 +236,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
             dob.setText(new StringBuilder().append(month + 1)
                     .append("-").append(day).append("-").append(year)
                     .append(" "));
+            requestFocus(address);
 
 
         }
@@ -287,19 +295,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    private boolean validateDob() {
-        if (dob.getText().toString().isEmpty()) {
-            inputLayoutdob.setError("Enter your Date Of Birth");
-            //requsting focus on editText
-            requestFocus(dob);
-            return false;
 
-        } else {
-            inputLayoutdob.setErrorEnabled(false);
-        }
-
-        return true;
-    }
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
@@ -309,37 +305,8 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
     }
 
 
-    private class MyTextWatcher implements TextWatcher {
-
-        private View view;
-
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.etname:
-                    validateName();
-                    break;
-                case R.id.etmobile:
-                    validateMobile();
-                    break;
-                case R.id.etdob:
-                    validateDob();
-                    break;
-
-            }
-        }
-    }
-
     public void openPic(View view){
+        insertDummyReadStoragePermission();
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -379,5 +346,74 @@ Bitmap bitmap;
             }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private void insertDummyReadStoragePermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(EnterPersonalDetail.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(EnterPersonalDetail.this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
+                ActivityCompat.requestPermissions(EnterPersonalDetail.this,
+                        new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(EnterPersonalDetail.this,
+                    new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
+    private void insertDummyWriteStoragePermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(EnterPersonalDetail.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(EnterPersonalDetail.this,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                ActivityCompat.requestPermissions(EnterPersonalDetail.this,
+                        new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(EnterPersonalDetail.this,
+                    new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+
+    }
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            switch (view.getId()) {
+                case R.id.etname:
+                    inputLayoutName.setErrorEnabled(false);
+                    break;
+                case R.id.etmobile:
+                    inputLayoutMobile.setErrorEnabled(false);
+                    break;
+
+            }
+        }
+        @Override
+        public void afterTextChanged (Editable editable){
+
+        }
+    }
 }

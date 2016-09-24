@@ -2,6 +2,9 @@ package in.silive.emergency;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,12 +81,43 @@ public class ShowSelectedContacts extends AppCompatActivity implements View.OnCl
                 if (!contact.isInList(databaseContactList)) dbHandler.putContact(contact);
             }
 
-            Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
-            startActivity(intent);
+            insertDummyLocationPermission();
+
 
 
         }
     }
+    final private int REQUEST_CODE_ASK_PERMISSIONS_FINE_LOCATION = 123;
+    private void insertDummyLocationPermission() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(ShowSelectedContacts.this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(ShowSelectedContacts.this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
 
+                ActivityCompat.requestPermissions(ShowSelectedContacts.this,
+                        new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS_FINE_LOCATION);
+
+                return;
+            }
+            ActivityCompat.requestPermissions(ShowSelectedContacts.this,
+                    new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_ASK_PERMISSIONS_FINE_LOCATION);
+            return;
+        }
+        Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
+        finish();
+        startActivity(intent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS_FINE_LOCATION){
+            Intent intent = new Intent(getApplicationContext(), FragmentCallingActivity.class);
+            finish();
+            startActivity(intent);
+            }
+        }
 
 }// end of class

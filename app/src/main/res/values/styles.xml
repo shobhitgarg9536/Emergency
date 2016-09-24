@@ -15,4 +15,8 @@
     <style name="ToolbarColoredBackArrow" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColorSecondary">#FFFFFFFF</item>
     </style>
+
+    <style name="WhiteCheck">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 </resources>
