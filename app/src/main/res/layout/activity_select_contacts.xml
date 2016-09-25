@@ -37,13 +37,23 @@
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:text="Selects Contacts which can help you in emergency "
-        />
+        android:layout_weight="0.05" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_search_contacts"
+        android:hint="Enter a name to search contact"
+        android:layout_weight="0.05" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/lv_contacts"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.90"
+        android:layout_weight="0.80"
          />
 
     <Button
