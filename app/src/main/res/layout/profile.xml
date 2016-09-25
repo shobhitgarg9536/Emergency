@@ -26,8 +26,9 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:fitsSystemWindows="true"
-            android:background="@drawable/noimage"
             app:layout_collapseMode="pin" />
+        <!-- android:background="@drawable/noimage"-->
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/tbProfile"
             android:layout_width="match_parent"
