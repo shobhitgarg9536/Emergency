@@ -186,19 +186,6 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                editor.putString("Diseases", diseases.getText().toString());
 
                editor.commit();
-               //shoeing alert dialog
-               AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-               alertDialog.setTitle("Personal Details");
-               alertDialog.setMessage("You have successfull entered your details");
-               alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
-                       startnewactivity();
-                   }
-               });
-               alertDialog.setCancelable(false);
-               alertDialog.create();
-               alertDialog.show();
            }
 
        }
@@ -367,6 +354,7 @@ Bitmap bitmap;
         }
 
     }
+    final private int REQUEST_CODE_ASK_PERMISSIONS_WRITE = 123;
     private void insertDummyWriteStoragePermission() {
         int hasWriteContactsPermission = ContextCompat.checkSelfPermission(EnterPersonalDetail.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -376,16 +364,23 @@ Bitmap bitmap;
 
                 ActivityCompat.requestPermissions(EnterPersonalDetail.this,
                         new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST_CODE_ASK_PERMISSIONS);
+                        REQUEST_CODE_ASK_PERMISSIONS_WRITE);
 
                 return;
             }
             ActivityCompat.requestPermissions(EnterPersonalDetail.this,
                     new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_CODE_ASK_PERMISSIONS);
+                    REQUEST_CODE_ASK_PERMISSIONS_WRITE);
             return;
         }
-
+        startnewactivity();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS_WRITE){
+            startnewactivity();
+        }
     }
     private class MyTextWatcher implements TextWatcher {
         private View view;

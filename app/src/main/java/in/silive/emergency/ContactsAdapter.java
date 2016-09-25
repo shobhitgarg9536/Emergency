@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -16,15 +17,16 @@ import java.util.ArrayList;
 
 /***
  * ContactAdapter converts the data to be displayed in each slot into a suitable View Object. The adapter will be used for
- * multiple list views. It contains a nested ViewHolder class containing the widgets used to display information.
- * 1. Store the ContactDataProvider in list. Use this list to getItem() and getCount()
+ * multiple displayList views. It contains a nested ViewHolder class containing the widgets used to display information.
+ * 1. Store the ContactDataProvider in displayList. Use this displayList to getItem() and getCount()
  * 2. Method getView() is to return the View object which will display the required data
  *
  */
 public class ContactsAdapter extends ArrayAdapter {
 
     /** List to store the contacts **/
-    private ArrayList<Contact> list = new ArrayList();
+    private ArrayList<Contact> displayList = new ArrayList();
+    private ArrayList<Contact> originalList = new ArrayList();
 
     /** Boolean value to store whether the adapter will be used for selecting contacts or displaying contacts **/
     private boolean isSelectionAdapter;
@@ -41,6 +43,13 @@ public class ContactsAdapter extends ArrayAdapter {
         return isSelectionAdapter;
     }
 
+    public int getOriginalListCount(){
+        return originalList.size();
+    }
+
+    public Contact getOriginalListItem(int index){
+        return originalList.get(index);
+    }
 
     /** Setter method for isSelectionAdapter **/
     public void setSelectionAdapter(boolean selectionAdapter) {
@@ -56,39 +65,40 @@ public class ContactsAdapter extends ArrayAdapter {
     }
 
 
-    /** Setter method for list **/
+    /** Setter method for displayList **/
     public void setList(ArrayList<Contact> contactList){
-        this.list = contactList;
+        this.originalList = contactList;
     }
 
 
     @Override
     public void add(Object object) {
-        list.add((Contact)object);     // add the object to the list
-        super.add(object);
+        originalList.add((Contact)object);
+        displayList.add((Contact)object);     // add the object to the displayList
     }
 
 
     @Override
     public int getCount() {
-        return this.list.size();
+        return this.displayList.size();
     }
 
     /**
-     * Returns the item stored in the list of adapter
-     * @param position Position of item in the list.
-     * @return  Object stored in the list. The list is of Contact type.
+     * Returns the item stored in the displayList of adapter
+     * @param position Position of item in the displayList.
+     * @return  Object stored in the displayList. The displayList is of Contact type.
      */
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return displayList.get(position);
     }
 
     /**
-     * Clears the list of the adapter. Removes all the contacts saved in the list.
+     * Clears the displayList of the adapter. Removes all the contacts saved in the displayList.
      */
     public void clear(){
-        list.clear();
+        originalList.clear();
+        displayList.clear();
     }
 
     /**
@@ -102,9 +112,9 @@ public class ContactsAdapter extends ArrayAdapter {
      */
 
     /**
-     * The getView methods saves the data of the list and generates individual object for listView. The individual view contains
+     * The getView methods saves the data of the displayList and generates individual object for listView. The individual view contains
      * the different views like TextView, Checkbox which will be used to display data.
-     * @param position  Position of view in listView, can also be used as index for list.
+     * @param position  Position of view in listView, can also be used as index for displayList.
      * @param convertView  View to be displayed
      * @param parent    Parent View
      * @return  View after saving the data in it.
@@ -129,7 +139,7 @@ public class ContactsAdapter extends ArrayAdapter {
         else        holder = (ViewHolder) row.getTag();
 
         /** storing data into the holder **/
-        final Contact contact = (Contact) this.getItem(position); // get contact
+        final Contact contact = displayList.get(position); // get contact
         holder.nameView.setText(contact.getName());
         holder.phoneView.setText(contact.getPhoneNumber());     // save data into respective views
 
@@ -139,10 +149,23 @@ public class ContactsAdapter extends ArrayAdapter {
 
         holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
         holder.checkBox.setChecked(contact.isSelected());  // set checkbox checked state
-        holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
+        // holder.checkBox.setOnCheckedChangeListener(null);  /** for resetting previous listeners **/
 
 
         if(this.isSelectionAdapter) {
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /** reverse the state of selected contacts **/
+                    contact.setSelected(!contact.isSelected());
+                    holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
+                    holder.checkBox.setChecked(contact.isSelected());   // set checkbox checked state
+
+
+                }
+            });
+
+
             holder.checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -159,6 +182,29 @@ public class ContactsAdapter extends ArrayAdapter {
         return row;
     }
 
+    /**
+     * Updates the display list and filters the contacts based on the name
+     * @param filterString      string used for filtering
+     */
+    public void filter(String filterString){
+        ArrayList<Contact> filterList = new ArrayList();
+
+        if(filterString == null || filterString.length() == 0){
+            filterList = originalList;
+        }
+        else {
+            String name = filterString.toLowerCase().trim();
+            for(int index = 0; index < originalList.size(); index++){
+                String contactName =  originalList.get(index).getName().toLowerCase();
+                if(contactName.startsWith( name) ){
+                    filterList.add(originalList.get(index));
+                }
+            }
+        }
+
+        displayList = filterList;
+        notifyDataSetChanged();
+    }
 
 
 }// end of class

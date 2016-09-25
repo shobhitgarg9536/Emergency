@@ -15,8 +15,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -37,6 +40,7 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
     Button button ;
     ProgressDialog progressDialog;     // to show loading
     Toolbar toolbar;
+    EditText searchContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,24 @@ public class SelectContacts extends AppCompatActivity implements Button.OnClickL
         button = (Button)findViewById(R.id.bt_next);
         button.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.tbContacts);
+        searchContact = (EditText) findViewById(R.id.et_search_contacts);
 
+        searchContact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.filter(searchContact.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Contacts");
 

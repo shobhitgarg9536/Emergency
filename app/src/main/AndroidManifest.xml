@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
@@ -115,7 +116,8 @@
         </receiver>
 
         <service android:name=".ChatHeadService"
-
+            />
+        <service android:name=".StartAppService"
             />
     </application>
 

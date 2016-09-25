@@ -27,6 +27,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 
 public class FragmentCallingActivity extends AppCompatActivity {
@@ -172,9 +173,15 @@ public class FragmentCallingActivity extends AppCompatActivity {
 
         }
         if(id == R.id.mstartChatHead){
-            insertDummySystemAlertWindowPermission();
-            Intent intent = new Intent(this , ChatHeadService.class);
-            startService(intent);
+            try {
+                insertDummySystemAlertWindowPermission();
+                Intent intent = new Intent(this, ChatHeadService.class);
+                startService(intent);
+            }catch (ServiceConfigurationError e){
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
         if(id == R.id.mstopChatHead){
