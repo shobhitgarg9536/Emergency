@@ -1,5 +1,13 @@
 [
     {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\activity_nav_activity_drawer.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\menu\\activity_nav_activity_drawer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\nav_activity.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\menu\\nav_activity.xml"
+    },
+    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\menu\\emergencymenu.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\menu\\emergencymenu.xml"
     },

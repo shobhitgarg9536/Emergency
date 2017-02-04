@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/etname"
             android:hint="Name*"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:maxLength="20" />
             </android.support.design.widget.TextInputLayout>
 
@@ -84,8 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etdob"
+                android:inputType="none"
+                android:maxLength="10"
                 android:layout_gravity="center_horizontal"
-                android:hint="DOB*" />
+                android:hint="DOB" />
 </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -156,15 +158,28 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginTop="15dp"
-        android:id="@+id/btSubmit"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Profile Pic"
+                android:id="@+id/button"
                 android:fontFamily="sans-serif-condensed"
-        android:layout_gravity="center_horizontal"
-                android:background="#c62818"
-                android:textColor="#ffffff" />
+
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textColor="#000000"
+                android:onClick="openPic" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="15dp"
+                android:id="@+id/btSubmit"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textColor="#000000" />
         </LinearLayout>
     </ScrollView>
 

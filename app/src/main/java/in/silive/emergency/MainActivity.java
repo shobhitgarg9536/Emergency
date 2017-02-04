@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         //accessing mobile no. sharedPreferences file
         MobileNO = (sharedPreferences.getString("MobileNO", ""));
+        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 
         Thread thread = new Thread(){
             @Override

@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:layout_gravity="center_horizontal"
-        android:background="#c62818"
+        android:background="#116861"
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:focusable="true"

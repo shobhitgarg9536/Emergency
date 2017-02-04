@@ -44,7 +44,7 @@ public class Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout =(CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(android.R.color.holo_red_dark));
+        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(android.R.color.holo_green_light));
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.white));
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(android.R.color.white));
 

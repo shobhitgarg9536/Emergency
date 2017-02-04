@@ -37,6 +37,7 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener, G
     TextView address;
     double latitude = 0, longitude = 0;
     String currentaddress = "";
+    android.support.v7.widget.CardView cardView;
 
     private Location mLastLocation;
 
@@ -57,12 +58,13 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener, G
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.typeofemergency, container, false);
+        android.support.constraint.ConstraintLayout linearLayout = (android.support.constraint.ConstraintLayout) inflater.inflate(R.layout.typeofemergency, container, false);
 
         hospital = (Button) linearLayout.findViewById(R.id.bthospital);
         police = (Button) linearLayout.findViewById(R.id.btpolice);
         pharmacy = (Button) linearLayout.findViewById(R.id.btpharmacy);
         address = (TextView) linearLayout.findViewById(R.id.tvaddress);
+        cardView = (android.support.v7.widget.CardView)linearLayout.findViewById(R.id.cardviewlocation);
 
 
         hospital.setOnClickListener(this);
@@ -70,7 +72,11 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener, G
         pharmacy.setOnClickListener(this);
 
         buildGoogleApiClient();
-        displayLocation();
+        try {
+            displayLocation();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
         getAddress();
 
         //object of current location
@@ -114,15 +120,18 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener, G
             @Override
             public void processFinish(String output) {
 
-                currentaddress = output;
-                if (currentaddress != null) {
-                    //if address is not null then make it visible in textview
-                    address.setVisibility(View.VISIBLE);
-                    address.setText("Your Location:\n" + currentaddress);
-                }
+                    currentaddress = output;
+                    if (currentaddress != null) {
+                        //if address is not null then make it visible in textview
+                        cardView.setVisibility(View.VISIBLE);
+                        address.setVisibility(View.VISIBLE);
+                        address.setText("Your Location:\n" + currentaddress);
+                    }
             }
         });
+
         locationAddress.execute(latitude, longitude);
+
     }
 
 

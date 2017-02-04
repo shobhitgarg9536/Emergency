@@ -56,11 +56,11 @@
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\anim\\abc_fade_in.xml"
     },
     {
-        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\anim\\abc_fade_out.xml"
-    },
-    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\anim\\abc_fade_out.xml"
     }
 ]

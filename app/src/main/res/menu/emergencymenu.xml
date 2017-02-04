@@ -22,13 +22,10 @@
         app:showAsAction="never"
         >
     </item>
-    <item android:id="@+id/mstartChatHead"
-        android:title="Start ChatHead"
-        app:showAsAction="never">
-    </item>
-    <item android:id="@+id/mstopChatHead"
-        android:title="Stop ChatHead"
-        app:showAsAction="never">
+    <item android:id="@+id/itemAbout"
+        android:title="About"
+        app:showAsAction="never"
+        >
     </item>
 
 

@@ -127,7 +127,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
         if(!Sdiseases.isEmpty())
             diseases.setText(Sdiseases);
 
-
+        insertDummyWriteStoragePermission();
 
 
         submit.setOnClickListener(this);
@@ -171,7 +171,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
            //if validations are true
            if(validateName() && validateMobile() && mobileNoLength > 7) {
 
-               insertDummyWriteStoragePermission();
+
              //putting values through sharedPreference
                sharedPreferences = getSharedPreferences(MyProfile, Context.MODE_PRIVATE);
               //getting sharedPreferences editor
@@ -186,6 +186,7 @@ public class EnterPersonalDetail extends AppCompatActivity implements View.OnCli
                editor.putString("Diseases", diseases.getText().toString());
 
                editor.commit();
+startnewactivity();
            }
 
        }
@@ -373,13 +374,13 @@ Bitmap bitmap;
                     REQUEST_CODE_ASK_PERMISSIONS_WRITE);
             return;
         }
-        startnewactivity();
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS_WRITE){
-            startnewactivity();
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS){}
+       else if(requestCode == REQUEST_CODE_ASK_PERMISSIONS_WRITE){
+
         }
     }
     private class MyTextWatcher implements TextWatcher {

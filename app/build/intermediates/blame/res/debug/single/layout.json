@@ -20,12 +20,20 @@
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_nav_activity.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\content_nav_activity.xml"
+    },
+    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\nav_header_nav_activity.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\nav_header_nav_activity.xml"
     },
     {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\typeofemergency.xml",
@@ -48,6 +56,10 @@
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\about.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\about.xml"
+    },
+    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
@@ -60,12 +72,12 @@
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.1.1\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
-        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
-        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\activity_main.xml"
-    },
-    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_contact_row.xml",
@@ -144,6 +156,10 @@
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_part_time.xml"
     },
     {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\app_bar_nav_activity.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\app_bar_nav_activity.xml"
+    },
+    {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\notification_template_big_media_narrow.xml"
     },
@@ -186,6 +202,10 @@
     {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
         "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.1.1\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_nav_activity.xml",
+        "source": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\src\\main\\res\\layout\\activity_nav_activity.xml"
     },
     {
         "merged": "C:\\Users\\Shobhit-pc\\Documents\\AndroidStudioProject\\Emergency\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_maps.xml",

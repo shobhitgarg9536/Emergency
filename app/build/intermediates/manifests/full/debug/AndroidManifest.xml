@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.silive.in.emergency"
+    package="in.silive.emergency"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="24" />
 
     <permission
         android:name="in.silive.emergency.MapsActivity.permission.MAPS_RECEIVE"
@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -32,21 +33,34 @@
 
     <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="in.silive.emergency.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="in.silive.emergency.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme" >
-        <activity android:name="in.silive.emergency.MainActivity" >
+        <activity
+            android:name="in.silive.emergency.MainActivity"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.emergency.EnterPersonalDetail" >
+        <activity
+            android:name="in.silive.emergency.EnterPersonalDetail"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.ENTERPERSONALDETAIL" />
 
@@ -55,14 +69,17 @@
         </activity>
         <activity
             android:name="in.silive.emergency.Profile"
-            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" >
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.PROFILE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.emergency.FragmentCallingActivity" >
+        <activity
+            android:name="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.FRAGMENTCALLINGACTIVITY" />
 
@@ -71,7 +88,8 @@
         </activity>
         <activity
             android:name="in.silive.emergency.DeleteContacts"
-            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" >
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />
 
@@ -80,7 +98,8 @@
         </activity>
         <activity
             android:name="in.silive.emergency.SelectContacts"
-            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" >
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.SELECTCONTACTS" />
 
@@ -89,9 +108,20 @@
         </activity>
         <activity
             android:name="in.silive.emergency.ShowSelectedContacts"
-            android:parentActivityName="in.silive.emergency.SelectContacts" >
+            android:parentActivityName="in.silive.emergency.SelectContacts"
+            android:screenOrientation="userPortrait" >
             <intent-filter>
                 <action android:name="in.silive.emergency.SHOWSELECTEDCONTACTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="in.silive.emergency.About"
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" >
+            <intent-filter>
+                <action android:name="in.silive.emergency.ABOUT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -104,16 +134,21 @@
         <activity
             android:name="in.silive.emergency.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName="in.silive.emergency.FragmentCallingActivity" />
+            android:parentActivityName="in.silive.emergency.FragmentCallingActivity"
+            android:screenOrientation="userPortrait" />
 
-        <receiver android:name="in.silive.emergency.VolumeReceiver" >
+        <receiver
+            android:name="in.silive.emergency.VolumeReceiver"
+            android:process=":remote" >
             <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
 
-        <service android:name="in.silive.emergency.ChatHeadService" />
+        <service android:name="in.silive.emergency.StartAppService" />
 
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
@@ -123,6 +158,61 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+            android:enabled="true"
+            android:permission="android.permission.INSTALL_PACKAGES" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="in.silive.emergency.firebaseinitprovider"
+            android:exported="false"
+            android:initOrder="100" />
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="in.silive.emergency" />
+            </intent-filter>
+        </receiver>
+        <!--
+ Internal (not exported) receiver used by the app to start its own exported services
+             without risk of being spoofed.
+        -->
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"
+            android:exported="false" />
+        <!--
+ FirebaseInstanceIdService performs security checks at runtime,
+             no need for explicit permissions despite exported="true"
+        -->
+        <service
+            android:name="com.google.firebase.iid.FirebaseInstanceIdService"
+            android:exported="true" >
+            <intent-filter android:priority="-500" >
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

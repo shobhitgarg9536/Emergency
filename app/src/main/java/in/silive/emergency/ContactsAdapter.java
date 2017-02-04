@@ -11,17 +11,7 @@ import android.widget.TextView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/**
- * Created by Aniket on 06-09-2016.
- */
 
-/***
- * ContactAdapter converts the data to be displayed in each slot into a suitable View Object. The adapter will be used for
- * multiple displayList views. It contains a nested ViewHolder class containing the widgets used to display information.
- * 1. Store the ContactDataProvider in displayList. Use this displayList to getItem() and getCount()
- * 2. Method getView() is to return the View object which will display the required data
- *
- */
 public class ContactsAdapter extends ArrayAdapter {
 
     /** List to store the contacts **/
@@ -101,24 +91,7 @@ public class ContactsAdapter extends ArrayAdapter {
         displayList.clear();
     }
 
-    /**
-     * The getView() works as ..
-     * 1. Create a row object of View type using inflater.
-     * 2. Create a holder object which contains widget objects to store data
-     * 3. Initialize the handler members.
-     * 4. Create a object of Contact.
-     * 5. Set the handler member properties and methods like setText() using the Contact
-     *
-     */
 
-    /**
-     * The getView methods saves the data of the displayList and generates individual object for listView. The individual view contains
-     * the different views like TextView, Checkbox which will be used to display data.
-     * @param position  Position of view in listView, can also be used as index for displayList.
-     * @param convertView  View to be displayed
-     * @param parent    Parent View
-     * @return  View after saving the data in it.
-     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;         // Each row of the listView
@@ -144,8 +117,10 @@ public class ContactsAdapter extends ArrayAdapter {
         holder.phoneView.setText(contact.getPhoneNumber());     // save data into respective views
 
         /** If adapter will be used for selecting contacts then make checkbox visible else gone **/
-        if(this.isSelectionAdapter)    holder.checkBox.setVisibility(CheckBox.VISIBLE);
-        else                            holder.checkBox.setVisibility(CheckBox.GONE);   /** free up space on layout **/
+        if(this.isSelectionAdapter)
+            holder.checkBox.setVisibility(CheckBox.VISIBLE);
+        else
+            holder.checkBox.setVisibility(CheckBox.GONE);   /** free up space on layout **/
 
         holder.checkBox.setSelected(contact.isSelected()); // set checkbox selection state according to contacts selected state
         holder.checkBox.setChecked(contact.isSelected());  // set checkbox checked state

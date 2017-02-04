@@ -5,7 +5,7 @@ package in.silive.emergency;
 
 public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");
-  public static final String APPLICATION_ID = "com.silive.in.emergency";
+  public static final String APPLICATION_ID = "in.silive.emergency";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "";
   public static final int VERSION_CODE = 1;

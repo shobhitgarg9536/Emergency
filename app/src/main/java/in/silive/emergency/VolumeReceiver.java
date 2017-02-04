@@ -18,6 +18,8 @@ import android.widget.Toast;
 public class VolumeReceiver extends BroadcastReceiver {
     Context mcontext;
 
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         mcontext=context;

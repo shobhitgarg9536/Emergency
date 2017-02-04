@@ -78,7 +78,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     HashMap<String, String> mMarkerPlaceLink = new HashMap<String, String>(); //link of all markers in the map
     RelativeLayout progessLayout;
     SlidingDrawer slidingDrawerMove;
-    TextView phone,website,international,vicinity,address,slidingText;
+    TextView phone,website,international,address,slidingText;
     private Toolbar toolbar;
     Thread thread;
     int count=5000; //radius around current location
@@ -107,7 +107,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         website =(TextView) findViewById(R.id.tvwebsite);
         address =(TextView) findViewById(R.id.tvaddress);
         international =(TextView) findViewById(R.id.tvinternational);
-        vicinity =(TextView) findViewById(R.id.tvVicinity);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -245,7 +244,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 phone.setText(output.get("formatted_phone_number").toString());
                                 international.setText(output.get("international_phone_number").toString());
                                 website.setText(output.get("website").toString());
-                                vicinity.setText(output.get("vicinity").toString());
+
 
                             } else {
 
@@ -287,7 +286,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 sb.append("location="+mLatitude+","+mLongitude);
                 sb.append("&radius="+count);
                 sb.append("&types="+typeofemergency);
-                sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
+                sb.append("&key=AIzaSyAxnqrtWfz-aPnGuT36eBU14WwRq8gSzpo");
 
                 PlacesAsynTask placesAsynTask = new PlacesAsynTask();
                 //passing string to asynTask class

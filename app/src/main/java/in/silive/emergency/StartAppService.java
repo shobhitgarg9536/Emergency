@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
  */
 public class StartAppService extends Service {
 
-int currentVolume,previousVolume;
+int currentVolume=0,previousVolume=0;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -49,16 +49,7 @@ int currentVolume,previousVolume;
             previousVolume = currentVolume;
             startActivity(i);
         }
-        else if(currentVolume - previousVolume == 3){
-            //if condition is true then open chat head
-            Intent i = new Intent(getBaseContext(),ChatHeadService.class);
-            //to make app2 starts on app1
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            //setting class of app2
-            i.setClass(getBaseContext(), ChatHeadService.class);
-            previousVolume = currentVolume;
-            startService(i);
-        }
+
         else{
             previousVolume = currentVolume;
         }
