@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.hardware.Camera;
@@ -72,8 +73,10 @@ public class FragmentCallingActivity extends AppCompatActivity implements Naviga
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
+
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
 
         sharedPreferences = getSharedPreferences(MyProfile, MODE_PRIVATE);
         Sname = sharedPreferences.getString("Name", "");

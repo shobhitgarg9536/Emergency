@@ -54,9 +54,6 @@ public class LocationAddress extends AsyncTask<Double , String ,String> {
                 //appending locality of address
                 if(address.getLocality()!=null)
                 sb.append(address.getLocality()).append("\n");
-                //appending postal code of address
-                if(address.getPostalCode()!=null)
-                sb.append(address.getPostalCode()).append("\n");
                 //appending country name of address
                 if(address.getCountryName()!=null)
                 sb.append(address.getCountryName());

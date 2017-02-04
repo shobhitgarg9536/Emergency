@@ -29,29 +29,31 @@ int currentVolume=0,previousVolume=0;
         //getting current volume
         currentVolume = audio.getStreamVolume(AudioManager.STREAM_RING);
 
-        if((currentVolume - previousVolume) == 2) {
-            //if condition is true then open chat head
-            Intent i = new Intent(getBaseContext(),Profile.class);
-            //to make app2 starts on app1
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            //setting class of app2
-            i.setClass(getBaseContext(), FragmentCallingActivity.class);
-            previousVolume = currentVolume;
-            startActivity(i);
-        }
-        else if(previousVolume - currentVolume == 2){
-            //if condition is true then open chat head
-            Intent i = new Intent(getBaseContext(),Profile.class);
-            //to make app2 starts on app1
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            //setting class of app2
-            i.setClass(getBaseContext(), FragmentCallingActivity.class);
-            previousVolume = currentVolume;
-            startActivity(i);
-        }
-
-        else{
-            previousVolume = currentVolume;
+        if(currentVolume!=2) {
+            if ((currentVolume - previousVolume) == 2) {
+                //if condition is true then open chat head
+                Intent i = new Intent(getBaseContext(), Profile.class);
+                //to make app2 starts on app1
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //setting class of app2
+                i.setClass(getBaseContext(), FragmentCallingActivity.class);
+                previousVolume = currentVolume;
+                currentVolume = 0;
+                startActivity(i);
+            } else if (previousVolume - currentVolume == 2) {
+                //if condition is true then open chat head
+                Intent i = new Intent(getBaseContext(), Profile.class);
+                //to make app2 starts on app1
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //setting class of app2
+                i.setClass(getBaseContext(), FragmentCallingActivity.class);
+                previousVolume = currentVolume;
+                currentVolume = 0;
+                startActivity(i);
+            } else {
+                previousVolume = currentVolume;
+                currentVolume = 0;
+            }
         }
         return 1 ;
     }

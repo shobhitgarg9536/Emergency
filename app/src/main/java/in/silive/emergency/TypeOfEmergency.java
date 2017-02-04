@@ -58,7 +58,7 @@ public class TypeOfEmergency extends Fragment implements View.OnClickListener, G
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        android.support.constraint.ConstraintLayout linearLayout = (android.support.constraint.ConstraintLayout) inflater.inflate(R.layout.typeofemergency, container, false);
+        LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.typeofemergency, container, false);
 
         hospital = (Button) linearLayout.findViewById(R.id.bthospital);
         police = (Button) linearLayout.findViewById(R.id.btpolice);
