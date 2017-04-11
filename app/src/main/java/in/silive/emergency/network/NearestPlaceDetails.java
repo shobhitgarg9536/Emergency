@@ -1,11 +1,7 @@
-package in.silive.emergency;
+package in.silive.emergency.network;
 
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+
+import in.silive.emergency.listeners.MapAsynResponse;
 
 public class NearestPlaceDetails  extends AsyncTask<String, Integer, String> {
 

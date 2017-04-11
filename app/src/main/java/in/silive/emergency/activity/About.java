@@ -1,9 +1,11 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import in.silive.emergency.R;
 
 /**
  * Created by Shobhit-pc on 9/29/2016.

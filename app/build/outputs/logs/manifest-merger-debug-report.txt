@@ -13,12 +13,12 @@ ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\
 	android:versionCode
 		INJECTED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml
-permission#in.silive.emergency.MapsActivity.permission.MAPS_RECEIVE
+permission#in.silive.emergency.activity.MapsActivity.permission.MAPS_RECEIVE
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:5:5-7:47
 	android:protectionLevel
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:7:9-44
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:6:9-80
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:6:9-89
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:9:5-67
 MERGED from [com.google.android.gms:play-services-maps:9.8.0] C:\Android\.android\build-cache\c0b669565543dffdfe380c9ac41a372f585fcd2b\output\AndroidManifest.xml:20:5-66
@@ -84,11 +84,11 @@ ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\
 MERGED from [com.google.android.gms:play-services-location:9.8.0] C:\Android\.android\build-cache\bbc23f2de51821ab2632a4bbc899ff7d96ea1c62\output\AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-maps:9.8.0] C:\Android\.android\build-cache\c0b669565543dffdfe380c9ac41a372f585fcd2b\output\AndroidManifest.xml:24:5-19
 MERGED from [com.google.android.gms:play-services-base:9.8.0] C:\Android\.android\build-cache\34c0abc9592014b95db0452ef1549767eeaa242a\output\AndroidManifest.xml:18:5-20:19
-MERGED from [com.android.support:design:24.1.1] C:\Android\.android\build-cache\3bdbc8f4326636c768cd32da8a7f45a9ca5a41fa\output\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\0ea54a24fcc6eec204b46578b189af71cda500ed\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Android\.android\build-cache\0a7586f72034b3d3a7ba208e8f2c9dc57d56fce5\output\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Android\.android\build-cache\20147fb2819e131b0bc9e9ead06b1e6a42365c6f\output\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:cardview-v7:24.0.0] C:\Android\.android\build-cache\7cb3d4f15fcec5b25c1813f2c12e41c2f0d0a6f5\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:24.1.1] C:\Android\.android\build-cache\2ba794560da58e7b368290953908ed15922a18a2\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\e362adbe6b47e318ec576e79582c9833b329e15a\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Android\.android\build-cache\04dcec7934c1dcfaa26a64821fe8954f5f99c83a\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Android\.android\build-cache\aeb170a561755852ccad9dc7657c7e26a3fd4f55\output\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:cardview-v7:24.0.0] C:\Android\.android\build-cache\dbeb260fed7e8d99be142307f73d2e46c2152e3a\output\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-core:9.8.0] C:\Android\.android\build-cache\22a48b436e643fed5e32c38e4bf72b15d73a5d1d\output\AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-crash:9.8.0] C:\Android\.android\build-cache\edfe18b188ebde54922d8f89a3c5b6a0bfda5f0e\output\AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.firebase:firebase-analytics:9.8.0] C:\Android\.android\build-cache\dd1025446659c33a02f2ae09d42c268650049686\output\AndroidManifest.xml:24:5-33:19
@@ -97,7 +97,7 @@ MERGED from [com.google.firebase:firebase-iid:9.8.0] C:\Android\.android\build-c
 MERGED from [com.google.firebase:firebase-common:9.8.0] C:\Android\.android\build-cache\43b0373f6549d199c7a9638bc206f7fae65c749d\output\AndroidManifest.xml:4:5-7:19
 MERGED from [com.google.android.gms:play-services-tasks:9.8.0] C:\Android\.android\build-cache\fcc3c9d82d856fb8196548b6e8f2f04f0d5806e3\output\AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-basement:9.8.0] C:\Android\.android\build-cache\6b97a8ec956f28d653153d346fd01e17f5942ae4\output\AndroidManifest.xml:19:5-21:19
-MERGED from [com.android.support:support-v4:24.1.1] C:\Android\.android\build-cache\66c974b428532798ba705cbb4080fa9f090715a6\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.1.1] C:\Android\.android\build-cache\7a3c076a796d9022979dec04094f1cba42b53cd2\output\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] C:\Android\.android\build-cache\e072d4e4190b5b133ff7774be548e28f9d20c262\output\AndroidManifest.xml:9:5-20
 	android:label
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:31:9-41
@@ -111,12 +111,12 @@ MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] C:\An
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:32:9-33
 	android:theme
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:34:9-47
-activity#in.silive.emergency.MainActivity
+activity#in.silive.emergency.activity.MainActivity
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:35:9-43:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:37:13-53
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:36:13-41
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:36:13-50
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:38:13-42:29
 action#android.intent.action.MAIN
@@ -127,12 +127,12 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:41:17-77
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:41:27-74
-activity#in.silive.emergency.EnterPersonalDetail
+activity#in.silive.emergency.activity.EnterPersonalDetail
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:44:9-52:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:46:13-53
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:45:13-48
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:45:13-57
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.ENTERPERSONALDETAIL
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:47:13-51:29
 action#in.silive.emergency.ENTERPERSONALDETAIL
@@ -143,82 +143,82 @@ category#android.intent.category.DEFAULT
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:50:17-76
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:50:27-73
-activity#in.silive.emergency.Profile
+activity#in.silive.emergency.activity.Profile
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:53:9-62:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:56:13-53
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:55:13-66
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:55:13-75
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:54:13-36
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:54:13-45
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.PROFILE
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:57:13-61:29
 action#in.silive.emergency.PROFILE
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:58:17-70
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:58:25-67
-activity#in.silive.emergency.FragmentCallingActivity
+activity#in.silive.emergency.activity.FragmentCallingActivity
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:63:9-71:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:65:13-53
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:64:13-52
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:64:13-61
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.FRAGMENTCALLINGACTIVITY
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:66:13-70:29
 action#in.silive.emergency.FRAGMENTCALLINGACTIVITY
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:67:17-86
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:67:25-83
-activity#in.silive.emergency.DeleteContacts
+activity#in.silive.emergency.activity.DeleteContacts
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:72:9-81:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:75:13-53
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:74:13-66
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:74:13-75
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:73:13-43
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:73:13-52
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.DELETECONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:76:13-80:29
 action#in.silive.emergency.DELETECONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:77:17-77
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:77:25-74
-activity#in.silive.emergency.SelectContacts
+activity#in.silive.emergency.activity.SelectContacts
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:82:9-91:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:85:13-53
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:84:13-66
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:84:13-75
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:83:13-43
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:83:13-52
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.SELECTCONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:86:13-90:29
 action#in.silive.emergency.SELECTCONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:87:17-77
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:87:25-74
-activity#in.silive.emergency.ShowSelectedContacts
+activity#in.silive.emergency.activity.ShowSelectedContacts
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:92:9-101:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:95:13-53
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:94:13-57
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:94:13-66
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:93:13-49
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:93:13-58
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.SHOWSELECTEDCONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:96:13-100:29
 action#in.silive.emergency.SHOWSELECTEDCONTACTS
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:97:17-83
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:97:25-80
-activity#in.silive.emergency.About
+activity#in.silive.emergency.activity.About
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:103:9-112:20
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:106:13-53
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:105:13-66
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:105:13-75
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:104:13-34
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:104:13-43
 intent-filter#android.intent.category.DEFAULT+in.silive.emergency.ABOUT
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:107:13-111:29
 action#in.silive.emergency.ABOUT
@@ -231,22 +231,22 @@ ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:116:13-52
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:115:13-58
-activity#in.silive.emergency.MapsActivity
+activity#in.silive.emergency.activity.MapsActivity
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:118:9-122:56
 	android:screenOrientation
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:122:13-53
 	android:label
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:120:13-56
 	android:parentActivityName
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:121:13-66
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:121:13-75
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:119:13-41
-receiver#in.silive.emergency.VolumeReceiver
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:119:13-50
+receiver#in.silive.emergency.receiver.VolumeReceiver
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:124:9-133:20
 	android:process
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:126:13-38
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:125:13-43
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:125:13-52
 intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.MEDIA_BUTTON+android.intent.category.HOME
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:127:13-132:29
 action#android.intent.action.MEDIA_BUTTON
@@ -261,21 +261,21 @@ category#android.intent.category.HOME
 ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:131:17-73
 	android:name
 		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:131:27-70
-service#in.silive.emergency.StartAppService
-ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:135:9-52
+service#in.silive.emergency.service.StartAppService
+ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:135:9-60
 	android:name
-		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:135:18-49
+		ADDED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml:135:18-57
 uses-sdk
 INJECTED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.google.android.gms:play-services-location:9.8.0] C:\Android\.android\build-cache\bbc23f2de51821ab2632a4bbc899ff7d96ea1c62\output\AndroidManifest.xml:3:5-42
 MERGED from [com.google.android.gms:play-services-maps:9.8.0] C:\Android\.android\build-cache\c0b669565543dffdfe380c9ac41a372f585fcd2b\output\AndroidManifest.xml:23:5-42
 MERGED from [com.google.android.gms:play-services-base:9.8.0] C:\Android\.android\build-cache\34c0abc9592014b95db0452ef1549767eeaa242a\output\AndroidManifest.xml:17:5-42
-MERGED from [com.android.support:design:24.1.1] C:\Android\.android\build-cache\3bdbc8f4326636c768cd32da8a7f45a9ca5a41fa\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:recyclerview-v7:24.1.1] C:\Android\.android\build-cache\2597f0d24925bdb86e9ba42619b1b36d6e9f128c\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\0ea54a24fcc6eec204b46578b189af71cda500ed\output\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Android\.android\build-cache\0a7586f72034b3d3a7ba208e8f2c9dc57d56fce5\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Android\.android\build-cache\20147fb2819e131b0bc9e9ead06b1e6a42365c6f\output\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:cardview-v7:24.0.0] C:\Android\.android\build-cache\7cb3d4f15fcec5b25c1813f2c12e41c2f0d0a6f5\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:24.1.1] C:\Android\.android\build-cache\2ba794560da58e7b368290953908ed15922a18a2\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:24.1.1] C:\Android\.android\build-cache\45f2107874f4f7c8a2eaa283d6ca836d1b2cb5d6\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\e362adbe6b47e318ec576e79582c9833b329e15a\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:24.1.1] C:\Android\.android\build-cache\04dcec7934c1dcfaa26a64821fe8954f5f99c83a\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.1.1] C:\Android\.android\build-cache\aeb170a561755852ccad9dc7657c7e26a3fd4f55\output\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:cardview-v7:24.0.0] C:\Android\.android\build-cache\dbeb260fed7e8d99be142307f73d2e46c2152e3a\output\AndroidManifest.xml:20:5-43
 MERGED from [com.google.firebase:firebase-core:9.8.0] C:\Android\.android\build-cache\22a48b436e643fed5e32c38e4bf72b15d73a5d1d\output\AndroidManifest.xml:4:5-42
 MERGED from [com.google.firebase:firebase-crash:9.8.0] C:\Android\.android\build-cache\edfe18b188ebde54922d8f89a3c5b6a0bfda5f0e\output\AndroidManifest.xml:20:5-42
 MERGED from [com.google.firebase:firebase-analytics:9.8.0] C:\Android\.android\build-cache\dd1025446659c33a02f2ae09d42c268650049686\output\AndroidManifest.xml:17:5-42
@@ -284,10 +284,10 @@ MERGED from [com.google.firebase:firebase-iid:9.8.0] C:\Android\.android\build-c
 MERGED from [com.google.firebase:firebase-common:9.8.0] C:\Android\.android\build-cache\43b0373f6549d199c7a9638bc206f7fae65c749d\output\AndroidManifest.xml:3:5-42
 MERGED from [com.google.android.gms:play-services-tasks:9.8.0] C:\Android\.android\build-cache\fcc3c9d82d856fb8196548b6e8f2f04f0d5806e3\output\AndroidManifest.xml:3:5-42
 MERGED from [com.google.android.gms:play-services-basement:9.8.0] C:\Android\.android\build-cache\6b97a8ec956f28d653153d346fd01e17f5942ae4\output\AndroidManifest.xml:17:5-42
-MERGED from [com.android.support:support-v4:24.1.1] C:\Android\.android\build-cache\66c974b428532798ba705cbb4080fa9f090715a6\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:24.1.1] C:\Android\.android\build-cache\7a3c076a796d9022979dec04094f1cba42b53cd2\output\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support.constraint:constraint-layout:1.0.0-beta4] C:\Android\.android\build-cache\e072d4e4190b5b133ff7774be548e28f9d20c262\output\AndroidManifest.xml:5:5-7:41
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\0ea54a24fcc6eec204b46578b189af71cda500ed\output\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:24.1.1] C:\Android\.android\build-cache\e362adbe6b47e318ec576e79582c9833b329e15a\output\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Shobhit-pc\Documents\AndroidStudioProject\Emergency\app\src\main\AndroidManifest.xml

@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.model;
 
 /**
  * Created by Aniket on 06-09-2016.

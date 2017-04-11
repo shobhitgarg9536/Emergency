@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.service;
 
 import android.app.Service;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+
+import in.silive.emergency.activity.FragmentCallingActivity;
+import in.silive.emergency.activity.Profile;
 
 /**
  * Created by Shobhit-pc on 9/25/2016.

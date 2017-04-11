@@ -77,7 +77,7 @@ public final class R {
         public static final int adjust_height = 0x7f0d003d;
         public static final int adjust_width = 0x7f0d003e;
         public static final int auto = 0x7f0d0039;
-        public static final int button = 0x7f0d00c0;
+        public static final int button = 0x7f0d00bf;
         public static final int center = 0x7f0d002a;
         public static final int crash_reporting_present = 0x7f0d0004;
         public static final int dark = 0x7f0d004a;
@@ -90,8 +90,8 @@ public final class R {
         public static final int satellite = 0x7f0d0040;
         public static final int standard = 0x7f0d0048;
         public static final int terrain = 0x7f0d0041;
-        public static final int text = 0x7f0d00d2;
-        public static final int text2 = 0x7f0d00d0;
+        public static final int text = 0x7f0d00d1;
+        public static final int text2 = 0x7f0d00cf;
         public static final int toolbar = 0x7f0d0087;
         public static final int wide = 0x7f0d0049;
         public static final int wrap_content = 0x7f0d0028;

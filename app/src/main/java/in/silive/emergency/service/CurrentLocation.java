@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.service;
 
 import android.app.Service;
 import android.content.Context;

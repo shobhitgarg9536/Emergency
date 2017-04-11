@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import in.silive.emergency.R;
+import in.silive.emergency.adapter.ContactsAdapter;
+import in.silive.emergency.database.DatabaseHandler;
+import in.silive.emergency.model.Contact;
 
 /** This activity deletes the contacts. If all the contacts are selected then the user is not allowed to delete
  * the contacts. A message is shown in that case **/

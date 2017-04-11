@@ -1,21 +1,16 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
-import android.*;
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.os.Bundle;
@@ -26,16 +21,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -61,11 +53,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.Provider;
 import java.security.ProviderException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import in.silive.emergency.network.NearestPlaceDetails;
+import in.silive.emergency.R;
+import in.silive.emergency.listeners.MapAsynResponse;
+import in.silive.emergency.service.CurrentLocation;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -224,7 +220,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 sb.append("reference=" + reference);
                 sb.append("&sensor=true");
-                sb.append("&key=AIzaSyABUAVb12NlYhSubPBAn5fz4Yc_c4RoxiM");
+                sb.append("&key=+AIzaSyAxnqrtWfz-aPnGuT36eBU14WwRq8gSzpo");
 
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

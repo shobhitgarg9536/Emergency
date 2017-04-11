@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.model;
 
 import android.provider.BaseColumns;
 

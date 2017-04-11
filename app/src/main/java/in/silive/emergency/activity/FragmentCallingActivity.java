@@ -1,6 +1,5 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
-import android.*;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -17,7 +16,6 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -29,11 +27,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,7 +38,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ServiceConfigurationError;
+
+import in.silive.emergency.R;
+import in.silive.emergency.fragment.TypeOfEmergency;
+import in.silive.emergency.receiver.VolumeReceiver;
+import in.silive.emergency.fragment.ContactsFragment;
 
 
 public class FragmentCallingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

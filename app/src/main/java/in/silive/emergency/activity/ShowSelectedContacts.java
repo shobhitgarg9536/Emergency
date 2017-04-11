@@ -1,11 +1,9 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
+import in.silive.emergency.R;
+import in.silive.emergency.adapter.ContactsAdapter;
+import in.silive.emergency.database.DatabaseHandler;
+import in.silive.emergency.model.Contact;
 
 /** Activity Class which displays the selected contacts from SelectContact activity and saves them into
  * the database. This class does not uses an AsyncTask class. No progress will be shown.

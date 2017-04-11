@@ -3,7 +3,7 @@
     package="in.silive.emergency">
 
     <permission
-        android:name="in.silive.emergency.MapsActivity.permission.MAPS_RECEIVE"
+        android:name="in.silive.emergency.activity.MapsActivity.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,7 +33,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnterPersonalDetail"
+            android:name=".activity.EnterPersonalDetail"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.ENTERPERSONALDETAIL" />
@@ -51,8 +51,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Profile"
-            android:parentActivityName=".FragmentCallingActivity"
+            android:name=".activity.Profile"
+            android:parentActivityName=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.PROFILE" />
@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FragmentCallingActivity"
+            android:name=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.FRAGMENTCALLINGACTIVITY" />
@@ -70,8 +70,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DeleteContacts"
-            android:parentActivityName=".FragmentCallingActivity"
+            android:name=".activity.DeleteContacts"
+            android:parentActivityName=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.DELETECONTACTS" />
@@ -80,8 +80,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectContacts"
-            android:parentActivityName=".FragmentCallingActivity"
+            android:name=".activity.SelectContacts"
+            android:parentActivityName=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.SELECTCONTACTS" />
@@ -90,8 +90,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowSelectedContacts"
-            android:parentActivityName=".SelectContacts"
+            android:name=".activity.ShowSelectedContacts"
+            android:parentActivityName=".activity.SelectContacts"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.SHOWSELECTEDCONTACTS" />
@@ -101,8 +101,8 @@
         </activity>
 
         <activity
-            android:name=".About"
-            android:parentActivityName=".FragmentCallingActivity"
+            android:name=".activity.About"
+            android:parentActivityName=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="in.silive.emergency.ABOUT" />
@@ -116,13 +116,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".FragmentCallingActivity"
+            android:parentActivityName=".activity.FragmentCallingActivity"
             android:screenOrientation="userPortrait" />
 
         <receiver
-            android:name=".VolumeReceiver"
+            android:name=".receiver.VolumeReceiver"
             android:process=":remote">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -132,7 +132,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".StartAppService" />
+        <service android:name=".service.StartAppService" />
 
 
     </application>

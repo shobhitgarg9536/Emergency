@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import in.silive.emergency.database.DatabaseHandler;
+import in.silive.emergency.R;
+import in.silive.emergency.adapter.ConnectContactsAdapter;
+import in.silive.emergency.model.Contact;
 
 /**
  * Created by Shobhit-pc on 9/6/2016.

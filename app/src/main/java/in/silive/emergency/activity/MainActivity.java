@@ -1,12 +1,13 @@
-package in.silive.emergency;
+package in.silive.emergency.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.firebase.crash.FirebaseCrash;
+
+import in.silive.emergency.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,6 +1,5 @@
-package in.silive.emergency;
+package in.silive.emergency.adapter;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -28,14 +27,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import in.silive.emergency.model.Contact;
+import in.silive.emergency.service.CurrentLocation;
+import in.silive.emergency.network.LocationAddress;
+import in.silive.emergency.R;
+import in.silive.emergency.listeners.AddressResponse;
 
 /**
  * Created by Aniket on 12-09-2016.

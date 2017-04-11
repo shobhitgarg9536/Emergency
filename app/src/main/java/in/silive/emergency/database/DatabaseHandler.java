@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import java.util.ArrayList;
-import in.silive.emergency.TableData.TableInfo;
+import in.silive.emergency.model.TableData.TableInfo;
+import in.silive.emergency.model.Contact;
 
 /**
  * Created by Aniket on 07-09-2016.

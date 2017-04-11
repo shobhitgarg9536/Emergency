@@ -1,4 +1,4 @@
-package in.silive.emergency;
+package in.silive.emergency.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import in.silive.emergency.R;
+import in.silive.emergency.model.Contact;
 
 
 public class ContactsAdapter extends ArrayAdapter {
